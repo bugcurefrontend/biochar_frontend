@@ -8,8 +8,10 @@ interface Slide {
   bullets: string[];
   images: string[];
 }
+
 const CardsPart = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const slides: Slide[] = [
     {
@@ -56,6 +58,24 @@ const CardsPart = () => {
     },
   ];
 
+  const currentSlide = slides[activeIndex];
+  const currentImage = currentSlide.images[imageIndex];
+
+  const handleNext = () => {
+    setImageIndex((prev) => (prev + 1) % currentSlide.images.length);
+  };
+
+  const handlePrev = () => {
+    setImageIndex((prev) =>
+      prev === 0 ? currentSlide.images.length - 1 : prev - 1
+    );
+  };
+
+  const onSlideChange = (index: number) => {
+    setActiveIndex(index);
+    setImageIndex(0); // reset image on slide switch
+  };
+
   return (
     <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12">
       <div className="text-center mb-10 lg:mb-16">
@@ -74,7 +94,7 @@ const CardsPart = () => {
         {slides.map((slide, index) => (
           <button
             key={index}
-            onClick={() => setActiveIndex(index)}
+            onClick={() => onSlideChange(index)}
             className={`px-4 py-2 rounded-full text-sm md:text-base transition-all border ${
               activeIndex === index
                 ? "bg-gray-900 text-white border-gray-900"
@@ -99,30 +119,46 @@ const CardsPart = () => {
           {/* Text side */}
           <div className="bg-gray-900 text-white md:w-1/2 p-8 space-y-6 flex flex-col justify-center">
             <h3 className="font-serif text-2xl lg:text-3xl mb-4">
-              {slides[activeIndex].title}
+              {currentSlide.title}
             </h3>
             <ul className="list-disc pl-5 space-y-3 text-sm md:text-base leading-relaxed">
-              {slides[activeIndex].bullets.map((bullet, i) => (
+              {currentSlide.bullets.map((bullet, i) => (
                 <li key={i}>{bullet}</li>
               ))}
             </ul>
           </div>
 
-          {/* Image Grid */}
-          <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center items-center">
-            {slides[activeIndex].images.map((img, i) => (
-              <div
-                key={i}
-                className="w-full h-[250px] relative overflow-hidden rounded-xl shadow"
-              >
-                <Image
-                  src={img}
-                  alt={`${slides[activeIndex].title} - image ${i + 1}`}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-500 ease-in-out"
-                />
-              </div>
-            ))}
+          {/* Image Carousel side */}
+          <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
+            <button
+              onClick={handlePrev}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white px-2 py-1 rounded-full hover:bg-black/80"
+            >
+              ‹
+            </button>
+
+            <motion.div
+              key={imageIndex}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-[80vh] relative rounded-xl overflow-hidden shadow"
+            >
+              <Image
+                src={currentImage}
+                alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+
+            <button
+              onClick={handleNext}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white px-2 py-1 rounded-full hover:bg-black/80"
+            >
+              ›
+            </button>
           </div>
         </motion.div>
       </AnimatePresence>
