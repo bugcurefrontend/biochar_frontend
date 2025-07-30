@@ -8,13 +8,8 @@ const Hero = () => {
     <>
       {/* <div className="relative w-full  border-2"> */}
       <div></div>
-      <Image
-        src="/hero.jpg"
-        alt="hero img"
-        width={100}
-        height={500}
-        className="w-full h-[65vh] object-cover md:h-full"
-      />
+
+      <video src="/HeroSection.mp4" autoPlay loop muted playsInline></video>
       {/* </div> */}
       {/* for mobile view */}
       <div className="bg-black px-4 py-10 font-serif md:hidden">
@@ -26,8 +21,9 @@ const Hero = () => {
           solution.
         </p>
         <div className="pt-5">
-          <button className="bg-white text-black px-3 py-1 rounded-full text-sm">
+          <button className="bg-white flex justify-between items-center text-black px-3 py-1 rounded-full text-sm">
             Buy Carbon Credits
+            <Image src={"/icon.svg"} alt={"icon"} width={10} height={10} />
           </button>
         </div>
       </div>
@@ -42,8 +38,15 @@ const Hero = () => {
           Solutions.
         </p>
         <div className="pt-5">
-          <button className="bg-white text-black px-3 py-1 rounded-full text-sm xl:text-[1.2rem] xl:px-7 xl:py-3">
-            <a href="#formForId">Buy Carbon Credits</a>
+          <button className="bg-white flex justify-between items-center  text-black px-3 py-1 rounded-full text-sm xl:text-[1.2rem] xl:px-7 xl:py-3">
+            <Link href="#formForId">Buy Carbon Credits </Link>
+            <Image
+              src={"/icon.svg"}
+              alt={"icon"}
+              width={20}
+              height={10}
+              className="mx-3"
+            />
           </button>
         </div>
       </div>
