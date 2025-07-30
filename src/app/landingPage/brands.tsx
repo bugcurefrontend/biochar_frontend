@@ -17,7 +17,7 @@ const logos = [
 ];
 
 export default function Brands() {
-  /** Duplicate the logos so the strip can loop seamlessly used */
+  /** Duplicate the logos so the strip can loop seamlessly */
   const loopLogos = [...logos, ...logos];
 
   return (
