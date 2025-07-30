@@ -7,11 +7,9 @@ const TermAndCondition = () => {
     <>
       <Header />
       <section className="bg-[#e4e6e7] py-12">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center pt-16">
           {/* Breadcrumb */}
-          <p className="text-sm text-gray-600 mb-4">
-            Terms & Conditions • Privacy policy
-          </p>
+          <p className="text-sm text-gray-600 mb-4">Privacy policy</p>
 
           {/* Title */}
           <h1 className="text-3xl font-serif font-semibold mb-6">

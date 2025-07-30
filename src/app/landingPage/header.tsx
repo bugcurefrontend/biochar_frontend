@@ -6,7 +6,7 @@ import React from "react";
 const Header = () => {
   return (
     <>
-      <div className="w-full fixed z-30 lg:top-7">
+      <div className="w-full">
         <div className="w-full flex justify-between items-center py-2 bg-white lg:rounded-full lg:px-5 lg:w-[95%] lg:mx-auto">
           <div className="py-1">
             <Link href="#">

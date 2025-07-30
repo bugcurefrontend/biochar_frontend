@@ -217,10 +217,10 @@ const TransfomationPart = () => {
                   Current
                 </span>
                 <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-                  <CountUp end={6948} duration={2} /> <br /> farmers
+                  <CountUp end={3000} duration={2} />+ <br /> Farmers Engaged
                 </h3>
                 <p className="text-sm text-gray-300">
-                  Working in 8 states of India
+                  Farmer trials underway with 460 farmers across 8 districts
                 </p>
               </div>
 
@@ -229,10 +229,11 @@ const TransfomationPart = () => {
                   Current
                 </span>
                 <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-                  <CountUp end={3216} duration={2} /> <br /> credits
+                  <CountUp end={3216} duration={2} /> <br />
+                  Carbon Credits Issued
                 </h3>
                 <p className="text-sm text-gray-300">
-                  From 20 sites across India
+                  Verified through rigorous standards and audits
                 </p>
               </div>
             </div>
@@ -241,26 +242,30 @@ const TransfomationPart = () => {
           <div className="flex flex-col space-y-6 w-full">
             <div className="bg-white rounded-2xl shadow px-8 py-12">
               <h3 className="text-4xl font-roboto font-semibold leading-tight mb-4">
-                <CountUp end={18} duration={2} /> Million <br /> farmers
+                <CountUp end={2} duration={2} />+ Million <br /> Carbon Credits
               </h3>
               <p className="text-sm text-gray-600">
-                Direct access through partner network
+                Projected long-term carbon drawdown
               </p>
             </div>
 
             <div className="bg-white rounded-2xl shadow px-8 py-12">
               <h3 className="text-4xl font-roboto font-semibold leading-tight mb-4">
-                <CountUp end={100000} duration={2} />+ <br /> villages
+                <CountUp end={100000} duration={2} />+ <br /> Villages Reached
               </h3>
               <p className="text-sm text-gray-600">
-                Grassroot level engagement by partners
+                Decentralized biochar units catalyzing rural livelihoods
               </p>
             </div>
 
             <div className="bg-white rounded-2xl shadow px-8 py-12">
               <h3 className="text-4xl font-roboto font-semibold leading-tight mb-4">
-                <CountUp end={2} duration={2} /> Million <br /> Carbon Credits
+                <CountUp end={18} duration={2} /> Million <br /> Farmers
+                Empowered
               </h3>
+              <p className="text-sm text-gray-600">
+                Scalable model for regenerative agriculture across India
+              </p>
               <p className="text-sm text-gray-600">By 2030</p>
             </div>
           </div>

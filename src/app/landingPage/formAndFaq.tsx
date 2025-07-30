@@ -92,7 +92,7 @@ export default function FormAndFaq() {
         {/* ─────── Image (above on mobile, left on desktop) ─────── */}
         <div className="relative md:col-span-6 px-6">
           <Image
-            src="/cardImg.jpg" // ↖ replace with real path
+            src="/testimonile/video.jpg" // ↖ replace with real path
             alt="Green landscape"
             width={1600}
             height={900}
