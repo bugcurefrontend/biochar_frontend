@@ -78,12 +78,40 @@ export default function FormAndFaq() {
     return Object.keys(newErr).length === 0;
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-    // 👉 replace with API call
-    console.table({ ...form, interests: selected });
-    setSubmitted(true);
+
+    const payload = {
+      full_name: form.name,
+      email: form.email,
+      interests: selected,
+      inquiry_message: form.message,
+    };
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/submit-contact/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Submission failed");
+      }
+
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+      setSelected([]);
+      setErrors({});
+    } catch (error) {
+      console.error("Submit error:", error);
+      alert("Something went wrong while submitting. Please try again.");
+    }
   }
 
   return (
@@ -100,9 +128,9 @@ export default function FormAndFaq() {
           />
 
           {/* Optional badge */}
-          <span className="hidden lg:block absolute top-6 left-6 bg-black text-white text-xs px-3 py-1 rounded">
+          {/* <span className="hidden lg:block absolute top-6 left-6 bg-black text-white text-xs px-3 py-1 rounded">
             Back in 2023
-          </span>
+          </span> */}
         </div>
 
         {/* ─────── Form ─────── */}
@@ -195,7 +223,7 @@ export default function FormAndFaq() {
                 value={form.message}
                 onChange={handleChange}
                 rows={2}
-                className="mt-2 w-full rounded border py-2 border-gray-300 focus:ring-gray-800 focus:border-gray-800 text-sm resize-none"
+                className="mt-2 w-full rounded border py-2 px-2 border-gray-300 focus:ring-gray-800 focus:border-gray-800 text-sm resize-none"
               />
             </label>
 

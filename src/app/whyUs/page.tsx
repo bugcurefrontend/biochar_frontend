@@ -98,7 +98,7 @@ const WhyUs = () => {
       </div>
 
       {/* Tab Navigation */}
-      <nav className="w-full overflow-x-auto border-b-2 border-gray-200 py-5 mb-10 lg:overflow-x-hidden">
+      <nav className="w-full overflow-x-auto py-5 mb-10 lg:overflow-x-hidden">
         <div className="flex mx-auto w-max gap-6 px-4">
           {slides.map((slide, index) => {
             const isActive = activeIndex === index;
@@ -109,8 +109,8 @@ const WhyUs = () => {
                 onClick={() => onSlideChange(index)}
                 className={`flex flex-nowrap text-nowrap items-center justify-center px-4 py-2 transition-all duration-300  ${
                   isActive
-                    ? "text-blue-700 border-b-3 border-blue-700"
-                    : "text-gray-500 hover:text-black"
+                    ? "text-black border-b-3 border-black"
+                    : "text-gray-400 hover:text-black"
                 }`}
               >
                 <span className="text-lg mt-1 text-center font-medium">

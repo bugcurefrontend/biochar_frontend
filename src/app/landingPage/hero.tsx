@@ -16,9 +16,14 @@ const Hero = () => {
         <h1 className="text-[1.5rem] text-white w-[50%]">
           Carbon to Community with Biochar
         </h1>
-        <p className="text-[0.8rem] text-white w-[50%] py-4">
-          As carbon emissions rise, rural livelihoods vanish. Two crises. One
-          solution.
+        <p className="text-[0.8rem] text-white w-[50%] py-1">
+          As carbon emissions rise
+        </p>
+        <p className="text-[0.8rem] text-white w-[50%] ">
+          rural livelihoods vanish
+        </p>
+        <p className="text-[0.8rem] text-white w-[50%] py-1">
+          Two Crises. One Solution.
         </p>
         <div className="pt-5">
           <button className="bg-white flex justify-between items-center text-black px-3 py-1 rounded-full text-sm">
@@ -33,9 +38,14 @@ const Hero = () => {
         <h1 className="text-[2.5rem] text-white w-[70%] xl:text-[3.5rem]">
           Carbon to Community with Biochar
         </h1>
-        <p className="text-[0.8rem] text-white w-[50%] py-4 xl:text-[1.8rem]">
-          As carbon emissions rise rural livelihood vanish Two Crisis One
-          Solutions.
+        <p className="text-[0.8rem] text-white w-[50%] py-1 xl:text-[1.8rem]">
+          As carbon emissions rise
+        </p>
+        <p className="text-[0.8rem] text-white w-[50%] py- xl:text-[1.8rem]">
+          rural livelihoods vanish
+        </p>
+        <p className="text-[0.8rem] text-white w-[50%] py-1 xl:text-[1.8rem]">
+          Two Crises. One Solution.
         </p>
         <div className="pt-5">
           <button className="bg-white flex justify-between items-center  text-black px-3 py-1 rounded-full text-sm xl:text-[1.2rem] xl:px-7 xl:py-3">

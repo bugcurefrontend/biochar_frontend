@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import CountUp from "react-countup";
 
@@ -42,7 +43,7 @@ const TransfomationPart = () => {
               </ul>
 
               <button className="inline-block mt-5 px-6 py-3 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
-                Turn carbon into community
+                <Link href="#formForId">Turn carbon into community</Link>
               </button>
             </div>
           </div>
@@ -139,56 +140,53 @@ const TransfomationPart = () => {
           {/* Stat card */}
           <div className="bg-white rounded-2xl shadow px-8 py-12 text-center">
             <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              18 Million
-              <br />
-              farmers
+              <CountUp end={2} duration={2} />+ Million <br /> Carbon Credits
             </h3>
             <p className="text-sm text-gray-600">
-              Direct access through partner network
+              Projected long-term carbon drawdown
             </p>
           </div>
           <div className="bg-white rounded-2xl shadow px-8 py-12 text-center">
             <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              18 Million
-              <br />
-              farmers
+              <CountUp end={2} duration={2} />+ Million <br /> Carbon Credits
             </h3>
             <p className="text-sm text-gray-600">
-              Direct access through partner network
+              Decentralized biochar units catalyzing rural livelihoods
             </p>
           </div>
           <div className="bg-white rounded-2xl shadow px-8 py-12 text-center">
             <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              18 Million
-              <br />
-              farmers
+              <CountUp end={18} duration={2} /> Million <br /> Farmers Empowered
             </h3>
             <p className="text-sm text-gray-600">
-              Direct access through partner network
+              Scalable model for regenerative agriculture across India
             </p>
           </div>
-          <div className="relative bg-[#08141f] text-white rounded-2xl px-6 py-10">
+          <div className="relative bg-[#08141f] text-center text-white rounded-2xl px-6 py-10">
             <span className="absolute top-6 right-6 bg-black text-xs px-3 py-1 rounded">
               Current
             </span>
             <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              3,216
-              <br />
-              credits
+              <CountUp end={3000} duration={2} />+ <br /> Farmers Engaged
             </h3>
-            <p className="text-sm text-gray-300">From 20 sites across India</p>
+            <p className="text-sm text-gray-300">
+              {" "}
+              Farmer trials underway with 460 farmers across 8 districts
+            </p>
           </div>
-          <div className="relative bg-[#08141f] text-white rounded-2xl px-6 py-10">
+          <div className="relative text-center bg-[#08141f] text-white rounded-2xl px-6 py-10">
             <span className="absolute top-6 right-6 bg-black text-xs px-3 py-1 rounded">
               Current
             </span>
 
             <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              3,216
-              <br />
-              credits
+              <CountUp end={3216} duration={2} /> <br />
+              Carbon Credits Issued
             </h3>
-            <p className="text-sm text-gray-300">From 20 sites across India</p>
+            <p className="text-sm text-gray-300">
+              {" "}
+              Verified through rigorous standards and audits
+            </p>
           </div>
         </div>
 
@@ -198,7 +196,6 @@ const TransfomationPart = () => {
                 max-w-[1440px] mx-auto              
                 grid-cols-[2fr_1fr]"
         >
-          {/* 2-column grid 2:1 */}
           {/* Left : hero image + two dark stats */}
           <div className="grid grid-rows-[auto_auto] gap-6">
             {/* Hero image */}
