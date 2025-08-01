@@ -149,7 +149,7 @@ const WhyUs = () => {
           <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
             <button
               onClick={handlePrev}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10  text-blue-700 text-[4rem] px-2 py-1"
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10  text-gray-500 text-[4rem] px-2 py-1"
             >
               ‹
             </button>
@@ -174,7 +174,7 @@ const WhyUs = () => {
 
             <button
               onClick={handleNext}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-blue-700 text-[4rem] px-2 py-1 "
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 text-[4rem] px-2 py-1 "
             >
               ›
             </button>

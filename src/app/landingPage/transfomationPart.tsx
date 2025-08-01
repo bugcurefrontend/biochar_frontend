@@ -3,8 +3,52 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import CountUp from "react-countup";
+import { useState } from "react";
 
 const TransfomationPart = () => {
+  const videoList = [
+    { src: "/Kanha.mp4", poster: "/poster1.jpg" },
+    { src: "/shivgarh_video.mp4", poster: "/poster1.jpg" },
+  ];
+
+  const [selectedVideo, setSelectedVideo] = useState(videoList[0]);
+  const topCards = [
+    {
+      count: 3000,
+      label: "Farmers Engaged",
+      description: "Farmer trials underway with 460 farmers across 8 districts",
+    },
+    {
+      count: 10200,
+      label: "Hectares Restored",
+      description:
+        "Degraded land improved using biochar-based soil regeneration",
+    },
+    {
+      count: 3216,
+      label: "Carbon Credits Issued",
+      description: "Verified through rigorous standards and audits",
+      sub: "By 2030",
+    },
+  ];
+  const bottomCards = [
+    {
+      count: 18,
+      label: "Million Farmers Empowered",
+      description: "Scalable model for regenerative agriculture across India",
+      sub: "2030 Vision",
+    },
+    {
+      count: 100000,
+      label: "Villages Reached",
+      description: "Decentralized biochar units catalyzing rural livelihoods",
+    },
+    {
+      count: 2,
+      label: "Million+ Carbon Credits",
+      description: "Projected long-term carbon drawdown",
+    },
+  ];
   return (
     <>
       <section id="ourImpact" className="bg-[#e9edf2] py-6 md:px-7">
@@ -126,147 +170,92 @@ const TransfomationPart = () => {
           </div>
         </div>
 
-        {/* ─────────── Mobile-only stats card (≤ md) ─────────── */}
-        <div className="md:hidden my-8 space-y-6 mx-6">
-          {/* Image banner */}
-          <Image
-            src="/farmer.png"
-            alt="Aerial view of farmland"
-            width={800}
-            height={450}
-            className="w-full h-48 object-cover rounded-xl"
-          />
-
-          {/* Stat card */}
-          <div className="bg-white rounded-2xl shadow px-8 py-12 text-center">
-            <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              <CountUp end={2} duration={2} />+ Million <br /> Carbon Credits
-            </h3>
-            <p className="text-sm text-gray-600">
-              Projected long-term carbon drawdown
-            </p>
-          </div>
-          <div className="bg-white rounded-2xl shadow px-8 py-12 text-center">
-            <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              <CountUp end={2} duration={2} />+ Million <br /> Carbon Credits
-            </h3>
-            <p className="text-sm text-gray-600">
-              Decentralized biochar units catalyzing rural livelihoods
-            </p>
-          </div>
-          <div className="bg-white rounded-2xl shadow px-8 py-12 text-center">
-            <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              <CountUp end={18} duration={2} /> Million <br /> Farmers Empowered
-            </h3>
-            <p className="text-sm text-gray-600">
-              Scalable model for regenerative agriculture across India
-            </p>
-          </div>
-          <div className="relative bg-[#08141f] text-center text-white rounded-2xl px-6 py-10">
-            <span className="absolute top-6 right-6 bg-black text-xs px-3 py-1 rounded">
-              Current
-            </span>
-            <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              <CountUp end={3000} duration={2} />+ <br /> Farmers Engaged
-            </h3>
-            <p className="text-sm text-gray-300">
-              {" "}
-              Farmer trials underway with 460 farmers across 8 districts
-            </p>
-          </div>
-          <div className="relative text-center bg-[#08141f] text-white rounded-2xl px-6 py-10">
-            <span className="absolute top-6 right-6 bg-black text-xs px-3 py-1 rounded">
-              Current
-            </span>
-
-            <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-              <CountUp end={3216} duration={2} /> <br />
-              Carbon Credits Issued
-            </h3>
-            <p className="text-sm text-gray-300">
-              {" "}
-              Verified through rigorous standards and audits
-            </p>
-          </div>
-        </div>
-
-        {/* ─────────── Desktop / Tablet block (≥ md) ─────────── */}
-        <div
-          className="hidden md:grid mt-16 gap-6 md:px-0  
-                max-w-[1440px] mx-auto              
-                grid-cols-[2fr_1fr]"
-        >
-          {/* Left : hero image + two dark stats */}
-          <div className="grid grid-rows-[auto_auto] gap-6">
-            {/* Hero image */}
-            <Image
-              src="/farmer.png"
-              alt="Farmer in field"
-              width={1500}
-              height={900}
-              className="w-full h-full object-cover rounded-xl lg:h-[70vh]"
-            />
-
-            {/* Two dark cards */}
-            <div className="grid grid-cols-2 gap-6">
-              <div className="relative bg-[#08141f] text-white rounded-2xl px-6 py-5">
-                <span className="absolute top-6 right-6 bg-black text-xs px-3 py-1 rounded">
-                  Current
-                </span>
-                <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-                  <CountUp end={3000} duration={2} />+ <br /> Farmers Engaged
+        <section className="bg-[#e9edf2] py-10 px-4">
+          {/* First Row – 2 Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            {topCards.map((item, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl shadow px-6 py-10 flex flex-col justify-between h-full"
+              >
+                <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
+                  <CountUp end={item.count} duration={2} />
+                  {item.count >= 1000 ? "+" : ""} <br />
+                  {item.label}
                 </h3>
-                <p className="text-sm text-gray-300">
-                  Farmer trials underway with 460 farmers across 8 districts
-                </p>
+                <p className="text-sm text-gray-600">{item.description}</p>
+                {item.sub && (
+                  <p className="text-sm text-gray-600 mt-1">{item.sub}</p>
+                )}
               </div>
+            ))}
+          </div>
 
-              <div className="relative bg-[#08141f] text-white rounded-2xl px-6 py-5">
-                <span className="absolute top-6 right-6 bg-black text-xs px-3 py-1 rounded">
-                  Current
-                </span>
-                <h3 className="font-roboto font-semibold text-5xl leading-none mb-6">
-                  <CountUp end={3216} duration={2} /> <br />
-                  Carbon Credits Issued
+          {/* Video Section */}
+          <div className="max-w-6xl mx-auto my-10">
+            {/* Main Video */}
+            <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
+              <video
+                key={selectedVideo.src}
+                src={selectedVideo.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster={selectedVideo.poster}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Thumbnails */}
+            <div className="flex gap-4 overflow-x-auto mt-6 pb-4">
+              {videoList.map((vid, idx) => (
+                <div
+                  key={idx}
+                  className={`relative w-[220px] h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${
+                    selectedVideo.src === vid.src
+                      ? "border-blue-500 border-2"
+                      : "border-transparent"
+                  }`}
+                  onClick={() => setSelectedVideo(vid)}
+                >
+                  <video
+                    src={vid.src}
+                    muted
+                    playsInline
+                    controls={false}
+                    className="w-full h-full object-cover"
+                  ></video>
+
+                  {/* Optional: Play icon overlay */}
+                  {/* <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                    <div className="w-10 h-10 border-l-8 border-t-transparent border-b-transparent border-white transform rotate-45"></div>
+                  </div> */}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Last Row – 3 Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            {bottomCards.map((item, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl shadow px-6 py-10 flex flex-col justify-between h-full"
+              >
+                <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
+                  <CountUp end={item.count} duration={2} />
+                  {item.count >= 1000 ? "+" : ""} <br />
+                  {item.label}
                 </h3>
-                <p className="text-sm text-gray-300">
-                  Verified through rigorous standards and audits
-                </p>
+                <p className="text-sm text-gray-600">{item.description}</p>
+                {item.sub && (
+                  <p className="text-sm text-gray-600 mt-1">{item.sub}</p>
+                )}
               </div>
-            </div>
+            ))}
           </div>
-          {/* Right : three white stat cards */}
-          <div className="flex flex-col space-y-6 w-full">
-            <div className="bg-white rounded-2xl shadow px-8 py-12">
-              <h3 className="text-4xl font-roboto font-semibold leading-tight mb-4">
-                <CountUp end={2} duration={2} />+ Million <br /> Carbon Credits
-              </h3>
-              <p className="text-sm text-gray-600">
-                Projected long-term carbon drawdown
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl shadow px-8 py-12">
-              <h3 className="text-4xl font-roboto font-semibold leading-tight mb-4">
-                <CountUp end={100000} duration={2} />+ <br /> Villages Reached
-              </h3>
-              <p className="text-sm text-gray-600">
-                Decentralized biochar units catalyzing rural livelihoods
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl shadow px-8 py-12">
-              <h3 className="text-4xl font-roboto font-semibold leading-tight mb-4">
-                <CountUp end={18} duration={2} /> Million <br /> Farmers
-                Empowered
-              </h3>
-              <p className="text-sm text-gray-600">
-                Scalable model for regenerative agriculture across India
-              </p>
-              <p className="text-sm text-gray-600">By 2030</p>
-            </div>
-          </div>
-        </div>
+        </section>
       </section>
     </>
   );

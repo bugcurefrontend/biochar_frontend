@@ -12,7 +12,7 @@ const Hero = () => {
       <video src="/HeroSection.mp4" autoPlay loop muted playsInline></video>
       {/* </div> */}
       {/* for mobile view */}
-      <div className="bg-black px-4 py-10 font-serif md:hidden">
+      <div className="bg-[#051119] px-4 py-10 font-serif md:hidden">
         <h1 className="text-[1.5rem] text-white w-[50%]">
           Carbon to Community with Biochar
         </h1>
