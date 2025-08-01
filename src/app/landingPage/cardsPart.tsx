@@ -89,7 +89,7 @@ const CardsPart = () => {
         </h2>
       </div>
 
-      {/* Tab Navigation add */}
+      {/* Tab Navigation  */}
       <nav className="w-full flex flex-wrap justify-center gap-4 md:gap-6 py-5 mb-10">
         {slides.map((slide, index) => (
           <button
