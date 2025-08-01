@@ -28,7 +28,13 @@ const Hero = () => {
         <div className="pt-5">
           <button className="bg-white flex justify-between items-center text-black px-3 py-1 rounded-full text-sm">
             Buy Carbon Credits
-            <Image src={"/icon.svg"} alt={"icon"} width={10} height={10} />
+            <Image
+              src={"/icon.svg"}
+              alt={"icon"}
+              width={10}
+              height={10}
+              className="mx-2"
+            />
           </button>
         </div>
       </div>
@@ -48,7 +54,7 @@ const Hero = () => {
           Two Crises. One Solution.
         </p>
         <div className="pt-5">
-          <button className="bg-white flex justify-between items-center  text-black px-3 py-1 rounded-full text-sm xl:text-[1.2rem] xl:px-7 xl:py-3">
+          <button className="bg-white flex justify-between items-center  text-black px-3 py-1 rounded-full text-sm lg:text-[1.2rem] md:px-7 md:py-3">
             <Link href="#formForId">Buy Carbon Credits </Link>
             <Image
               src={"/icon.svg"}

@@ -21,7 +21,7 @@ const WhyUs = () => {
         "Local & Sustainable: Produced and applied to soil locally, minimizing carbon footprint of carbon sequestering activity.",
         "Verified & Transparent: Fully traceable via Digital MRV and certified by Carbon Standards International (CSI), delivering assured impact.",
       ],
-      images: ["/CardsImg/card1.png", "/CardsImg/card2.jpg"],
+      images: ["/CardsImg/card1.jpg", "/CardsImg/card12.jpg"],
     },
     {
       title: "Empowering Communities",
@@ -30,12 +30,7 @@ const WhyUs = () => {
         "Soil Health: Biochar improves soil moisture and structure and permanently increases fertility by bringing back microbial life in soil for generations.",
         "Farmer Prosperity: Our field trials across diverse zones demonstrate better crop yields & farmer income year after year, with a single application of biochar. Carbon finance makes biochar affordable and accessible to farmers.",
       ],
-      images: [
-        "/CardsImg/card3.jpg",
-        "/CardsImg/card4.jpg",
-        "/CardsImg/card5.png",
-        "/CardsImg/card6.png",
-      ],
+      images: ["/CardsImg/card3.jpg", "/CardsImg/card4.jpg"],
     },
     {
       title: "Research & Adoption",
@@ -44,7 +39,13 @@ const WhyUs = () => {
         "Backed by Science: Trials with 144 farmers across 3 districts showed 18–32% yield gains in diverse soils & practices. Partnership with ICAR-CICR.",
         "Innovation: In-situ pyrolysis enables on-farm production of biochar, reducing logistics costs and improving unit economics.",
       ],
-      images: ["/CardsImg/card7.png", "/CardsImg/card8.png"],
+      images: [
+        "/CardsImg/card5.jpg",
+        "/CardsImg/card6.jpg",
+        "/CardsImg/card7.jpg",
+        "/CardsImg/card8.jpg",
+        "/CardsImg/card9.jpg",
+      ],
     },
     {
       title: "Scale",
@@ -54,7 +55,7 @@ const WhyUs = () => {
         "Collaborative Model: Partnering with ICAR-CICR, Samunnati, Arvind Mills, Pratibha Syntex, and dMRV partners for science, adoption, and transparency.",
         "SDG-aligned: Driving climate action, rural livelihoods, healthy soils, biodiversity and food security.",
       ],
-      images: ["/cardImg.jpg"],
+      images: ["/CardsImg/card10.jpg", "/CardsImg/card11.jpg"],
     },
   ];
 
@@ -126,11 +127,11 @@ const WhyUs = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={activeIndex}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
-          transition={{ duration: 0.4 }}
-          className="flex flex-col md:flex-row  rounded-xl overflow-hidden"
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -300, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="flex flex-col md:flex-row gap- rounded-xl overflow-hidden"
         >
           {/* Text side */}
           <div className="bg-gray-900 text-white md:w-1/2 p-8 space-y-6 flex flex-col justify-center">
@@ -148,30 +149,32 @@ const WhyUs = () => {
           <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
             <button
               onClick={handlePrev}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white px-2 py-1 hover:bg-black/80"
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10  text-blue-700 text-[4rem] px-2 py-1"
             >
               ‹
             </button>
 
-            <motion.div
-              key={imageIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              className="w-full h-[80vh] relative overflow-hidden shadow"
-            >
-              <Image
-                src={currentImage}
-                alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={imageIndex}
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -100, opacity: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="w-full h-[80vh] relative overflow-hidden shadow"
+              >
+                <Image
+                  src={currentImage}
+                  alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
 
             <button
               onClick={handleNext}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white px-2 py-1 rounded-full hover:bg-black/80"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-blue-700 text-[4rem] px-2 py-1 "
             >
               ›
             </button>
