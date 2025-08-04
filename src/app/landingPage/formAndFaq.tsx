@@ -90,7 +90,7 @@ export default function FormAndFaq() {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/submit-contact/", {
+      const res = await fetch("https://biochar-api.onrender.com/api/contacts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
