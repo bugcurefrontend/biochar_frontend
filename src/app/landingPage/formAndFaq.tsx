@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
-import { FaQuinscape } from "react-icons/fa";
+import { useState, useRef, useEffect } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
 
 const interestOptions = [
@@ -48,6 +47,8 @@ const faqs = [
 export default function FormAndFaq() {
   const [selected, setSelected] = useState<string[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [imagesVisible, setImagesVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -59,6 +60,28 @@ export default function FormAndFaq() {
     interests?: string;
   }>({});
   const [submitted, setSubmitted] = useState(false);
+
+  // Intersection Observer for lazy loading
+  useEffect(() => {
+    const currentRef = sectionRef.current;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setImagesVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
   const toggle = (label: string) =>
     setSelected((prev) =>
       prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]
@@ -115,17 +138,25 @@ export default function FormAndFaq() {
   }
 
   return (
-    <section className=" " id="formForId">
+    <section className=" " id="formForId" ref={sectionRef}>
       <div className="max-w-7xl mt-8 mx-auto md:grid md:grid-cols-12">
         {/* ─────── Image (above on mobile, left on desktop) ─────── */}
         <div className="relative md:col-span-6 px-6">
-          <Image
-            src="/testimonile/video.jpg"
-            alt="Green landscape"
-            width={1600}
-            height={900}
-            className="w-full h-72 sm:h-96 md:h-full object-cover rounded-xl"
-          />
+          {imagesVisible ? (
+            <Image
+              src="/testimonile/video.jpg"
+              alt="Green landscape"
+              width={600}
+              height={400}
+              className="w-full h-72 sm:h-96 md:h-full object-cover rounded-xl"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority={false}
+            />
+          ) : (
+            <div className="w-full h-72 sm:h-96 md:h-full bg-gray-200 rounded-xl flex items-center justify-center">
+              <span className="text-gray-400">Loading image...</span>
+            </div>
+          )}
 
           {/* Optional badge */}
           {/* <span className="hidden lg:block absolute top-6 left-6 bg-black text-white text-xs px-3 py-1 rounded">

@@ -3,15 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import CountUp from "react-countup";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 
 const TransfomationPart = () => {
-  const videoList = [
+  const videoList = useMemo(() => [
     { src: "/Kanha.mp4", poster: "/poster1.jpg" },
     { src: "/shivgarh_video.mp4", poster: "/poster1.jpg" },
-  ];
+  ], []);
 
   const [selectedVideo, setSelectedVideo] = useState(videoList[0]);
+  const [imagesVisible, setImagesVisible] = useState(false);
+  const [videosLoaded, setVideosLoaded] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const mainVideoRef = useRef<HTMLVideoElement>(null);
+  const thumbnailRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
   const topCards = [
     {
       count: 3000,
@@ -50,31 +56,54 @@ const TransfomationPart = () => {
     },
   ];
 
-  const videoSectionRef = useRef<HTMLDivElement>(null);
-  const [videoVisible, setVideoVisible] = useState(false);
-
+  // Intersection Observer for lazy loading
   useEffect(() => {
+    const currentRef = sectionRef.current;
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVideoVisible(true);
+          setImagesVisible(true);
+          // Load videos after a small delay to ensure DOM is ready
+          setTimeout(() => {
+            setVideosLoaded(true);
+          }, 100);
         }
       },
       { threshold: 0.2 }
     );
-    if (videoSectionRef.current) {
-      observer.observe(videoSectionRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     return () => {
-      if (videoSectionRef.current) {
-        observer.unobserve(videoSectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
 
+  // Load video sources when videos become visible
+  useEffect(() => {
+    if (videosLoaded && mainVideoRef.current) {
+      mainVideoRef.current.src = selectedVideo.src;
+      mainVideoRef.current.load();
+    }
+  }, [videosLoaded, selectedVideo]);
+
+  // Load thumbnail video sources when videos become visible
+  useEffect(() => {
+    if (videosLoaded) {
+      thumbnailRefs.current.forEach((videoRef, index) => {
+        if (videoRef && videoList[index]) {
+          videoRef.src = videoList[index].src;
+          videoRef.load();
+        }
+      });
+    }
+  }, [videosLoaded, videoList]);
+
   return (
     <>
-      <section id="ourImpact" className="bg-[#e9edf2] py-6 md:px-7">
+      <section id="ourImpact" className="bg-[#e9edf2] py-6 md:px-7" ref={sectionRef}>
         <div className="max-w-7xl mx-auto px-5 py-10 lg:py-24">
           {/* <div className="grid md:grid-cols-12 md:gap-16"> */}
           <div className="md:flex md:justify-between w-full">
@@ -117,15 +146,23 @@ const TransfomationPart = () => {
         </div>
         {/* ─────────────── Testimonial card – mobile (≤ md) ─────────────── */}
         <article className="bg-gray-900 text-white rounded-xl mt-8 p-6 mx-6 overflow-hidden md:hidden">
-          {/* Image + “Before” tag */}
+          {/* Image + "Before" tag */}
           <div className="relative">
-            <Image
-              src="/girl.png" // replace with actual path
-              alt="Girl before transformation"
-              width={500}
-              height={500}
-              className="w-full h-full object-cover"
-            />
+            {imagesVisible ? (
+              <Image
+                src="/girl.png" // replace with actual path
+                alt="Girl before transformation"
+                width={400}
+                height={300}
+                className="w-full h-full object-cover"
+                sizes="(max-width: 768px) 100vw"
+                priority={false}
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span className="text-gray-400">Loading image...</span>
+              </div>
+            )}
             <span className="absolute top-2 right-2 bg-black/80 text-xs px-3 py-1 rounded">
               Before
             </span>
@@ -134,11 +171,11 @@ const TransfomationPart = () => {
           {/* Quote */}
           <div className=" py-6">
             <p className="font-serif text-lg leading-relaxed">
-              “Vision, ingenuity, and labor have transformed what was once harsh
+              &ldquo;Vision, ingenuity, and labor have transformed what was once harsh
               and depleted land into a lush green campus, with rainforest full
               of thriving, endemic, and endangered species, medicinal and edible
               plants, and organic farms. Kanha Shanti Vanam has become a
-              testament to harmony with nature.”
+              testament to harmony with nature.&rdquo;
             </p>
 
             <div className="text-lg py-4 text-gray-300">
@@ -153,13 +190,21 @@ const TransfomationPart = () => {
           <div className="md:w-1/2 flex flex-col">
             {/* After image */}
             <div className="relative">
-              <Image
-                src="/testimonile/video.jpg"
-                alt="Girl after transformation"
-                width={600}
-                height={500}
-                className="w-full h-full object-cover"
-              />
+              {imagesVisible ? (
+                <Image
+                  src="/testimonile/video.jpg"
+                  alt="Girl after transformation"
+                  width={500}
+                  height={400}
+                  className="w-full h-full object-cover"
+                  sizes="(min-width: 768px) 50vw"
+                  priority={false}
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-400">Loading image...</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -167,11 +212,11 @@ const TransfomationPart = () => {
           <div className="md:w-1/2 flex flex-col relative ">
             <div className="p-8 space-y-4">
               <p className="font-serif text-lg leading-relaxed">
-                “Vision, ingenuity, and labor have transformed what was once
+                &ldquo;Vision, ingenuity, and labor have transformed what was once
                 harsh and depleted land into a lush green campus, with
                 rainforest full of thriving, endemic, and endangered species,
                 medicinal and edible plants, and organic farms. Kanha Shanti
-                Vanam has become a testament to harmony with nature.”
+                Vanam has become a testament to harmony with nature.&rdquo;
               </p>
             </div>
 
@@ -215,13 +260,12 @@ const TransfomationPart = () => {
           </div>
 
           {/* Video Section */}
-          <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
+          <div className="max-w-6xl mx-auto my-10">
             {/* Main Video */}
             <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
-              {videoVisible ? (
+              {imagesVisible ? (
                 <video
-                  key={selectedVideo.src}
-                  src={selectedVideo.src}
+                  ref={mainVideoRef}
                   autoPlay
                   loop
                   muted
@@ -249,9 +293,11 @@ const TransfomationPart = () => {
                   }`}
                   onClick={() => setSelectedVideo(vid)}
                 >
-                  {videoVisible ? (
+                  {imagesVisible ? (
                     <video
-                      src={vid.src}
+                      ref={(el) => {
+                        thumbnailRefs.current[idx] = el;
+                      }}
                       muted
                       playsInline
                       controls={false}

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Slide {
@@ -12,6 +12,8 @@ interface Slide {
 const CardsPart = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
+  const [imagesVisible, setImagesVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const slides: Slide[] = [
     {
@@ -40,7 +42,7 @@ const CardsPart = () => {
     {
       title: "Research & Adoption",
       bullets: [
-        "Center of Excellence: India’s first biochar COE integrates innovation, training, and outreach to accelerate adoption by farming communities.",
+        "Center of Excellence: India's first biochar COE integrates innovation, training, and outreach to accelerate adoption by farming communities.",
         "Backed by Science: Trials with 144 farmers across 3 districts showed 18–32% yield gains in diverse soils & practices. Partnership with ICAR-CICR.",
         "Innovation: In-situ pyrolysis enables on-farm production of biochar, reducing logistics costs and improving unit economics.",
       ],
@@ -49,7 +51,7 @@ const CardsPart = () => {
     {
       title: "Scale",
       bullets: [
-        "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India through Samunnati and Heartfulness Institute, we’re built for scale.",
+        "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India through Samunnati and Heartfulness Institute, we're built for scale.",
         "Afforestation: In 10,200 acres of reforestation with Forests by Heartfulness, biochar has boosted sapling survival to 85–90%.",
         "Collaborative Model: Partnering with ICAR-CICR, Samunnati, Arvind Mills, Pratibha Syntex, and dMRV partners for science, adoption, and transparency.",
         "SDG-aligned: Driving climate action, rural livelihoods, healthy soils, biodiversity and food security.",
@@ -60,6 +62,27 @@ const CardsPart = () => {
 
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
+
+  // Intersection Observer for lazy loading
+  useEffect(() => {
+    const currentRef = sectionRef.current;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setImagesVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
 
   const handleNext = () => {
     setImageIndex((prev) => (prev + 1) % currentSlide.images.length);
@@ -77,7 +100,7 @@ const CardsPart = () => {
   };
 
   return (
-    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12">
+    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12" ref={sectionRef}>
       <div className="text-center mb-10 lg:mb-16">
         <p className="text-sm lg:text-base font-light tracking-wide text-gray-500 mb-4">
           What sets HeartyCulture Biochar apart?
@@ -145,12 +168,18 @@ const CardsPart = () => {
               transition={{ duration: 0.3 }}
               className="w-full h-[80vh] relative rounded-xl overflow-hidden shadow"
             >
-              <Image
-                src={currentImage}
-                alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-                fill
-                className="object-cover"
-              />
+              {imagesVisible ? (
+                <Image
+                  src={currentImage}
+                  alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-400">Loading image...</span>
+                </div>
+              )}
             </motion.div>
 
             <button
