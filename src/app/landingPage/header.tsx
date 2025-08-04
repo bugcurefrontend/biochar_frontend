@@ -59,10 +59,11 @@ const Header = () => {
         </div>
 
         <div>
-          <button className="bg-black text-white px-6 py-2 rounded-full text-sm">
-            <button onClick={() => handleScrollOrNavigate("formForId")}>
-              Buy Carbon Credits
-            </button>
+          <button
+            className="bg-black text-white px-6 py-2 rounded-full text-sm"
+            onClick={() => handleScrollOrNavigate("formForId")}
+          >
+            Buy Carbon Credits
           </button>
         </div>
       </div>

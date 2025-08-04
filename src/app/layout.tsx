@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Heaartyculture Biochar",
+  title: "Heartyculture Biochar",
   description: "",
 };
 

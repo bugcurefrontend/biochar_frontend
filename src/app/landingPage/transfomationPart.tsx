@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import CountUp from "react-countup";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const TransfomationPart = () => {
   const videoList = [
@@ -49,6 +49,29 @@ const TransfomationPart = () => {
       description: "Projected long-term carbon drawdown",
     },
   ];
+
+  const videoSectionRef = useRef<HTMLDivElement>(null);
+  const [videoVisible, setVideoVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVideoVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (videoSectionRef.current) {
+      observer.observe(videoSectionRef.current);
+    }
+    return () => {
+      if (videoSectionRef.current) {
+        observer.unobserve(videoSectionRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <section id="ourImpact" className="bg-[#e9edf2] py-6 md:px-7">
@@ -192,19 +215,26 @@ const TransfomationPart = () => {
           </div>
 
           {/* Video Section */}
-          <div className="max-w-6xl mx-auto my-10">
+          <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
             {/* Main Video */}
             <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
-              <video
-                key={selectedVideo.src}
-                src={selectedVideo.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                poster={selectedVideo.poster}
-                className="w-full h-full object-cover"
-              />
+              {videoVisible ? (
+                <video
+                  key={selectedVideo.src}
+                  src={selectedVideo.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={selectedVideo.poster}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                  {/* Placeholder while video not loaded */}
+                  <span>Loading video...</span>
+                </div>
+              )}
             </div>
 
             {/* Thumbnails */}
@@ -219,18 +249,23 @@ const TransfomationPart = () => {
                   }`}
                   onClick={() => setSelectedVideo(vid)}
                 >
-                  <video
-                    src={vid.src}
-                    muted
-                    playsInline
-                    controls={false}
-                    className="w-full h-full object-cover"
-                  ></video>
-
-                  {/* Optional: Play icon overlay */}
-                  {/* <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                    <div className="w-10 h-10 border-l-8 border-t-transparent border-b-transparent border-white transform rotate-45"></div>
-                  </div> */}
+                  {videoVisible ? (
+                    <video
+                      src={vid.src}
+                      muted
+                      playsInline
+                      controls={false}
+                      className="w-full h-full object-cover"
+                    ></video>
+                  ) : (
+                    <Image
+                      src={vid.poster}
+                      alt="Video thumbnail"
+                      width={220}
+                      height={130}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
               ))}
             </div>
