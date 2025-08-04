@@ -90,9 +90,8 @@ export default function FormAndFaq() {
     };
 
     try {
-      const res = await fetch("https://biochar-api.onrender.com/api/contacts", {
+      const res = await fetch("https://biochar-api.onrender.com/api/contacts/", {
         method: "POST",
-         redirect: "manual",
         headers: {
           "Content-Type": "application/json",
         },
