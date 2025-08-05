@@ -63,10 +63,7 @@ const TransfomationPart = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setImagesVisible(true);
-          // Load videos after a small delay to ensure DOM is ready
-          setTimeout(() => {
-            setVideosLoaded(true);
-          }, 100);
+          setVideosLoaded(true);
         }
       },
       { threshold: 0.2 }

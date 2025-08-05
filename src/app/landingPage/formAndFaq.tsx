@@ -139,7 +139,7 @@ export default function FormAndFaq() {
 
   return (
     <section className=" " id="formForId" ref={sectionRef}>
-      <div className="max-w-7xl mt-8 mx-auto md:grid md:grid-cols-12">
+      <div className="max-w-7xl mt-8 mx-auto md:grid md:grid-cols-12 mb-12 lg:mb-24">
         {/* ─────── Image (above on mobile, left on desktop) ─────── */}
         <div className="relative md:col-span-6 px-6">
           {imagesVisible ? (

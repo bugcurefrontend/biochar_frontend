@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface Slide {
   title: string;
@@ -35,7 +34,7 @@ const WhyUs = () => {
     {
       title: "Research & Adoption",
       bullets: [
-        "Center of Excellence: India’s first biochar COE integrates innovation, training, and outreach to accelerate adoption by farming communities.",
+        "Center of Excellence: India's first biochar COE integrates innovation, training, and outreach to accelerate adoption by farming communities.",
         "Backed by Science: Trials with 144 farmers across 3 districts showed 18–32% yield gains in diverse soils & practices. Partnership with ICAR-CICR.",
         "Innovation: In-situ pyrolysis enables on-farm production of biochar, reducing logistics costs and improving unit economics.",
       ],
@@ -50,7 +49,7 @@ const WhyUs = () => {
     {
       title: "Scale",
       bullets: [
-        "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India through Samunnati and Heartfulness Institute, we’re built for scale.",
+        "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India through Samunnati and Heartfulness Institute, we're built for scale.",
         "Afforestation: In 10,200 acres of reforestation with Forests by Heartfulness, biochar has boosted sapling survival to 85–90%.",
         "Collaborative Model: Partnering with ICAR-CICR, Samunnati, Arvind Mills, Pratibha Syntex, and dMRV partners for science, adoption, and transparency.",
         "SDG-aligned: Driving climate action, rural livelihoods, healthy soils, biodiversity and food security.",
@@ -124,63 +123,45 @@ const WhyUs = () => {
       </nav>
 
       {/* Card Content */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeIndex}
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -300, opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="flex flex-col md:flex-row gap- rounded-xl overflow-hidden"
-        >
-          {/* Text side */}
-          <div className="bg-gray-900 text-white md:w-1/2 p-8 space-y-6 flex flex-col justify-center">
-            <h3 className="font-serif text-2xl lg:text-3xl mb-4">
-              {currentSlide.title}
-            </h3>
-            <ul className="list-disc pl-5 space-y-3 text-sm md:text-base leading-relaxed">
-              {currentSlide.bullets.map((bullet, i) => (
-                <li key={i}>{bullet}</li>
-              ))}
-            </ul>
+      <div className="flex flex-col md:flex-row gap- rounded-xl overflow-hidden">
+        {/* Text side */}
+        <div className="bg-gray-900 text-white md:w-1/2 p-8 space-y-6 flex flex-col justify-center">
+          <h3 className="font-serif text-2xl lg:text-3xl mb-4">
+            {currentSlide.title}
+          </h3>
+          <ul className="list-disc pl-5 space-y-3 text-sm md:text-base leading-relaxed">
+            {currentSlide.bullets.map((bullet, i) => (
+              <li key={i}>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Image Carousel side */}
+        <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
+          <button
+            onClick={handlePrev}
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10  text-gray-500 text-[4rem] px-2 py-1"
+          >
+            ‹
+          </button>
+
+          <div className="w-full h-[80vh] relative overflow-hidden shadow">
+            <Image
+              src={currentImage}
+              alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+              fill
+              className="object-cover"
+            />
           </div>
 
-          {/* Image Carousel side */}
-          <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
-            <button
-              onClick={handlePrev}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10  text-gray-500 text-[4rem] px-2 py-1"
-            >
-              ‹
-            </button>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={imageIndex}
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -100, opacity: 0 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="w-full h-[80vh] relative overflow-hidden shadow"
-              >
-                <Image
-                  src={currentImage}
-                  alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            <button
-              onClick={handleNext}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 text-[4rem] px-2 py-1 "
-            >
-              ›
-            </button>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+          <button
+            onClick={handleNext}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 text-[4rem] px-2 py-1 "
+          >
+            ›
+          </button>
+        </div>
+      </div>
     </section>
   );
 };
