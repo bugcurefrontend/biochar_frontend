@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 interface Slide {
   title: string;
@@ -61,28 +61,28 @@ const WhyUs = () => {
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
 
-  const handleNext = () => {
-    setImageIndex((prev) => (prev + 1) % currentSlide.images.length);
-  };
+  const handleNext = useCallback(() => {
+    const numImages = slides[activeIndex].images.length;
+    setImageIndex((prev) => (prev + 1) % numImages);
+  }, [activeIndex, slides]);
 
-  const handlePrev = () => {
-    setImageIndex((prev) =>
-      prev === 0 ? currentSlide.images.length - 1 : prev - 1
-    );
-  };
+  const handlePrev = useCallback(() => {
+    const numImages = slides[activeIndex].images.length;
+    setImageIndex((prev) => (prev - 1 + numImages) % numImages);
+  }, [activeIndex, slides]);
 
-  const onSlideChange = (index: number) => {
+  const onSlideChange = useCallback((index: number) => {
     setActiveIndex(index);
-    setImageIndex(0); // reset image on slide switch
-  };
+    setImageIndex(0);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setImageIndex((prev) => (prev + 1) % currentSlide.images.length);
+      handleNext();
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [activeIndex, currentSlide.images.length]);
+  }, [handleNext]);
 
   return (
     <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12">
@@ -97,19 +97,17 @@ const WhyUs = () => {
         </h2>
       </div>
 
-      {/* Tab Navigation */}
       <nav className="w-full overflow-x-auto py-5 mb-10 lg:overflow-x-hidden">
         <div className="flex mx-auto w-max gap-6 px-4">
           {slides.map((slide, index) => {
             const isActive = activeIndex === index;
-
             return (
               <button
                 key={index}
                 onClick={() => onSlideChange(index)}
-                className={`flex flex-nowrap text-nowrap items-center justify-center px-4 py-2 transition-all duration-300  ${
+                className={`flex flex-nowrap text-nowrap items-center justify-center px-4 py-2 transition-all duration-300 ${
                   isActive
-                    ? "text-black border-b-3 border-black"
+                    ? "text-black border-b-2 border-black" // Restored the bottom border for the underline effect
                     : "text-gray-400 hover:text-black"
                 }`}
               >
@@ -122,9 +120,7 @@ const WhyUs = () => {
         </div>
       </nav>
 
-      {/* Card Content */}
-      <div className="flex flex-col md:flex-row gap- rounded-xl overflow-hidden">
-        {/* Text side */}
+      <div className="flex flex-col md:flex-row rounded-xl overflow-hidden">
         <div className="bg-gray-900 text-white md:w-1/2 p-8 space-y-6 flex flex-col justify-center">
           <h3 className="font-serif text-2xl lg:text-3xl mb-4">
             {currentSlide.title}
@@ -136,11 +132,11 @@ const WhyUs = () => {
           </ul>
         </div>
 
-        {/* Image Carousel side */}
         <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
           <button
             onClick={handlePrev}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10  text-gray-500 text-[4rem] px-2 py-1"
+            aria-label="Previous image"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 text-[4rem] px-2 py-1"
           >
             ‹
           </button>
@@ -151,12 +147,14 @@ const WhyUs = () => {
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
               fill
               className="object-cover"
+              priority={activeIndex === 0 && imageIndex === 0}
             />
           </div>
 
           <button
             onClick={handleNext}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 text-[4rem] px-2 py-1 "
+            aria-label="Next image"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 text-[4rem] px-2 py-1"
           >
             ›
           </button>
