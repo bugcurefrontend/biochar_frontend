@@ -40,7 +40,7 @@ const TransfomationPart = () => {
   const bottomCards = [
     {
       count: 18,
-      label: "Million Farmers Empowered",
+      label: "Million+ Farmers Empowered",
       description: "Scalable model for regenerative agriculture across India",
       sub: "2030 Vision",
     },
@@ -243,11 +243,26 @@ const TransfomationPart = () => {
                 key={i}
                 className="bg-white rounded-2xl shadow px-6 py-10 flex flex-col justify-between h-full"
               >
-                <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
+                {/* <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
                   <CountUp end={item.count} duration={2} />
                   {item.count >= 1000 ? "+" : ""} <br />
                   {item.label}
-                </h3>
+                </h3> */}
+                <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
+  {item.label.includes("Million") ? (
+    <>
+      <CountUp end={item.count} duration={2} separator="," />+ Million
+      <br />
+      {item.label.replace("Million+", "").trim()}
+    </>
+  ) : (
+    <>
+      <CountUp end={item.count} duration={2} separator="," />
+      {item.count >= 1000 ? "+" : ""} <br />
+      {item.label}
+    </>
+  )}
+</h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
                 {item.sub && (
                   <p className="text-sm text-gray-600 mt-1">{item.sub}</p>
@@ -321,11 +336,26 @@ const TransfomationPart = () => {
                 key={i}
                 className="bg-white rounded-2xl shadow px-6 py-10 flex flex-col justify-between h-full"
               >
-                <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
+                {/* <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
                   <CountUp end={item.count} duration={2} />
                   {item.count >= 1000 ? "+" : ""} <br />
                   {item.label}
-                </h3>
+                </h3> */}
+                <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
+  {item.label.includes("Million") ? (
+    <>
+      <CountUp end={item.count} duration={2} separator="," />+ Million
+      <br />
+      {item.label.replace("Million+", "").trim()}
+    </>
+  ) : (
+    <>
+      <CountUp end={item.count} duration={2} separator="," />
+      {item.count >= 1000 ? "+" : ""} <br />
+      {item.label}
+    </>
+  )}
+</h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
                 {item.sub && (
                   <p className="text-sm text-gray-600 mt-1">{item.sub}</p>
