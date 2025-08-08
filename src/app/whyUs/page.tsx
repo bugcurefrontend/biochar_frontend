@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef, useMemo } from "react";
 
 interface Slide {
   title: string;
@@ -11,8 +11,10 @@ interface Slide {
 const WhyUs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
+  // Track image position for each tab to resume from where left off
+  const imagePositionsRef = useRef<number[]>([0, 0, 0, 0]);
 
-  const slides: Slide[] = [
+  const slides: Slide[] = useMemo(() => [
     {
       title: "Permanent Carbon Removal",
       bullets: [
@@ -20,7 +22,7 @@ const WhyUs = () => {
         "Local & Sustainable: Produced and applied to soil locally, minimizing carbon footprint of carbon sequestering activity.",
         "Verified & Transparent: Fully traceable via Digital MRV and certified by Carbon Standards International (CSI), delivering assured impact.",
       ],
-      images: ["/CardsImg/card1.jpg", "/CardsImg/card12.jpg"],
+      images: ["/CardsImg/card1.jpg", "/CardsImg/card12.jpg", "/CardsImg/card7.jpg", "/CardsImg/card8.jpg", "/CardsImg/card9.jpg"],
     },
     {
       title: "Empowering Communities",
@@ -41,9 +43,6 @@ const WhyUs = () => {
       images: [
         "/CardsImg/card5.jpg",
         "/CardsImg/card6.jpg",
-        "/CardsImg/card7.jpg",
-        "/CardsImg/card8.jpg",
-        "/CardsImg/card9.jpg",
       ],
     },
     {
@@ -56,7 +55,7 @@ const WhyUs = () => {
       ],
       images: ["/CardsImg/card10.jpg", "/CardsImg/card11.jpg"],
     },
-  ];
+  ], []);
 
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
@@ -72,17 +71,40 @@ const WhyUs = () => {
   }, [activeIndex, slides]);
 
   const onSlideChange = useCallback((index: number) => {
+    // Save current image position before switching tabs
+    imagePositionsRef.current[activeIndex] = imageIndex;
+
     setActiveIndex(index);
-    setImageIndex(0);
-  }, []);
+    // Resume from saved position for the new tab
+    setImageIndex(imagePositionsRef.current[index]);
+  }, [activeIndex, imageIndex]);
+
+  // Auto-play functionality: Images change every 2 seconds, tabs every 5 seconds
+  useEffect(() => {
+    // Image auto-advance every 2 seconds
+    const imageInterval = setInterval(() => {
+      const numImages = slides[activeIndex]?.images.length || 1;
+      const newImageIndex = (imagePositionsRef.current[activeIndex] + 1) % numImages;
+      imagePositionsRef.current[activeIndex] = newImageIndex;
+      setImageIndex(newImageIndex);
+    }, 2000);
+
+    return () => clearInterval(imageInterval);
+  }, [activeIndex, slides]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
+    // Tab auto-advance every 5 seconds
+    const tabInterval = setInterval(() => {
+      setActiveIndex((prev) => {
+        const nextIndex = (prev + 1) % slides.length;
+        // Set image to the saved position for the next tab
+        setImageIndex(imagePositionsRef.current[nextIndex]);
+        return nextIndex;
+      });
     }, 5000);
 
-    return () => clearInterval(interval);
-  }, [handleNext]);
+    return () => clearInterval(tabInterval);
+  }, [slides.length]);
 
   return (
     <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12">

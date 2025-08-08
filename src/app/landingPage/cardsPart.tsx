@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Slide {
@@ -12,8 +12,10 @@ interface Slide {
 const CardsPart = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
+  // Track image position for each tab to resume from where left off
+  const [imagePositions, setImagePositions] = useState<number[]>([0, 0, 0, 0]);
 
-  const slides: Slide[] = [
+  const slides: Slide[] = useMemo(() => [
     {
       title: "Permanent Carbon Removal",
       bullets: [
@@ -56,7 +58,7 @@ const CardsPart = () => {
       ],
       images: ["/cardImg.jpg"],
     },
-  ];
+  ], []);
 
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
@@ -73,20 +75,49 @@ const CardsPart = () => {
   }, [activeIndex, slides]);
 
   const onSlideChange = useCallback((index: number) => {
+    // Save current image position before switching tabs
+    setImagePositions(prev => {
+      const newPositions = [...prev];
+      newPositions[activeIndex] = imageIndex;
+      return newPositions;
+    });
+
     setActiveIndex(index);
-    setImageIndex(0);
-  }, []);
+    // Resume from saved position for the new tab
+    setImageIndex(imagePositions[index]);
+  }, [activeIndex, imageIndex, imagePositions]);
 
-  // OPTIONAL: Add this back for auto-play functionality
-  /*
+  // Auto-play functionality: Images change every 2 seconds, tabs every 5 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 5000); // Change image every 5 seconds
+    // Image auto-advance every 2 seconds
+    const imageInterval = setInterval(() => {
+      setImagePositions(prev => {
+        const newPositions = [...prev];
+        const numImages = slides[activeIndex]?.images.length || 1;
+        newPositions[activeIndex] = (newPositions[activeIndex] + 1) % numImages;
+        return newPositions;
+      });
 
-    return () => clearInterval(interval);
-  }, [handleNext]);
-  */
+      const numImages = slides[activeIndex]?.images.length || 1;
+      setImageIndex((prev) => (prev + 1) % numImages);
+    }, 2000);
+
+    return () => clearInterval(imageInterval);
+  }, [activeIndex, slides]);
+
+  useEffect(() => {
+    // Tab auto-advance every 5 seconds
+    const tabInterval = setInterval(() => {
+      setActiveIndex((prev) => {
+        const nextIndex = (prev + 1) % slides.length;
+        // Set image to the saved position for the next tab
+        setImageIndex(imagePositions[nextIndex]);
+        return nextIndex;
+      });
+    }, 5000);
+
+    return () => clearInterval(tabInterval);
+  }, [imagePositions, slides.length]);
 
   return (
     <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12">

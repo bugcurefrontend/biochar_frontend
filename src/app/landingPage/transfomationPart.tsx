@@ -185,23 +185,15 @@ const TransfomationPart = () => {
         <div className="hidden md:flex mt-16 bg-gray-900 text-white rounded-xl overflow-hidden">
           {/* Left – Before image */}
           <div className="md:w-1/2 flex flex-col">
-            {/* After image */}
-            <div className="relative">
-              {imagesVisible ? (
-                <Image
-                  src="/testimonile/video.jpg"
-                  alt="Girl after transformation"
-                  width={500}
-                  height={400}
-                  className="w-full h-full object-cover"
-                  sizes="(min-width: 768px) 50vw"
-                  priority={false}
-                />
-              ) : (
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">Loading image...</span>
-                </div>
-              )}
+            {/* Video iframe */}
+            <div className="relative aspect-video">
+              <iframe
+                src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
+                className="w-full h-full border-0"
+                allow="autoplay"
+                allowFullScreen
+                loading="eager"
+              />
             </div>
           </div>
 
