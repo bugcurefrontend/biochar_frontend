@@ -21,20 +21,18 @@ const TransfomationPart = () => {
   const topCards = [
     {
       count: 3000,
-      label: "Farmers Engaged",
-      description: "Farmer trials underway with 460 farmers across 8 districts",
+      label: "Farmers\nEngaged",
+      description: "Trials Active with 460 Farmers in 8 Districts",
     },
     {
       count: 10200,
-      label: "Hectares Restored",
-      description:
-        "Degraded land improved using biochar-based soil regeneration",
+      label: "Hectares\nRestored",
+      description: "with Biochar-Based Soil Regeneration Practices",
     },
     {
-      count: 3216,
-      label: "Carbon Credits Issued",
-      description: "Verified through rigorous standards and audits",
-      sub: "By 2030",
+      count: 3920,
+      label: "Carbon Credits\nIssued",
+      description: "Verified via Leading Standards and Third-Party Audits",
     },
   ];
   const bottomCards = [
@@ -258,14 +256,16 @@ const TransfomationPart = () => {
     <>
       <CountUp end={item.count} duration={2} separator="," />
       {item.count >= 1000 ? "+" : ""} <br />
-      {item.label}
+      {item.label.split('\n').map((line, index) => (
+        <span key={index}>
+          {line}
+          {index < item.label.split('\n').length - 1 && <br />}
+        </span>
+      ))}
     </>
   )}
 </h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
-                {item.sub && (
-                  <p className="text-sm text-gray-600 mt-1">{item.sub}</p>
-                )}
               </div>
             ))}
           </div>
@@ -273,7 +273,7 @@ const TransfomationPart = () => {
           {/* Section Title for Video */}
           <div className="text-center mb-10 mt-16">
             <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
-              For people
+              Touching Lives
             </h2>
           </div>
 
@@ -365,7 +365,12 @@ const TransfomationPart = () => {
     <>
       <CountUp end={item.count} duration={2} separator="," />
       {item.count >= 1000 ? "+" : ""} <br />
-      {item.label}
+      {item.label.split('\n').map((line, index) => (
+        <span key={index}>
+          {line}
+          {index < item.label.split('\n').length - 1 && <br />}
+        </span>
+      ))}
     </>
   )}
 </h3>
