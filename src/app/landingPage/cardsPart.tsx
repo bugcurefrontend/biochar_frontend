@@ -23,7 +23,7 @@ const CardsPart = () => {
         "Local & Sustainable: Produced and applied to soil locally, minimizing carbon footprint of carbon sequestering activity.",
         "Verified & Transparent: Fully traceable via Digital MRV and certified by Carbon Standards International (CSI), delivering assured impact.",
       ],
-      images: ["/CardsImg/card1.png", "/CardsImg/card2.jpg"],
+      images: ["/CardsImg/card1.jpg", "/CardsImg/card2.jpg"],
     },
     {
       title: "Empowering Communities",
@@ -35,8 +35,8 @@ const CardsPart = () => {
       images: [
         "/CardsImg/card3.jpg",
         "/CardsImg/card4.jpg",
-        "/CardsImg/card5.png",
-        "/CardsImg/card6.png",
+        "/CardsImg/card5.jpg",
+        "/CardsImg/card6.jpg",
       ],
     },
     {
@@ -46,7 +46,7 @@ const CardsPart = () => {
         "Backed by Science: Trials with 144 farmers across 3 districts showed 18–32% yield gains in diverse soils & practices. Partnership with ICAR-CICR.",
         "Innovation: In-situ pyrolysis enables on-farm production of biochar, reducing logistics costs and improving unit economics.",
       ],
-      images: ["/CardsImg/card7.png", "/CardsImg/card8.png"],
+      images: ["/CardsImg/card7.jpg", "/CardsImg/card8.jpg"],
     },
     {
       title: "Scale",
@@ -120,12 +120,12 @@ const CardsPart = () => {
   }, [imagePositions, slides.length]);
 
   return (
-    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12">
+    <section id="whyUs" className="max-w-7xl mx-auto px-2 sm:px-4 lg:py-24 py-12 overflow-hidden">
       <div className="text-center mb-10 lg:mb-16">
         <p className="text-sm lg:text-base font-light tracking-wide text-gray-500 mb-4">
           What sets HeartyCulture Biochar apart?
         </p>
-        <h2 className="font-semibold text-2xl md:text-3xl md:font-normal px-[10%] lg:text-5xl leading-tight">
+        <h2 className="font-semibold text-2xl md:text-3xl md:font-normal px-2 sm:px-[10%] lg:text-5xl leading-tight">
           Permanent carbon removal that drives
           <br className="hidden lg:block" />
           real community impact
@@ -136,87 +136,93 @@ const CardsPart = () => {
       <nav
         role="tablist"
         aria-label="Why Us Categories"
-        className="w-full flex flex-wrap justify-center gap-4 md:gap-6 py-5 mb-10"
+        className="w-full py-5 mb-6 md:mb-10"
       >
-        {slides.map((slide, index) => (
-          <button
-            key={index}
-            role="tab"
-            aria-selected={activeIndex === index}
-            onClick={() => onSlideChange(index)}
-            className={`px-4 py-2 rounded-full text-sm md:text-base transition-all border ${
-              activeIndex === index
-                ? "bg-gray-900 text-white border-gray-900"
-                : "bg-white text-gray-600 hover:text-black border-gray-300"
-            }`}
-          >
-            {slide.title}
-          </button>
-        ))}
+        <div className="grid grid-cols-2 gap-1 sm:flex sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3 md:gap-6 max-w-full mx-auto">
+          {slides.map((slide, index) => (
+            <button
+              key={index}
+              role="tab"
+              aria-selected={activeIndex === index}
+              onClick={() => onSlideChange(index)}
+              className={`px-1 py-2 sm:px-3 md:px-4 rounded-full text-xs sm:text-sm md:text-base transition-all border sm:flex-none min-w-0 text-center overflow-hidden ${
+                activeIndex === index
+                  ? "bg-gray-900 text-white border-gray-900"
+                  : "bg-white text-gray-600 hover:text-black border-gray-300"
+              }`}
+            >
+              <span className="block leading-tight truncate sm:whitespace-nowrap">
+                {slide.title}
+              </span>
+            </button>
+          ))}
+        </div>
       </nav>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeIndex}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
-          transition={{ duration: 0.4 }}
-          className="flex flex-col md:flex-row gap-6 rounded-xl overflow-hidden"
-        >
-          {/* Text side */}
-          <div className="bg-gray-900 text-white md:w-1/2 p-8 space-y-6 flex flex-col justify-center rounded-xl">
-            <h3 className="font-serif text-2xl lg:text-3xl mb-4">
-              {currentSlide.title}
-            </h3>
-            <ul className="list-disc pl-5 space-y-3 text-sm md:text-base leading-relaxed">
-              {currentSlide.bullets.map((bullet, i) => (
-                <li key={i}>{bullet}</li>
-              ))}
-            </ul>
-          </div>
+      <div className="px-1 sm:px-4">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-col md:flex-row gap-4 md:gap-6 rounded-xl overflow-hidden"
+          >
+            {/* Text side */}
+            <div className="bg-gray-900 text-white md:w-1/2 p-4 sm:p-6 md:p-8 space-y-4 md:space-y-6 flex flex-col justify-center rounded-xl">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 md:mb-4">
+                {currentSlide.title}
+              </h3>
+              <ul className="list-disc pl-4 md:pl-5 space-y-2 md:space-y-3 text-xs sm:text-sm md:text-base leading-relaxed">
+                {currentSlide.bullets.map((bullet, i) => (
+                  <li key={i}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Image Carousel side */}
-          <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
-            <button
-              onClick={handlePrev}
-              aria-label="Previous image"
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-black/80 transition-colors"
-            >
-              &#8249;
-            </button>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={imageIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="w-full h-[300px] md:h-full relative rounded-xl overflow-hidden shadow"
+            {/* Image Carousel side */}
+            <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
+              <button
+                onClick={handlePrev}
+                aria-label="Previous image"
+                className="absolute left-1 sm:left-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-black/80 transition-colors text-xs sm:text-sm md:text-base"
               >
-                {/* SIMPLIFICATION: Removed manual observer. Next/Image handles lazy loading. */}
-                <Image
-                  src={currentImage}
-                  alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                  priority={activeIndex === 0 && imageIndex === 0}
-                />
-              </motion.div>
-            </AnimatePresence>
+                &#8249;
+              </button>
 
-            <button
-              onClick={handleNext}
-              aria-label="Next image"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-black/80 transition-colors"
-            >
-              &#8250;
-            </button>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={imageIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-full relative rounded-xl overflow-hidden shadow"
+                >
+                  {/* SIMPLIFICATION: Removed manual observer. Next/Image handles lazy loading. */}
+                  <Image
+                    src={currentImage}
+                    alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 50vw"
+                    className="object-contain"
+                    priority={activeIndex === 0 && imageIndex === 0}
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              <button
+                onClick={handleNext}
+                aria-label="Next image"
+                className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 text-white w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-black/80 transition-colors text-xs sm:text-sm md:text-base"
+              >
+                &#8250;
+              </button>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </section>
   );
 };

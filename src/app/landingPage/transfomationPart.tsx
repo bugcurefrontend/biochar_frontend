@@ -227,7 +227,14 @@ const TransfomationPart = () => {
           </div>
         </div>
 
-        <section className="bg-[#e9edf2] py-10 px-4">
+        <section className="bg-[#e9edf2] py-10 px-4 mt-16">
+          {/* Section Title */}
+          <div className="text-center mb-10">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
+              Where we are currently standing
+            </h2>
+          </div>
+
           {/* First Row – 2 Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
             {topCards.map((item, i) => (
@@ -261,6 +268,13 @@ const TransfomationPart = () => {
                 )}
               </div>
             ))}
+          </div>
+
+          {/* Section Title for Video */}
+          <div className="text-center mb-10 mt-16">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
+              For people
+            </h2>
           </div>
 
           {/* Video Section */}
@@ -319,6 +333,13 @@ const TransfomationPart = () => {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Section Title for Bottom Cards */}
+          <div className="text-center mb-10 mt-16">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
+              Our 2030 Vision
+            </h2>
           </div>
 
           {/* Last Row – 3 Cards */}

@@ -29,13 +29,15 @@ export default function Brands() {
         </p>
 
         <motion.div
-          className="flex gap-12 items-center w-full"
-          animate={{ x: ["0%", "-50%"] }}
+          className="flex gap-8 items-center"
+          animate={{ x: "-100%" }}
           transition={{
             repeat: Infinity,
-            duration: 20,
+            duration: 40,
             ease: "linear",
+            repeatType: "loop",
           }}
+          style={{ x: "0%" }}
         >
           {loopLogos.map((logo, i) => (
             <Link
@@ -43,14 +45,14 @@ export default function Brands() {
               href={logo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full"
+              className="flex-shrink-0"
             >
               <Image
                 src={logo.src}
                 alt={`Partner logo ${i + 1}`}
-                width={200}
-                height={200}
-                className="max-w-[200px] flex-shrink-0 hover:opacity-80 transition"
+                width={150}
+                height={150}
+                className="w-[150px] h-[100px] object-contain hover:opacity-80 transition-opacity duration-300"
               />
             </Link>
           ))}
