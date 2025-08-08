@@ -32,7 +32,7 @@ const TransfomationPart = () => {
     {
       count: 3920,
       label: "Carbon Credits\nIssued",
-      description: "Verified via Leading Standards and Third-Party Audits",
+      description: "Verified via Leading Standards",
     },
   ];
   const bottomCards = [
