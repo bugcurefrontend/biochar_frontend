@@ -164,127 +164,141 @@ export default function FormAndFaq() {
           </span> */}
         </div>
 
-        {/* ─────── Form ─────── */}
-        <div className="md:col-span-6 px-6 py-10 flex flex-col items-center">
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl mb-2">
-            Create impact today
-          </h2>
-          <form
-            onSubmit={handleSubmit}
-            className="w-full max-w-md border border-gray-300 bg-white rounded-xl p-3 space-y-6"
-          >
-            {/* Name */}
-            <label className="block">
-              <span className="text-xs font-medium">Full Name*</span>
-              <div className="mt-1 relative flex items-center">
-                <span className="absolute left-3 text-gray-500">
-                  <MdOutlineMailOutline />
-                </span>
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="Karbon Karma"
-                  className={`pl-10 pr-3 w-full rounded border py-2 placeholder:text-sm text-sm
-          ${errors.name ? "border-red-500" : "border-gray-300"}
-          focus:ring-gray-800 focus:border-gray-800`}
-                />
+        {/* ─────── Form / Success Message ─────── */}
+        <div className="md:col-span-6 px-6 py-10 flex flex-col items-center justify-center">
+          {submitted ? (
+            <div className="text-left space-y-6 max-w-md mr-auto">
+              <div className="text-gray-800 space-y-4">
+                <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl leading-tight">
+                  Every acre you help restore.<br />
+                  Every credit you purchase.<br />
+                  Every village you touch,<br />
+                  brings us one step closer<br />
+                  to a greener future.
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Feel free to WhatsApp or<br />
+                  call us at +91 234.456.7568
+                </p>
               </div>
-              {errors.name && (
-                <p className="text-xs text-red-600 mt-1">{errors.name}</p>
-              )}
-            </label>
-
-            {/* Email */}
-            <label className="block">
-              <span className="text-xs font-medium">Enter your email*</span>
-              <div className="mt-1 relative flex items-center">
-                <span className="absolute left-3 text-gray-500">
-                  <MdOutlineMailOutline />
-                </span>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="hello@carbon.co"
-                  className={`pl-10 pr-3 w-full rounded border py-2 placeholder:text-sm text-sm
-          ${errors.email ? "border-red-500" : "border-gray-300"}
-          focus:ring-gray-800 focus:border-gray-800`}
-                />
-              </div>
-              {errors.email && (
-                <p className="text-xs text-red-600 mt-1">{errors.email}</p>
-              )}
-            </label>
-
-            {/* Interests */}
-            <div>
-              <span className="text-xs font-medium">Interests*</span>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {interestOptions.map((label) => {
-                  const active = selected.includes(label);
-                  return (
-                    <button
-                      key={label}
-                      type="button"
-                      onClick={() => toggle(label)}
-                      className={`px-4 py-2 rounded text-xs border transition
-              ${
-                active
-                  ? "bg-black text-white border-black"
-                  : "bg-white text-gray-800 border-gray-300"
-              }`}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-              {errors.interests && (
-                <p className="text-xs text-red-600 mt-1">{errors.interests}</p>
-              )}
             </div>
+          ) : (
+            <>
+              <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl mb-2">
+                Create impact today
+              </h2>
+              <form
+                onSubmit={handleSubmit}
+                className="w-full max-w-md border border-gray-300 bg-white rounded-xl p-3 space-y-6"
+              >
+                {/* Name */}
+                <label className="block">
+                  <span className="text-xs font-medium">Full Name*</span>
+                  <div className="mt-1 relative flex items-center">
+                    <span className="absolute left-3 text-gray-500">
+                      <MdOutlineMailOutline />
+                    </span>
+                    <input
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Karbon Karma"
+                      className={`pl-10 pr-3 w-full rounded border py-2 placeholder:text-sm text-sm
+              ${errors.name ? "border-red-500" : "border-gray-300"}
+              focus:ring-gray-800 focus:border-gray-800`}
+                    />
+                  </div>
+                  {errors.name && (
+                    <p className="text-xs text-red-600 mt-1">{errors.name}</p>
+                  )}
+                </label>
 
-            {/* Message */}
-            <label className="block">
-              <span className="text-xs font-medium">Inquiry message</span>
-              <textarea
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                rows={2}
-                className="mt-2 w-full rounded border py-2 px-2 border-gray-300 focus:ring-gray-800 focus:border-gray-800 text-sm resize-none"
-              />
-            </label>
+                {/* Email */}
+                <label className="block">
+                  <span className="text-xs font-medium">Enter your email*</span>
+                  <div className="mt-1 relative flex items-center">
+                    <span className="absolute left-3 text-gray-500">
+                      <MdOutlineMailOutline />
+                    </span>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="hello@carbon.co"
+                      className={`pl-10 pr-3 w-full rounded border py-2 placeholder:text-sm text-sm
+              ${errors.email ? "border-red-500" : "border-gray-300"}
+              focus:ring-gray-800 focus:border-gray-800`}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="text-xs text-red-600 mt-1">{errors.email}</p>
+                  )}
+                </label>
 
-            {/* Actions / Success */}
-            {submitted ? (
-              <p className="text-green-600 text-center text-sm">
-                Thank you! We&apos;ll be in touch.
-              </p>
-            ) : (
-              <div className="flex justify-center gap-2">
-                <button
-                  type="reset"
-                  onClick={() => {
-                    setForm({ name: "", email: "", message: "" });
-                    setSelected([]);
-                    setErrors({});
-                  }}
-                  className="px-6 py-2 rounded-full border border-gray-400 text-gray-700 text-sm"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-6 py-2 rounded-full bg-[#123955] text-white text-sm hover:bg-gray-800"
-                >
-                  Transform carbon
-                </button>
-              </div>
-            )}
-          </form>
+                {/* Interests */}
+                <div>
+                  <span className="text-xs font-medium">Interests*</span>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {interestOptions.map((label) => {
+                      const active = selected.includes(label);
+                      return (
+                        <button
+                          key={label}
+                          type="button"
+                          onClick={() => toggle(label)}
+                          className={`px-4 py-2 rounded text-xs border transition
+                  ${
+                    active
+                      ? "bg-black text-white border-black"
+                      : "bg-white text-gray-800 border-gray-300"
+                  }`}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {errors.interests && (
+                    <p className="text-xs text-red-600 mt-1">{errors.interests}</p>
+                  )}
+                </div>
+
+                {/* Message */}
+                <label className="block">
+                  <span className="text-xs font-medium">Inquiry message</span>
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    rows={2}
+                    className="mt-2 w-full rounded border py-2 px-2 border-gray-300 focus:ring-gray-800 focus:border-gray-800 text-sm resize-none"
+                  />
+                </label>
+
+                {/* Actions */}
+                <div className="flex justify-center gap-2">
+                  <button
+                    type="reset"
+                    onClick={() => {
+                      setForm({ name: "", email: "", message: "" });
+                      setSelected([]);
+                      setErrors({});
+                    }}
+                    className="px-6 py-2 rounded-full border border-gray-400 text-gray-700 text-sm"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-6 py-2 rounded-full bg-[#123955] text-white text-sm hover:bg-gray-800"
+                  >
+                    Transform carbon
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </div>
       <section className="py-16 px-4 bg-gray-100">
