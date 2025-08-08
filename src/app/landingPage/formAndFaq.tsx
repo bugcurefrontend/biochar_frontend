@@ -178,7 +178,7 @@ export default function FormAndFaq() {
                 </h2>
                 <p className="text-sm text-gray-600">
                   Feel free to WhatsApp or<br />
-                  call us at +91 234.456.7568
+                  call us at +91 99788 22525
                 </p>
               </div>
             </div>
