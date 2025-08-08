@@ -39,19 +39,19 @@ const TransfomationPart = () => {
     {
       count: 18,
       label: "18+ Million\nFarmers\nEmpowered",
-      description: "Scalable model for regenerative agriculture across India",
+      description: "Scalable model for regenerative\nagriculture across India",
       showCountSeparately: false,
     },
     {
       count: 100000,
       label: "Villages\nReached",
-      description: "Decentralized biochar units catalyzing rural livelihoods",
+      description: "Decentralized biochar units catalyzing\nrural livelihoods",
       showCountSeparately: true,
     },
     {
       count: 2,
       label: "2+ Million\nCarbon\nCredits",
-      description: "Projected long-term carbon drawdown",
+      description: "Projected long-term\ncarbon drawdown",
       showCountSeparately: false,
     },
   ];
@@ -267,7 +267,14 @@ const TransfomationPart = () => {
     </>
   )}
 </h3>
-                <p className="text-sm text-gray-600">{item.description}</p>
+                <p className="text-sm text-gray-600">
+                  {item.description.split('\n').map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      {index < item.description.split('\n').length - 1 && <br />}
+                    </span>
+                  ))}
+                </p>
               </div>
             ))}
           </div>
@@ -379,9 +386,25 @@ const TransfomationPart = () => {
     </>
   )}
 </h3>
-                <p className="text-sm text-gray-600">{item.description}</p>
+                <p className="text-sm text-gray-600">
+                  {item.description.split('\n').map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      {index < item.description.split('\n').length - 1 && <br />}
+                    </span>
+                  ))}
+                </p>
               </div>
             ))}
+          </div>
+
+          {/* Download Annual Report Button */}
+          <div className="text-center mt-12 mb-8">
+            <button className="inline-block px-6 py-3 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
+              <a href="/path-to-your-pdf/2025-annual-report.pdf" target="_blank" rel="noopener noreferrer">
+                Download 2025 Annual Report
+              </a>
+            </button>
           </div>
         </section>
       </section>
