@@ -38,19 +38,21 @@ const TransfomationPart = () => {
   const bottomCards = [
     {
       count: 18,
-      label: "Million+ Farmers Empowered",
+      label: "18+ Million\nFarmers\nEmpowered",
       description: "Scalable model for regenerative agriculture across India",
-      sub: "2030 Vision",
+      showCountSeparately: false,
     },
     {
       count: 100000,
-      label: "Villages Reached",
+      label: "Villages\nReached",
       description: "Decentralized biochar units catalyzing rural livelihoods",
+      showCountSeparately: true,
     },
     {
       count: 2,
-      label: "Million+ Carbon Credits",
+      label: "2+ Million\nCarbon\nCredits",
       description: "Projected long-term carbon drawdown",
+      showCountSeparately: false,
     },
   ];
 
@@ -355,13 +357,7 @@ const TransfomationPart = () => {
                   {item.label}
                 </h3> */}
                 <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
-  {item.label.includes("Million") ? (
-    <>
-      <CountUp end={item.count} duration={2} separator="," />+ Million
-      <br />
-      {item.label.replace("Million+", "").trim()}
-    </>
-  ) : (
+  {item.showCountSeparately ? (
     <>
       <CountUp end={item.count} duration={2} separator="," />
       {item.count >= 1000 ? "+" : ""} <br />
@@ -372,12 +368,18 @@ const TransfomationPart = () => {
         </span>
       ))}
     </>
+  ) : (
+    <>
+      {item.label.split('\n').map((line, index) => (
+        <span key={index}>
+          {line}
+          {index < item.label.split('\n').length - 1 && <br />}
+        </span>
+      ))}
+    </>
   )}
 </h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
-                {item.sub && (
-                  <p className="text-sm text-gray-600 mt-1">{item.sub}</p>
-                )}
               </div>
             ))}
           </div>
