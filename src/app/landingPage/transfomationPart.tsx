@@ -141,50 +141,10 @@ const TransfomationPart = () => {
             </div>
           </div>
         </div>
-        {/* ─────────────── Testimonial card – mobile (≤ md) ─────────────── */}
-        <article className="bg-gray-900 text-white rounded-xl mt-8 p-6 mx-6 overflow-hidden md:hidden">
-          {/* Image + "Before" tag */}
-          <div className="relative">
-            {imagesVisible ? (
-              <Image
-                src="/girl.png" // replace with actual path
-                alt="Girl before transformation"
-                width={400}
-                height={300}
-                className="w-full h-full object-cover"
-                sizes="(max-width: 768px) 100vw"
-                priority={false}
-              />
-            ) : (
-              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-400">Loading image...</span>
-              </div>
-            )}
-            <span className="absolute top-2 right-2 bg-black/80 text-xs px-3 py-1 rounded">
-              Before
-            </span>
-          </div>
-
-          {/* Quote */}
-          <div className=" py-6">
-            <p className="font-serif text-lg leading-relaxed">
-              &ldquo;Vision, ingenuity, and labor have transformed what was once harsh
-              and depleted land into a lush green campus, with rainforest full
-              of thriving, endemic, and endangered species, medicinal and edible
-              plants, and organic farms. Kanha Shanti Vanam has become a
-              testament to harmony with nature.&rdquo;
-            </p>
-
-            <div className="text-lg py-4 text-gray-300">
-              <p className="">Patricia Scotland</p>
-              <p className="">Secretary General, Commonwealth</p>
-            </div>
-          </div>
-        </article>
-        {/* ─────────────── Testimonial Card – Desktop (≥ md) ─────────────── */}
-        <div className="hidden md:flex mt-16 bg-gray-900 text-white rounded-xl overflow-hidden">
-          {/* Left – Before image */}
-          <div className="md:w-1/2 flex flex-col">
+        {/* ─────────────── Responsive Testimonial Card – All Screens ─────────────── */}
+        <div className="mt-8 mx-4 sm:mx-6 lg:mt-16 bg-gray-900 text-white rounded-xl overflow-hidden">
+          {/* Mobile and Tablet Layout (< lg) */}
+          <div className="lg:hidden">
             {/* Video iframe */}
             <div className="relative aspect-video">
               <iframe
@@ -195,34 +155,74 @@ const TransfomationPart = () => {
                 loading="eager"
               />
             </div>
-          </div>
 
-          {/* Right – After image + Content */}
-          <div className="md:w-1/2 flex flex-col relative ">
-            <div className="p-8 space-y-4">
-              <p className="font-serif text-lg leading-relaxed">
-                &ldquo;Vision, ingenuity, and labor have transformed what was once
-                harsh and depleted land into a lush green campus, with
-                rainforest full of thriving, endemic, and endangered species,
-                medicinal and edible plants, and organic farms. Kanha Shanti
-                Vanam has become a testament to harmony with nature.&rdquo;
+            {/* Content below video */}
+            <div className="p-4 sm:p-6 lg:p-8">
+              <p className="font-serif text-base sm:text-lg leading-relaxed mb-4">
+                &ldquo;Vision, ingenuity, and labor have transformed what was once harsh
+                and depleted land into a lush green campus, with rainforest full
+                of thriving, endemic, and endangered species, medicinal and edible
+                plants, and organic farms. Kanha Shanti Vanam has become a
+                testament to harmony with nature.&rdquo;
               </p>
-            </div>
 
-            {/* Content */}
-            <div className="p-8 space-y-4">
-              <div className="text-sm font-normal text-gray-300">
-                <p className="">Patricia Scotland</p>
-                <p className="text-gray-300">Secretary General, Commonwealth</p>
+              <div className="text-sm text-gray-300 mb-4">
+                <p>Patricia Scotland</p>
+                <p>Secretary General, Commonwealth</p>
               </div>
 
-              <p className="text-xs text-gray-400 leading-relaxed pt-4">
+              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
                 Water table has increased from 1,200 feet below ground to 300
                 feet below ground. Over 150,000 trees have been grown on barren
                 land, in a period of 6 years. Multiple rainforests grown on poor
                 soil in a semi-arid land with low annual rainfall, considered
                 impossible by experts.
               </p>
+            </div>
+          </div>
+
+          {/* Desktop Layout (≥ lg) */}
+          <div className="hidden lg:flex h-96">
+            {/* Left – Video */}
+            <div className="lg:w-1/2 relative overflow-hidden">
+              <iframe
+                src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
+                className="absolute inset-0 w-full h-full border-0"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                allow="autoplay"
+                allowFullScreen
+                loading="eager"
+              />
+            </div>
+
+            {/* Right – Content */}
+            <div className="lg:w-1/2 flex flex-col justify-center h-full">
+              <div className="p-6 xl:p-8 space-y-6">
+                <p className="font-serif text-lg xl:text-xl leading-relaxed">
+                  &ldquo;Vision, ingenuity, and labor have transformed what was once
+                  harsh and depleted land into a lush green campus, with
+                  rainforest full of thriving, endemic, and endangered species,
+                  medicinal and edible plants, and organic farms. Kanha Shanti
+                  Vanam has become a testament to harmony with nature.&rdquo;
+                </p>
+
+                <div className="text-sm font-normal text-gray-300">
+                  <p>Patricia Scotland</p>
+                  <p className="text-gray-300">Secretary General, Commonwealth</p>
+                </div>
+
+                <p className="text-xs xl:text-sm text-gray-400 leading-relaxed">
+                  Water table has increased from 1,200 feet below ground to 300
+                  feet below ground. Over 150,000 trees have been grown on barren
+                  land, in a period of 6 years. Multiple rainforests grown on poor
+                  soil in a semi-arid land with low annual rainfall, considered
+                  impossible by experts.
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -56,7 +56,7 @@ const CardsPart = () => {
         "Collaborative Model: Partnering with ICAR-CICR, Samunnati, Arvind Mills, Pratibha Syntex, and dMRV partners for science, adoption, and transparency.",
         "SDG-aligned: Driving climate action, rural livelihoods, healthy soils, biodiversity and food security.",
       ],
-      images: ["/cardImg.jpg"],
+      images: ["/CardsImg/15.jpeg", "/CardsImg/16.jpeg", "/cardImg.jpg"],
     },
   ], []);
 
