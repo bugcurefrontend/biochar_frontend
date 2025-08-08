@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row md:justify-between md:items-center">
         {/* Left - Copyright */}
         <div className="mb-4 md:mb-0">
-          © 2024 Heartfulness. All rights reserved.
+          © 2024 Heartyculture Biochar. All rights reserved.
         </div>
 
         {/* Right - Links */}
