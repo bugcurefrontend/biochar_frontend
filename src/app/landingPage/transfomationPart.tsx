@@ -313,7 +313,7 @@ const TransfomationPart = () => {
               {videoList.map((vid, idx) => (
                 <div
                   key={idx}
-                  className={`relative w-[220px] h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${
+                  className={`relative w-[140px] h-[80px] sm:w-[180px] sm:h-[100px] md:w-[220px] md:h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${
                     selectedVideo.src === vid.src
                       ? "border-blue-500 border-2"
                       : "border-transparent"
