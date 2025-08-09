@@ -5,8 +5,8 @@ import React from "react";
 
 const Hero = () => {
   return (
-    // 1. Main container: Sets up the full-screen, relative positioning context.
-    <div className="relative h-screen w-full overflow-hidden font-serif">
+    // 1. Main container: Responsive height — shorter on mobile so it doesn't dominate the screen
+    <div className="relative w-full overflow-hidden font-serif h-[65vh] md:h-[80vh] lg:h-screen">
       
       {/* 2. Video Layer: Stretches to fill the container and sits in the back. */}
       <video
@@ -37,14 +37,14 @@ const Hero = () => {
             Two Crises. One Solution.
           </p>
           <div className="pt-5">
-            <button className="flex items-center justify-between rounded-full bg-white px-3 py-1 text-sm text-black md:px-7 md:py-3 lg:text-[1.2rem]">
+            <button className="flex items-center rounded-full bg-white px-3 py-1 text-black text-sm md:px-7 md:py-3 md:text-[1.2rem] gap-2 md:gap-3">
               <Link href="#formForId">Buy Carbon Credits </Link>
               <Image
                 src={"/icon.svg"}
                 alt={"icon"}
                 width={20} // Standardized width for better scaling
                 height={20} // Standardized height
-                className="ml-3 h-auto w-auto"
+                className="ml-2 h-auto w-auto scale-90 md:ml-3 md:scale-100"
               />
             </button>
           </div>

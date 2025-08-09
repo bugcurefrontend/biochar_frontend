@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <div className="w-full">
-      <div className="w-full flex justify-between items-center py-2 bg-white lg:rounded-full lg:px-5 lg:w-[95%] lg:mx-auto">
+      <div className="w-full flex justify-between items-center py-2 bg-white px-4 lg:rounded-full lg:px-5 lg:w-[95%] lg:mx-auto">
         <div className="py-1">
           <Link href="/">
             <Image
