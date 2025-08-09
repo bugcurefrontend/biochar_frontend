@@ -11,7 +11,6 @@ interface Slide {
 const WhyUs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
-  // Track image position for each tab to resume from where left off
   const imagePositionsRef = useRef<number[]>([0, 0, 0, 0]);
 
   const slides: Slide[] = useMemo(() => [
@@ -71,17 +70,12 @@ const WhyUs = () => {
   }, [activeIndex, slides]);
 
   const onSlideChange = useCallback((index: number) => {
-    // Save current image position before switching tabs
     imagePositionsRef.current[activeIndex] = imageIndex;
-
     setActiveIndex(index);
-    // Resume from saved position for the new tab
     setImageIndex(imagePositionsRef.current[index]);
   }, [activeIndex, imageIndex]);
 
-  // Auto-play functionality: Images change every 2 seconds, tabs every 5 seconds
   useEffect(() => {
-    // Image auto-advance every 2 seconds
     const imageInterval = setInterval(() => {
       const numImages = slides[activeIndex]?.images.length || 1;
       const newImageIndex = (imagePositionsRef.current[activeIndex] + 1) % numImages;
@@ -93,11 +87,9 @@ const WhyUs = () => {
   }, [activeIndex, slides]);
 
   useEffect(() => {
-    // Tab auto-advance every 5 seconds
     const tabInterval = setInterval(() => {
       setActiveIndex((prev) => {
         const nextIndex = (prev + 1) % slides.length;
-        // Set image to the saved position for the next tab
         setImageIndex(imagePositionsRef.current[nextIndex]);
         return nextIndex;
       });
@@ -129,7 +121,7 @@ const WhyUs = () => {
                 onClick={() => onSlideChange(index)}
                 className={`flex flex-nowrap text-nowrap items-center justify-center px-4 py-2 transition-all duration-300 ${
                   isActive
-                    ? "text-black border-b-2 border-black" // Restored the bottom border for the underline effect
+                    ? "text-black border-b-2 border-black"
                     : "text-gray-400 hover:text-black"
                 }`}
               >
@@ -162,8 +154,9 @@ const WhyUs = () => {
           >
             ‹
           </button>
-
-          <div className="w-full h-[80vh] relative overflow-hidden shadow">
+          
+          {/* --- THIS IS THE ONLY CHANGE --- */}
+          <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
             <Image
               src={currentImage}
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
