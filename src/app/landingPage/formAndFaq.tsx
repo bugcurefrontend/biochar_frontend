@@ -146,11 +146,12 @@ export default function FormAndFaq() {
             <Image
               src="/testimonile/video.jpg"
               alt="Green landscape"
-              width={600}
-              height={400}
+              width={800}
+              height={600}
               className="w-full h-72 sm:h-96 md:h-full object-cover rounded-xl"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority={false}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+              loading="eager"
+              quality={85}
             />
           ) : (
             <div className="w-full h-72 sm:h-96 md:h-full bg-gray-200 rounded-xl flex items-center justify-center">

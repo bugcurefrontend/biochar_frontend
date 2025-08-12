@@ -7,16 +7,15 @@ import { useState, useRef, useEffect, useMemo } from "react";
 
 const TransfomationPart = () => {
   const videoList = useMemo(() => [
-    { src: "/Kanha.mp4", poster: "/poster1.jpg" },
-    { src: "/shivgarh_video.mp4", poster: "/poster1.jpg" },
+    { src: "/Kanha.mp4", poster: "/testimonile/video.jpg" },
+    { src: "/shivgarh_video.mp4", poster: "/testimonile/video.jpg" },
   ], []);
 
   const [selectedVideo, setSelectedVideo] = useState(videoList[0]);
   const [imagesVisible, setImagesVisible] = useState(false);
   const [videosLoaded, setVideosLoaded] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const mainVideoRef = useRef<HTMLVideoElement>(null);
-  const thumbnailRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
   const topCards = [
     {
@@ -78,21 +77,19 @@ const TransfomationPart = () => {
     };
   }, []);
 
-  // Load video sources when videos become visible
-  useEffect(() => {
-    if (videosLoaded && mainVideoRef.current) {
-      mainVideoRef.current.src = selectedVideo.src;
-      mainVideoRef.current.load();
-    }
-  }, [videosLoaded, selectedVideo]);
-
-  // Load thumbnail video sources when videos become visible
+  // Load and manage video sources
   useEffect(() => {
     if (videosLoaded) {
-      thumbnailRefs.current.forEach((videoRef, index) => {
-        if (videoRef && videoList[index]) {
-          videoRef.src = videoList[index].src;
-          videoRef.load();
+      videoList.forEach((video) => {
+        // Only load the video if it hasn't been loaded yet
+        if (!videoRefs.current.has(video.src)) {
+          const videoElement = document.createElement('video');
+          videoElement.src = video.src;
+          videoElement.muted = true;
+          videoElement.playsInline = true;
+          videoElement.loop = true;
+          videoElement.load();
+          videoRefs.current.set(video.src, videoElement);
         }
       });
     }
@@ -292,12 +289,18 @@ const TransfomationPart = () => {
             <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
               {imagesVisible ? (
                 <video
-                  ref={mainVideoRef}
+                  key={selectedVideo.src}
+                  ref={(el) => {
+                    if (el && !videoRefs.current.has(selectedVideo.src)) {
+                      videoRefs.current.set(selectedVideo.src, el);
+                    }
+                  }}
                   autoPlay
                   loop
                   muted
                   playsInline
                   poster={selectedVideo.poster}
+                  src={selectedVideo.src}
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -322,14 +325,18 @@ const TransfomationPart = () => {
                 >
                   {imagesVisible ? (
                     <video
+                      key={vid.src}
                       ref={(el) => {
-                        thumbnailRefs.current[idx] = el;
+                        if (el && !videoRefs.current.has(vid.src)) {
+                          videoRefs.current.set(vid.src, el);
+                        }
                       }}
+                      src={vid.src}
                       muted
                       playsInline
                       controls={false}
                       className="w-full h-full object-cover"
-                    ></video>
+                    />
                   ) : (
                     <Image
                       src={vid.poster}
