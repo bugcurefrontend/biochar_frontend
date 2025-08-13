@@ -21,23 +21,36 @@ const logos = [
 const loopLogos = [...logos, ...logos];
 
 export default function Brands() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <section className="bg-white text-black">
-      <div className="max-w-7xl mx-auto px-6 py-16 overflow-hidden">
-        <p className="text-center text-xs uppercase tracking-wider text-gray-400 mb-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-16 overflow-hidden">
+        <p className="text-center text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-6 sm:mb-10">
           Loved and supported by
         </p>
 
         <motion.div
-          className="flex gap-8 items-center"
+          className="flex items-center"
+          style={{ gap: isMobile ? '1rem' : '2rem', x: "0%" }}
           animate={{ x: "-100%" }}
           transition={{
             repeat: Infinity,
-            duration: 40,
+            duration: isMobile ? 20 : 40,
             ease: "linear",
             repeatType: "loop",
           }}
-          style={{ x: "0%" }}
         >
           {loopLogos.map((logo, i) => (
             <Link
@@ -45,15 +58,20 @@ export default function Brands() {
               href={logo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-shrink-0"
+              className="flex-shrink-0 group"
             >
-              <Image
-                src={logo.src}
-                alt={`Partner logo ${i + 1}`}
-                width={150}
-                height={150}
-                className="w-[150px] h-[100px] object-contain hover:opacity-80 transition-opacity duration-300"
-              />
+              <div className="relative">
+                <Image
+                  src={logo.src}
+                  alt={`Partner logo ${i + 1}`}
+                  width={150}
+                  height={150}
+                  className="w-[80px] h-[50px] sm:w-[120px] sm:h-[80px] md:w-[150px] md:h-[100px] 
+                    object-contain transition-all duration-300 
+                    group-hover:opacity-80 group-hover:scale-105"
+                  priority={i < 5} // Load first 5 images immediately
+                />
+              </div>
             </Link>
           ))}
         </motion.div>

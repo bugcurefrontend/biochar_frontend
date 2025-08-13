@@ -7,14 +7,23 @@ import { useState, useRef, useEffect, useMemo } from "react";
 
 const TransfomationPart = () => {
   const videoList = useMemo(() => [
-    { src: "/Kanha.mp4", poster: "/testimonile/video.jpg" },
-    { src: "/shivgarh_video.mp4", poster: "/testimonile/video.jpg" },
+    { 
+      src: "/Kanha.mp4", 
+      poster: "/thumbnails/kanha-thumb.jpg",
+      title: "Kanha Biochar Project"
+    },
+    { 
+      src: "/shivgarh_video.mp4", 
+      poster: "/thumbnails/shivgarh-thumb.jpg",
+      title: "Shivgarh Impact Story"
+    },
   ], []);
 
   const [selectedVideo, setSelectedVideo] = useState(videoList[0]);
-  const [imagesVisible, setImagesVisible] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(false);
   const [videosLoaded, setVideosLoaded] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoSectionRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
   const topCards = [
@@ -57,22 +66,26 @@ const TransfomationPart = () => {
 
   // Intersection Observer for lazy loading
   useEffect(() => {
-    const currentRef = sectionRef.current;
+    const videoSection = videoSectionRef.current;
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setImagesVisible(true);
+          setSectionVisible(true);
+          // Only load videos when section becomes visible
           setVideosLoaded(true);
         }
       },
-      { threshold: 0.2 }
+      { 
+        threshold: 0.2,
+        rootMargin: '100px' // Start loading slightly before the section is in view
+      }
     );
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (videoSection) {
+      observer.observe(videoSection);
     }
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
+      if (videoSection) {
+        observer.unobserve(videoSection);
       }
     };
   }, []);
@@ -284,10 +297,10 @@ const TransfomationPart = () => {
           </div>
 
           {/* Video Section */}
-          <div className="max-w-6xl mx-auto my-10">
+          <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
             {/* Main Video */}
             <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
-              {imagesVisible ? (
+              {sectionVisible ? (
                 <video
                   key={selectedVideo.src}
                   ref={(el) => {
@@ -295,18 +308,26 @@ const TransfomationPart = () => {
                       videoRefs.current.set(selectedVideo.src, el);
                     }
                   }}
-                  autoPlay
+                  autoPlay={videosLoaded}
                   loop
                   muted
                   playsInline
                   poster={selectedVideo.poster}
-                  src={selectedVideo.src}
+                  src={sectionVisible ? selectedVideo.src : undefined}
                   className="w-full h-full object-cover"
+                  onLoadedData={() => setVideosLoaded(true)}
                 />
               ) : (
                 <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  {/* Placeholder while video not loaded */}
-                  <span>Loading video...</span>
+                  <div className="text-center">
+                    <div className="w-8 h-8 mb-2 mx-auto">
+                      <svg className="animate-spin" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                      </svg>
+                    </div>
+                    <span className="text-sm text-gray-500">Loading video player...</span>
+                  </div>
                 </div>
               )}
             </div>
@@ -323,29 +344,33 @@ const TransfomationPart = () => {
                   }`}
                   onClick={() => setSelectedVideo(vid)}
                 >
-                  {imagesVisible ? (
-                    <video
-                      key={vid.src}
-                      ref={(el) => {
-                        if (el && !videoRefs.current.has(vid.src)) {
-                          videoRefs.current.set(vid.src, el);
-                        }
-                      }}
-                      src={vid.src}
-                      muted
-                      playsInline
-                      controls={false}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
+                  <div className="relative w-full h-full">
                     <Image
                       src={vid.poster}
-                      alt="Video thumbnail"
+                      alt={vid.title}
                       width={220}
                       height={130}
                       className="w-full h-full object-cover"
+                      priority
                     />
-                  )}
+                    <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                      <div className={`p-2 rounded-full ${selectedVideo.src === vid.src ? 'bg-blue-500' : 'bg-white'}`}>
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          viewBox="0 0 24 24" 
+                          fill="currentColor" 
+                          className={`w-4 h-4 ${selectedVideo.src === vid.src ? 'text-white' : 'text-gray-800'}`}
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
+                      <p className="text-xs text-white font-medium truncate">
+                        {vid.title}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
