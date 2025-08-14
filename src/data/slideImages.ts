@@ -7,26 +7,26 @@ export const SLIDE_IMAGES = {
     "/CardsImg/card7.jpg",
     "/CardsImg/card8.jpg",
     "/CardsImg/card9.jpg"
-  ],
+  ] as string[],
   
   // Empowering Communities  
   COMMUNITIES: [
     "/CardsImg/card3.jpg",
     "/CardsImg/card4.jpg"
-  ],
+  ] as string[],
   
   // Research & Adoption
   RESEARCH: [
     "/CardsImg/card5.jpg",
     "/CardsImg/card6.jpg"
-  ],
+  ] as string[],
   
   // Scale
   SCALE: [
     "/CardsImg/card10.jpg",
     "/CardsImg/card11.jpg"
-  ]
-} as const;
+  ] as string[]
+};
 
 // Get all unique images across all categories
 export const getAllUniqueImages = (): string[] => {
