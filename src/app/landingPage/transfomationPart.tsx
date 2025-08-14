@@ -7,22 +7,22 @@ import { useState, useRef, useEffect, useMemo } from "react";
 
 const TransfomationPart = () => {
   const videoList = useMemo(() => [
-    { 
-      src: "/Kanha.mp4", 
-      poster: "/thumbnails/kanha-thumb.jpg",
+    {
+      src: "/Kanha.mp4",
       title: "Kanha Biochar Project"
     },
-    { 
-      src: "/shivgarh_video.mp4", 
-      poster: "/thumbnails/shivgarh-thumb.jpg",
+    {
+      src: "/shivgarh_video.mp4",
       title: "Shivgarh Impact Story"
     },
   ], []);
 
   const [selectedVideo, setSelectedVideo] = useState(videoList[0]);
-  const [sectionVisible, setSectionVisible] = useState(false);
-  const [videosLoaded, setVideosLoaded] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(false); // Load when user scrolls to it
+  const [testimonialVisible, setTestimonialVisible] = useState(true); // Load immediately
+  const [videosLoaded, setVideosLoaded] = useState(false); // Enable when section visible
   const sectionRef = useRef<HTMLDivElement>(null);
+  const testimonialRef = useRef<HTMLDivElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
@@ -64,20 +64,43 @@ const TransfomationPart = () => {
     },
   ];
 
-  // Intersection Observer for lazy loading
+  // Intersection Observer for testimonial section (Google Drive video)
+  useEffect(() => {
+    const testimonialSection = testimonialRef.current;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTestimonialVisible(true);
+        }
+      },
+      {
+        threshold: 0.01, // Trigger as soon as any part is visible
+        rootMargin: '400px' // Start loading 400px before visible
+      }
+    );
+    if (testimonialSection) {
+      observer.observe(testimonialSection);
+    }
+    return () => {
+      if (testimonialSection) {
+        observer.unobserve(testimonialSection);
+      }
+    };
+  }, []);
+
+  // Intersection Observer for local video section - fast loading like testimonial
   useEffect(() => {
     const videoSection = videoSectionRef.current;
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setSectionVisible(true);
-          // Only load videos when section becomes visible
           setVideosLoaded(true);
         }
       },
-      { 
-        threshold: 0.2,
-        rootMargin: '100px' // Start loading slightly before the section is in view
+      {
+        threshold: 0.01, // Trigger as soon as any part is visible
+        rootMargin: '400px' // Start loading 400px before visible - same as testimonial
       }
     );
     if (videoSection) {
@@ -152,18 +175,24 @@ const TransfomationPart = () => {
           </div>
         </div>
         {/* ─────────────── Responsive Testimonial Card – All Screens ─────────────── */}
-        <div className="mt-8 mx-4 sm:mx-6 lg:mt-16 bg-gray-900 text-white rounded-xl overflow-hidden">
+        <div className="mt-8 mx-4 sm:mx-6 lg:mt-16 bg-gray-900 text-white rounded-xl overflow-hidden" ref={testimonialRef}>
           {/* Mobile and Tablet Layout (< lg) */}
           <div className="lg:hidden">
-            {/* Video iframe */}
+            {/* Video iframe - loads when testimonial section is visible */}
             <div className="relative aspect-video">
-              <iframe
-                src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
-                className="w-full h-full border-0"
-                allow="autoplay"
-                allowFullScreen
-                loading="eager"
-              />
+              {testimonialVisible ? (
+                <iframe
+                  src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
+                  className="w-full h-full border-0"
+                  allow="autoplay"
+                  allowFullScreen
+                  loading="eager"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                  <span className="text-gray-400">Loading video...</span>
+                </div>
+              )}
             </div>
 
             {/* Content below video */}
@@ -193,20 +222,26 @@ const TransfomationPart = () => {
 
           {/* Desktop Layout (≥ lg) */}
           <div className="hidden lg:flex h-96">
-            {/* Left – Video */}
+            {/* Left – Video - loads when testimonial section is visible */}
             <div className="lg:w-1/2 relative overflow-hidden">
-              <iframe
-                src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
-                className="absolute inset-0 w-full h-full border-0"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-                allow="autoplay"
-                allowFullScreen
-                loading="eager"
-              />
+              {testimonialVisible ? (
+                <iframe
+                  src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
+                  className="absolute inset-0 w-full h-full border-0"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                  allow="autoplay"
+                  allowFullScreen
+                  loading="eager"
+                />
+              ) : (
+                <div className="absolute inset-0 w-full h-full bg-gray-800 flex items-center justify-center">
+                  <span className="text-gray-400">Loading video...</span>
+                </div>
+              )}
             </div>
 
             {/* Right – Content */}
@@ -258,25 +293,25 @@ const TransfomationPart = () => {
                   {item.label}
                 </h3> */}
                 <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
-  {item.label.includes("Million") ? (
-    <>
-      <CountUp end={item.count} duration={2} separator="," />+ Million
-      <br />
-      {item.label.replace("Million+", "").trim()}
-    </>
-  ) : (
-    <>
-      <CountUp end={item.count} duration={2} separator="," />
-      {item.count >= 1000 ? "+" : ""} <br />
-      {item.label.split('\n').map((line, index) => (
-        <span key={index}>
-          {line}
-          {index < item.label.split('\n').length - 1 && <br />}
-        </span>
-      ))}
-    </>
-  )}
-</h3>
+                  {item.label.includes("Million") ? (
+                    <>
+                      <CountUp end={item.count} duration={2} separator="," />+ Million
+                      <br />
+                      {item.label.replace("Million+", "").trim()}
+                    </>
+                  ) : (
+                    <>
+                      <CountUp end={item.count} duration={2} separator="," />
+                      {item.count >= 1000 ? "+" : ""} <br />
+                      {item.label.split('\n').map((line, index) => (
+                        <span key={index}>
+                          {line}
+                          {index < item.label.split('\n').length - 1 && <br />}
+                        </span>
+                      ))}
+                    </>
+                  )}
+                </h3>
                 <p className="text-sm text-gray-600">
                   {item.description.split('\n').map((line, index) => (
                     <span key={index}>
@@ -312,66 +347,29 @@ const TransfomationPart = () => {
                   loop
                   muted
                   playsInline
-                  poster={selectedVideo.poster}
-                  src={sectionVisible ? selectedVideo.src : undefined}
+                  src={selectedVideo.src}
                   className="w-full h-full object-cover"
-                  onLoadedData={() => setVideosLoaded(true)}
                 />
               ) : (
                 <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-8 h-8 mb-2 mx-auto">
-                      <svg className="animate-spin" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
-                      </svg>
-                    </div>
-                    <span className="text-sm text-gray-500">Loading video player...</span>
-                  </div>
+                  <span className="text-gray-500">Loading videos...</span>
                 </div>
               )}
             </div>
 
-            {/* Thumbnails */}
-            <div className="flex gap-4 overflow-x-auto mt-6 pb-4">
+            {/* Video Selection Buttons - No duplicate video loading */}
+            <div className="flex gap-4 justify-center mt-6">
               {videoList.map((vid, idx) => (
-                <div
+                <button
                   key={idx}
-                  className={`relative w-[140px] h-[80px] sm:w-[180px] sm:h-[100px] md:w-[220px] md:h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${
-                    selectedVideo.src === vid.src
-                      ? "border-blue-500 border-2"
-                      : "border-transparent"
-                  }`}
+                  className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${selectedVideo.src === vid.src
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    }`}
                   onClick={() => setSelectedVideo(vid)}
                 >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={vid.poster}
-                      alt={vid.title}
-                      width={220}
-                      height={130}
-                      className="w-full h-full object-cover"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                      <div className={`p-2 rounded-full ${selectedVideo.src === vid.src ? 'bg-blue-500' : 'bg-white'}`}>
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          viewBox="0 0 24 24" 
-                          fill="currentColor" 
-                          className={`w-4 h-4 ${selectedVideo.src === vid.src ? 'text-white' : 'text-gray-800'}`}
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
-                      <p className="text-xs text-white font-medium truncate">
-                        {vid.title}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  {vid.title}
+                </button>
               ))}
             </div>
           </div>
@@ -396,28 +394,28 @@ const TransfomationPart = () => {
                   {item.label}
                 </h3> */}
                 <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
-  {item.showCountSeparately ? (
-    <>
-      <CountUp end={item.count} duration={2} separator="," />
-      {item.count >= 1000 ? "+" : ""} <br />
-      {item.label.split('\n').map((line, index) => (
-        <span key={index}>
-          {line}
-          {index < item.label.split('\n').length - 1 && <br />}
-        </span>
-      ))}
-    </>
-  ) : (
-    <>
-      {item.label.split('\n').map((line, index) => (
-        <span key={index}>
-          {line}
-          {index < item.label.split('\n').length - 1 && <br />}
-        </span>
-      ))}
-    </>
-  )}
-</h3>
+                  {item.showCountSeparately ? (
+                    <>
+                      <CountUp end={item.count} duration={2} separator="," />
+                      {item.count >= 1000 ? "+" : ""} <br />
+                      {item.label.split('\n').map((line, index) => (
+                        <span key={index}>
+                          {line}
+                          {index < item.label.split('\n').length - 1 && <br />}
+                        </span>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {item.label.split('\n').map((line, index) => (
+                        <span key={index}>
+                          {line}
+                          {index < item.label.split('\n').length - 1 && <br />}
+                        </span>
+                      ))}
+                    </>
+                  )}
+                </h3>
                 <p className="text-sm text-gray-600">
                   {item.description.split('\n').map((line, index) => (
                     <span key={index}>
