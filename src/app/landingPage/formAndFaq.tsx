@@ -145,17 +145,22 @@ export default function FormAndFaq() {
           {imagesVisible ? (
             <Image
               src="/testimonile/video.jpg"
-              alt="Green landscape"
+              alt="Green landscape with biochar restoration project"
               width={800}
               height={600}
-              className="w-full h-72 sm:h-96 md:h-full object-cover rounded-xl"
+              className="w-full h-72 sm:h-96 md:h-full object-cover rounded-xl transition-opacity duration-300"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-              loading="eager"
+              loading="lazy"
               quality={85}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             />
           ) : (
-            <div className="w-full h-72 sm:h-96 md:h-full bg-gray-200 rounded-xl flex items-center justify-center">
-              <span className="text-gray-400">Loading image...</span>
+            <div className="w-full h-72 sm:h-96 md:h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center animate-pulse">
+              <div className="text-center">
+                <div className="w-8 h-8 mb-2 mx-auto bg-gray-300 rounded animate-pulse"></div>
+                <span className="text-gray-400 text-sm">Loading image...</span>
+              </div>
             </div>
           )}
 
@@ -249,11 +254,10 @@ export default function FormAndFaq() {
                           type="button"
                           onClick={() => toggle(label)}
                           className={`px-4 py-2 rounded text-xs border transition
-                  ${
-                    active
-                      ? "bg-black text-white border-black"
-                      : "bg-white text-gray-800 border-gray-300"
-                  }`}
+                  ${active
+                              ? "bg-black text-white border-black"
+                              : "bg-white text-gray-800 border-gray-300"
+                            }`}
                         >
                           {label}
                         </button>
