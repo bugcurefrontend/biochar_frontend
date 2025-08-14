@@ -357,19 +357,51 @@ const TransfomationPart = () => {
               )}
             </div>
 
-            {/* Video Selection Buttons - No duplicate video loading */}
-            <div className="flex gap-4 justify-center mt-6">
+            {/* Video Thumbnails Gallery */}
+            <div className="flex gap-4 overflow-x-auto mt-6 pb-4">
               {videoList.map((vid, idx) => (
-                <button
+                <div
                   key={idx}
-                  className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${selectedVideo.src === vid.src
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                    }`}
+                  className={`relative w-[140px] h-[80px] sm:w-[180px] sm:h-[100px] md:w-[220px] md:h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${
+                    selectedVideo.src === vid.src
+                      ? "border-blue-500 border-2"
+                      : "border-transparent"
+                  }`}
                   onClick={() => setSelectedVideo(vid)}
                 >
-                  {vid.title}
-                </button>
+                  <div className="relative w-full h-full bg-gray-800">
+                    {/* Video preview - only loads when section is visible */}
+                    {sectionVisible ? (
+                      <video
+                        src={vid.src}
+                        className="w-full h-full object-cover"
+                        muted
+                        playsInline
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+                        <span className="text-xs text-gray-400">Loading...</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                      <div className={`p-2 rounded-full ${selectedVideo.src === vid.src ? 'bg-blue-500' : 'bg-white'}`}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className={`w-4 h-4 ${selectedVideo.src === vid.src ? 'text-white' : 'text-gray-800'}`}
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
+                      <p className="text-xs text-white font-medium truncate">
+                        {vid.title}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
