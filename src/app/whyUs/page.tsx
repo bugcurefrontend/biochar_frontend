@@ -13,12 +13,39 @@ interface Slide {
 const WhyUs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const imagePositionsRef = useRef<number[]>([0, 0, 0, 0]);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const slides = SLIDE_DATA;
 
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
+
+  // Intersection Observer to detect visibility
+  useEffect(() => {
+    const currentSection = sectionRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.3, // Component is visible when 30% is in view
+        rootMargin: '0px'
+      }
+    );
+
+    if (currentSection) {
+      observer.observe(currentSection);
+    }
+
+    return () => {
+      if (currentSection) {
+        observer.unobserve(currentSection);
+      }
+    };
+  }, []);
 
   const handleNext = useCallback(() => {
     const numImages = slides[activeIndex].images.length;
@@ -36,7 +63,10 @@ const WhyUs = () => {
     setImageIndex(imagePositionsRef.current[index]);
   }, [activeIndex, imageIndex]);
 
+  // Image auto-advance - only when visible
   useEffect(() => {
+    if (!isVisible) return; // Don't run when not visible
+
     const imageInterval = setInterval(() => {
       const numImages = slides[activeIndex]?.images.length || 1;
       const newImageIndex = (imagePositionsRef.current[activeIndex] + 1) % numImages;
@@ -45,9 +75,12 @@ const WhyUs = () => {
     }, 2000);
 
     return () => clearInterval(imageInterval);
-  }, [activeIndex, slides]);
+  }, [activeIndex, slides, isVisible]); // Added isVisible dependency
 
+  // Tab auto-advance - only when visible
   useEffect(() => {
+    if (!isVisible) return; // Don't run when not visible
+
     const tabInterval = setInterval(() => {
       setActiveIndex((prev) => {
         const nextIndex = (prev + 1) % slides.length;
@@ -57,10 +90,10 @@ const WhyUs = () => {
     }, 5000);
 
     return () => clearInterval(tabInterval);
-  }, [slides.length]);
+  }, [slides.length, isVisible]); // Added isVisible dependency
 
   return (
-    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12">
+    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12" ref={sectionRef}>
       <div className="text-center mb-10 lg:mb-16">
         <p className="text-sm lg:text-base font-light tracking-wide text-gray-500 mb-4">
           What sets HeartyCulture Biochar apart?
@@ -70,6 +103,13 @@ const WhyUs = () => {
           <br className="hidden lg:block" />
           real community impact
         </h2>
+
+        {/* Optional: Visual indicator when paused */}
+        {!isVisible && (
+          <div className="mt-4 text-xs text-gray-400 opacity-50">
+            ⏸️ Auto-slide paused (not in view)
+          </div>
+        )}
       </div>
 
       <nav className="w-full overflow-x-auto py-5 mb-10 lg:overflow-x-hidden">
@@ -80,11 +120,10 @@ const WhyUs = () => {
               <button
                 key={index}
                 onClick={() => onSlideChange(index)}
-                className={`flex flex-nowrap text-nowrap items-center justify-center px-4 py-2 transition-all duration-300 ${
-                  isActive
+                className={`flex flex-nowrap text-nowrap items-center justify-center px-4 py-2 transition-all duration-300 ${isActive
                     ? "text-black border-b-2 border-black"
                     : "text-gray-400 hover:text-black"
-                }`}
+                  }`}
               >
                 <span className="text-lg mt-1 text-center font-medium">
                   {slide.title}
@@ -115,7 +154,7 @@ const WhyUs = () => {
           >
             ‹
           </button>
-          
+
           {/* --- THIS IS THE ONLY CHANGE --- */}
           <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
             <OptimizedImage

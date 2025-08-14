@@ -120,7 +120,10 @@ const Hero = () => {
       {/* 4. Content Layer: Sits on top of the video and overlay. */}
       <div className="relative z-20 flex h-full items-center px-4 md:px-8 lg:px-16">
         <div>
-          <h1 className="w-[80%] text-[1.5rem] text-white md:w-[70%] md:text-[2.5rem] xl:text-[3.5rem]">
+          <h1 
+            className="w-[80%] text-[1.5rem] text-white md:w-[70%] md:text-[2.5rem] xl:text-[3.5rem]"
+            style={{ fontDisplay: 'swap' }} // Ensures text shows immediately
+          >
             Carbon to Community with Biochar
           </h1>
           <p className="py-1 text-[0.8rem] text-white md:w-[50%] md:text-base xl:text-[1.8rem]">
