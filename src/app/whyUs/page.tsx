@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState, useRef, useMemo } from "react";
-import { useImagePreloader } from "../../hooks/useImagePreloader";
-import { SLIDE_DATA, getAllUniqueImages } from "../../data/slideImages";
+import { OptimizedImage } from "../../components/OptimizedImage";
+import { SLIDE_DATA } from "../../data/slideImages";
 
 interface Slide {
   title: string;
@@ -19,10 +19,6 @@ const WhyUs = () => {
 
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
-
-  // Preload all unique images once - no duplicates
-  const allUniqueImages = useMemo(() => getAllUniqueImages(), []);
-  const { isImageLoaded } = useImagePreloader(allUniqueImages);
 
   const handleNext = useCallback(() => {
     const numImages = slides[activeIndex].images.length;
@@ -122,23 +118,12 @@ const WhyUs = () => {
           
           {/* --- THIS IS THE ONLY CHANGE --- */}
           <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
-            {isImageLoaded(currentImage) ? (
-              <Image
-                src={currentImage}
-                alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-opacity duration-300"
-                priority={activeIndex === 0 && imageIndex === 0}
-              />
-            ) : (
-              <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center animate-pulse">
-                <div className="text-center">
-                  <div className="w-8 h-8 mb-2 mx-auto bg-gray-300 rounded animate-pulse"></div>
-                  <span className="text-gray-400 text-sm">Loading image...</span>
-                </div>
-              </div>
-            )}
+            <OptimizedImage
+              src={currentImage}
+              alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+              className="object-cover transition-opacity duration-300"
+              priority={activeIndex === 0 && imageIndex === 0}
+            />
           </div>
 
           <button
