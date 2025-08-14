@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState, useRef, useMemo } from "react";
+import { useImagePreloader } from "../../hooks/useImagePreloader";
+import { SLIDE_DATA, getAllUniqueImages } from "../../data/slideImages";
 
 interface Slide {
   title: string;
@@ -13,51 +15,14 @@ const WhyUs = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const imagePositionsRef = useRef<number[]>([0, 0, 0, 0]);
 
-  const slides: Slide[] = useMemo(() => [
-    {
-      title: "Permanent Carbon Removal",
-      bullets: [
-        "Permanent: Over 75% of biochar applied is Persistent Aromatic Carbon, locking carbon in soil for thousands of years.",
-        "Local & Sustainable: Produced and applied to soil locally, minimizing carbon footprint of carbon sequestering activity.",
-        "Verified & Transparent: Fully traceable via Digital MRV and certified by Carbon Standards International (CSI), delivering assured impact.",
-      ],
-      images: ["/CardsImg/card1.jpg", "/CardsImg/card12.jpg", "/CardsImg/card7.jpg", "/CardsImg/card8.jpg", "/CardsImg/card9.jpg"],
-    },
-    {
-      title: "Empowering Communities",
-      bullets: [
-        "Livelihoods: Rural youth and women build profitable village-scale biochar businesses, creating dignified local jobs and establishing a vibrant rural economy.",
-        "Soil Health: Biochar improves soil moisture and structure and permanently increases fertility by bringing back microbial life in soil for generations.",
-        "Farmer Prosperity: Our field trials across diverse zones demonstrate better crop yields & farmer income year after year, with a single application of biochar. Carbon finance makes biochar affordable and accessible to farmers.",
-      ],
-      images: ["/CardsImg/card3.jpg", "/CardsImg/card4.jpg"],
-    },
-    {
-      title: "Research & Adoption",
-      bullets: [
-        "Center of Excellence: India's first biochar COE integrates innovation, training, and outreach to accelerate adoption by farming communities.",
-        "Backed by Science: Trials with 144 farmers across 3 districts showed 18–32% yield gains in diverse soils & practices. Partnership with ICAR-CICR.",
-        "Innovation: In-situ pyrolysis enables on-farm production of biochar, reducing logistics costs and improving unit economics.",
-      ],
-      images: [
-        "/CardsImg/card5.jpg",
-        "/CardsImg/card6.jpg",
-      ],
-    },
-    {
-      title: "Scale",
-      bullets: [
-        "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India through Samunnati and Heartfulness Institute, we're built for scale.",
-        "Afforestation: In 10,200 acres of reforestation with Forests by Heartfulness, biochar has boosted sapling survival to 85–90%.",
-        "Collaborative Model: Partnering with ICAR-CICR, Samunnati, Arvind Mills, Pratibha Syntex, and dMRV partners for science, adoption, and transparency.",
-        "SDG-aligned: Driving climate action, rural livelihoods, healthy soils, biodiversity and food security.",
-      ],
-      images: ["/CardsImg/card10.jpg", "/CardsImg/card11.jpg"],
-    },
-  ], []);
+  const slides = SLIDE_DATA;
 
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
+
+  // Preload all unique images once - no duplicates
+  const allUniqueImages = useMemo(() => getAllUniqueImages(), []);
+  const { isImageLoaded } = useImagePreloader(allUniqueImages);
 
   const handleNext = useCallback(() => {
     const numImages = slides[activeIndex].images.length;
@@ -157,13 +122,23 @@ const WhyUs = () => {
           
           {/* --- THIS IS THE ONLY CHANGE --- */}
           <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
-            <Image
-              src={currentImage}
-              alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-              fill
-              className="object-cover"
-              priority={activeIndex === 0 && imageIndex === 0}
-            />
+            {isImageLoaded(currentImage) ? (
+              <Image
+                src={currentImage}
+                alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-opacity duration-300"
+                priority={activeIndex === 0 && imageIndex === 0}
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center animate-pulse">
+                <div className="text-center">
+                  <div className="w-8 h-8 mb-2 mx-auto bg-gray-300 rounded animate-pulse"></div>
+                  <span className="text-gray-400 text-sm">Loading image...</span>
+                </div>
+              </div>
+            )}
           </div>
 
           <button

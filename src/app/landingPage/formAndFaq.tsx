@@ -337,7 +337,7 @@ export default function FormAndFaq() {
         >
           {faqs.map((faq, i) => (
             <div key={i} className="flex flex-col gap-4">
-              <Image src={"/sticker.svg"} alt={"icon"} width={40} height={70} />
+              <Image src={"/sticker.svg"} alt={"icon"} width={40} height={40} style={{ width: 'auto', height: 'auto', maxWidth: '40px', maxHeight: '40px' }} className="object-contain" />
               <h4 className="font-serif text-lg">{faq.question}</h4>
               <p className="text-sm leading-relaxed text-gray-600">
                 {faq.answer}

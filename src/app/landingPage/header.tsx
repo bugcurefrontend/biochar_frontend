@@ -29,6 +29,8 @@ const Header = () => {
               alt={"logo"}
               width={120}
               height={70}
+              style={{ width: 'auto', height: 'auto', maxWidth: '120px', maxHeight: '70px' }}
+              className="object-contain"
             />
           </Link>
         </div>

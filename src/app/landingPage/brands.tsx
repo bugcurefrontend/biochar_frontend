@@ -65,10 +65,11 @@ export default function Brands() {
                   src={logo.src}
                   alt={`Partner logo ${i + 1}`}
                   width={150}
-                  height={150}
-                  className="w-[80px] h-[50px] sm:w-[120px] sm:h-[80px] md:w-[150px] md:h-[100px] 
+                  height={100}
+                  className="w-[80px] h-auto sm:w-[120px] md:w-[150px] 
                     object-contain transition-all duration-300 
                     group-hover:opacity-80 group-hover:scale-105"
+                  style={{ height: 'auto' }}
                   priority={i < 5} // Load first 5 images immediately
                 />
               </div>
