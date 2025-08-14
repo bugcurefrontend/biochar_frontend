@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Goudy_Bookletter_1911 } from "next/font/google";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,13 +25,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Heartyculture Biochar",
   description: "Permanent carbon removal that drives real community impact",
-  other: {
-    // Preload critical resources
-    'link': [
-      '<link rel="preload" href="/HeroSection.mp4" as="video" type="video/mp4">',
-      '<link rel="preload" href="/Logos/logo.png" as="image">',
-    ].join(''),
-  },
 };
 
 export default function RootLayout({
@@ -43,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${goudy.variable} antialiased`}
       >
+        
         {children}
       </body>
     </html>
