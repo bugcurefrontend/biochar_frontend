@@ -1,7 +1,8 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { OptimizedImage } from "../../components/OptimizedImage";
+import { SLIDE_DATA } from "../../data/slideImages";
 
 interface Slide {
   title: string;
@@ -15,50 +16,7 @@ const CardsPart = () => {
   // Track image position for each tab to resume from where left off
   const [imagePositions, setImagePositions] = useState<number[]>([0, 0, 0, 0]);
 
-  const slides: Slide[] = useMemo(() => [
-    {
-      title: "Permanent Carbon Removal",
-      bullets: [
-        "Permanent: Over 75% of biochar applied is Persistent Aromatic Carbon, locking carbon in soil for thousands of years.",
-        "Local & Sustainable: Produced and applied to soil locally, minimizing carbon footprint of carbon sequestering activity.",
-        "Verified & Transparent: Fully traceable via Digital MRV and certified by Carbon Standards International (CSI), delivering assured impact.",
-      ],
-      images: ["/CardsImg/card1.jpg", "/CardsImg/card2.jpg"],
-    },
-    {
-      title: "Empowering Communities",
-      bullets: [
-        "Livelihoods: Rural youth and women build profitable village-scale biochar businesses, creating dignified local jobs and establishing a vibrant rural economy.",
-        "Soil Health: Biochar improves soil moisture and structure and permanently increases fertility by bringing back microbial life in soil for generations.",
-        "Farmer Prosperity: Our field trials across diverse zones demonstrate better crop yields & farmer income year after year, with a single application of biochar. Carbon finance makes biochar affordable and accessible to farmers.",
-      ],
-      images: [
-        "/CardsImg/card3.jpg",
-        "/CardsImg/card4.jpg",
-        "/CardsImg/card5.jpg",
-        "/CardsImg/card6.jpg",
-      ],
-    },
-    {
-      title: "Research & Adoption",
-      bullets: [
-        "Center of Excellence: India's first biochar COE integrates innovation, training, and outreach to accelerate adoption by farming communities.",
-        "Backed by Science: Trials with 144 farmers across 3 districts showed 18–32% yield gains in diverse soils & practices. Partnership with ICAR-CICR.",
-        "Innovation: In-situ pyrolysis enables on-farm production of biochar, reducing logistics costs and improving unit economics.",
-      ],
-      images: ["/CardsImg/card7.jpg", "/CardsImg/card8.jpg"],
-    },
-    {
-      title: "Scale",
-      bullets: [
-        "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India through Samunnati and Heartfulness Institute, we're built for scale.",
-        "Afforestation: In 10,200 acres of reforestation with Forests by Heartfulness, biochar has boosted sapling survival to 85–90%.",
-        "Collaborative Model: Partnering with ICAR-CICR, Samunnati, Arvind Mills, Pratibha Syntex, and dMRV partners for science, adoption, and transparency.",
-        "SDG-aligned: Driving climate action, rural livelihoods, healthy soils, biodiversity and food security.",
-      ],
-      images: ["/CardsImg/15.jpeg", "/CardsImg/16.jpeg", "/cardImg.jpg"],
-    },
-  ], []);
+  const slides = SLIDE_DATA;
 
   const currentSlide = slides[activeIndex];
   const currentImage = currentSlide.images[imageIndex];
@@ -145,11 +103,10 @@ const CardsPart = () => {
               role="tab"
               aria-selected={activeIndex === index}
               onClick={() => onSlideChange(index)}
-              className={`px-1 py-2 sm:px-3 md:px-4 rounded-full text-xs sm:text-sm md:text-base transition-all border sm:flex-none min-w-0 text-center overflow-hidden ${
-                activeIndex === index
+              className={`px-1 py-2 sm:px-3 md:px-4 rounded-full text-xs sm:text-sm md:text-base transition-all border sm:flex-none min-w-0 text-center overflow-hidden ${activeIndex === index
                   ? "bg-gray-900 text-white border-gray-900"
                   : "bg-white text-gray-600 hover:text-black border-gray-300"
-              }`}
+                }`}
             >
               <span className="block leading-tight truncate sm:whitespace-nowrap">
                 {slide.title}
@@ -200,12 +157,10 @@ const CardsPart = () => {
                   transition={{ duration: 0.5 }}
                   className="w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-full relative rounded-xl overflow-hidden shadow"
                 >
-                  {/* SIMPLIFICATION: Removed manual observer. Next/Image handles lazy loading. */}
-                  <Image
+                  {/* Using OptimizedImage to prevent duplicate loading */}
+                  <OptimizedImage
                     src={currentImage}
                     alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 50vw"
                     className="object-contain"
                     priority={activeIndex === 0 && imageIndex === 0}
                   />
