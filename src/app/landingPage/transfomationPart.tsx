@@ -8,11 +8,11 @@ import { useState, useRef, useEffect, useMemo } from "react";
 const TransfomationPart = () => {
   const videoList = useMemo(() => [
     {
-      src: "/Kanha.mp4",
+      src: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580049/4_1_womc8l.mp4",
       title: "Kanha Biochar Project"
     },
     {
-      src: "/shivgarh_video.mp4",
+      src: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755579266/3_1_frh94m.mp4",
       title: "Shivgarh Impact Story"
     },
   ], []);
@@ -178,21 +178,17 @@ const TransfomationPart = () => {
         <div className="mt-8 mx-4 sm:mx-6 lg:mt-16 bg-gray-900 text-white rounded-xl overflow-hidden" ref={testimonialRef}>
           {/* Mobile and Tablet Layout (< lg) */}
           <div className="lg:hidden">
-            {/* Video iframe - loads when testimonial section is visible */}
-            <div className="relative aspect-video">
-              {testimonialVisible ? (
-                <iframe
-                  src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
-                  className="w-full h-full border-0"
-                  allow="autoplay"
-                  allowFullScreen
-                  loading="eager"
-                />
-              ) : (
-                <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                  <span className="text-gray-400">Loading video...</span>
-                </div>
-              )}
+            {/* Video container */}
+            <div className="relative aspect-video bg-gray-800 flex items-center justify-center">
+              <video
+                src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
+                className="w-full h-full object-cover"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Content below video */}
@@ -222,26 +218,17 @@ const TransfomationPart = () => {
 
           {/* Desktop Layout (≥ lg) */}
           <div className="hidden lg:flex h-96">
-            {/* Left – Video - loads when testimonial section is visible */}
+            {/* Left – Video */}
             <div className="lg:w-1/2 relative overflow-hidden">
-              {testimonialVisible ? (
-                <iframe
-                  src="https://drive.google.com/file/d/1gsOvFSHl7EGPbqV0VzO8D7Mod1hV_-N5/preview"
-                  className="absolute inset-0 w-full h-full border-0"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
-                  allow="autoplay"
-                  allowFullScreen
-                  loading="eager"
-                />
-              ) : (
-                <div className="absolute inset-0 w-full h-full bg-gray-800 flex items-center justify-center">
-                  <span className="text-gray-400">Loading video...</span>
-                </div>
-              )}
+              <video
+                src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
+                className="absolute inset-0 w-full h-full object-cover"
+                controls
+                playsInline
+                preload="metadata"
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Right – Content */}
@@ -462,7 +449,7 @@ const TransfomationPart = () => {
           {/* Download Annual Report Button */}
           <div className="text-center mt-12 mb-8">
             <button className="inline-block px-6 py-3 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
-              <a href="/path-to-your-pdf/2025-annual-report.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="/HFI Biochar Annual Report 2025.pdf" target="_blank" rel="noopener noreferrer">
                 Download 2025 Annual Report
               </a>
             </button>
