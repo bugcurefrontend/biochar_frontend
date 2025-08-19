@@ -25,6 +25,13 @@ const TransfomationPart = () => {
   const [testimonialVisible, setTestimonialVisible] = useState(true);
   const [testimonialPlaying, setTestimonialPlaying] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Handle video visibility changes
+  const handleVisibilityChange = (isVisible: boolean, setPlayingState: (playing: boolean) => void) => {
+    if (!isVisible) {
+      setPlayingState(false);
+    }
+  };
   const testimonialRef = useRef<HTMLDivElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
 
@@ -73,11 +80,13 @@ const TransfomationPart = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setTestimonialVisible(true);
+        } else {
+          handleVisibilityChange(false, setTestimonialPlaying);
         }
       },
       {
-        threshold: 0.01, // Trigger as soon as any part is visible
-        rootMargin: '400px' // Start loading 400px before visible
+        threshold: 0.3, // Trigger when 30% of the element is visible/invisible
+        rootMargin: '0px'
       }
     );
     if (testimonialSection) {
@@ -97,11 +106,13 @@ const TransfomationPart = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setSectionVisible(true);
+        } else {
+          handleVisibilityChange(false, setIsVideoPlaying);
         }
       },
       {
-        threshold: 0.01,
-        rootMargin: '400px'
+        threshold: 0.3, // Trigger when 30% of the element is visible/invisible
+        rootMargin: '0px'
       }
     );
     if (videoSection) {
