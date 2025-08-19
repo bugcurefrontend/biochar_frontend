@@ -6,25 +6,27 @@ import CountUp from "react-countup";
 import { useState, useRef, useEffect, useMemo } from "react";
 
 const TransfomationPart = () => {
-  const videoList = useMemo(() => [
+  const galleryItems = useMemo(() => [
     {
-      src: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580049/4_1_womc8l.mp4",
+      videoSrc: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580049/4_1_womc8l.mp4",
+      thumbnail: "/kanha_thumbnail.png",
       title: "Kanha Biochar Project"
     },
     {
-      src: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755579266/3_1_frh94m.mp4",
+      videoSrc: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755579266/3_1_frh94m.mp4",
+      thumbnail: "/shivgarh_thumbnail.png",
       title: "Shivgarh Impact Story"
     },
   ], []);
 
-  const [selectedVideo, setSelectedVideo] = useState(videoList[0]);
-  const [sectionVisible, setSectionVisible] = useState(false); // Load when user scrolls to it
-  const [testimonialVisible, setTestimonialVisible] = useState(true); // Load immediately
-  const [videosLoaded, setVideosLoaded] = useState(false); // Enable when section visible
+  const [selectedItem, setSelectedItem] = useState(galleryItems[0]);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(false);
+  const [testimonialVisible, setTestimonialVisible] = useState(true);
+  const [testimonialPlaying, setTestimonialPlaying] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
-  const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
   const topCards = [
     {
@@ -88,19 +90,18 @@ const TransfomationPart = () => {
     };
   }, []);
 
-  // Intersection Observer for local video section - fast loading like testimonial
+  // Intersection Observer for video section
   useEffect(() => {
     const videoSection = videoSectionRef.current;
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setSectionVisible(true);
-          setVideosLoaded(true);
         }
       },
       {
-        threshold: 0.01, // Trigger as soon as any part is visible
-        rootMargin: '400px' // Start loading 400px before visible - same as testimonial
+        threshold: 0.01,
+        rootMargin: '400px'
       }
     );
     if (videoSection) {
@@ -112,24 +113,6 @@ const TransfomationPart = () => {
       }
     };
   }, []);
-
-  // Load and manage video sources
-  useEffect(() => {
-    if (videosLoaded) {
-      videoList.forEach((video) => {
-        // Only load the video if it hasn't been loaded yet
-        if (!videoRefs.current.has(video.src)) {
-          const videoElement = document.createElement('video');
-          videoElement.src = video.src;
-          videoElement.muted = true;
-          videoElement.playsInline = true;
-          videoElement.loop = true;
-          videoElement.load();
-          videoRefs.current.set(video.src, videoElement);
-        }
-      });
-    }
-  }, [videosLoaded, videoList]);
 
   return (
     <>
@@ -178,17 +161,45 @@ const TransfomationPart = () => {
         <div className="mt-8 mx-4 sm:mx-6 lg:mt-16 bg-gray-900 text-white rounded-xl overflow-hidden" ref={testimonialRef}>
           {/* Mobile and Tablet Layout (< lg) */}
           <div className="lg:hidden">
-            {/* Video container */}
-            <div className="relative aspect-video bg-gray-800 flex items-center justify-center">
-              <video
-                src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
-                className="w-full h-full object-cover"
-                controls
-                playsInline
-                preload="metadata"
-              >
-                Your browser does not support the video tag.
-              </video>
+            {/* Video/Image container */}
+            <div 
+              className="relative aspect-video bg-gray-800 flex items-center justify-center cursor-pointer" 
+              onClick={() => setTestimonialPlaying(true)}
+            >
+              {testimonialPlaying ? (
+                <video
+                  src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  autoPlay
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <Image
+                  src="/patricia_thumbnail.png"
+                  alt="Patricia Scotland Testimonial"
+                  className="w-full h-full object-cover"
+                  width={640}
+                  height={360}
+                />
+              )}
+              {!testimonialPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="p-4 rounded-full bg-white bg-opacity-80">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-8 h-8 text-gray-800"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Content below video */}
@@ -219,16 +230,44 @@ const TransfomationPart = () => {
           {/* Desktop Layout (≥ lg) */}
           <div className="hidden lg:flex h-96">
             {/* Left – Video */}
-            <div className="lg:w-1/2 relative overflow-hidden">
-              <video
-                src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
-                className="absolute inset-0 w-full h-full object-cover"
-                controls
-                playsInline
-                preload="metadata"
-              >
-                Your browser does not support the video tag.
-              </video>
+            <div 
+              className="lg:w-1/2 relative overflow-hidden cursor-pointer" 
+              onClick={() => setTestimonialPlaying(true)}
+            >
+              {testimonialPlaying ? (
+                <video
+                  src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  autoPlay
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/patricia_thumbnail.png"
+                    alt="Patricia Scotland Testimonial"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    width={640}
+                    height={360}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="p-4 rounded-full bg-white bg-opacity-80">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-8 h-8 text-gray-800"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right – Content */}
@@ -320,70 +359,72 @@ const TransfomationPart = () => {
 
           {/* Video Section */}
           <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
-            {/* Main Video */}
-            <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
-              {sectionVisible ? (
+            {/* Main Video Player */}
+            <div 
+              className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4 cursor-pointer" 
+              onClick={() => setIsVideoPlaying(true)}
+            >
+              {isVideoPlaying ? (
                 <video
-                  key={selectedVideo.src}
-                  ref={(el) => {
-                    if (el && !videoRefs.current.has(selectedVideo.src)) {
-                      videoRefs.current.set(selectedVideo.src, el);
-                    }
-                  }}
-                  autoPlay={videosLoaded}
-                  loop
-                  muted
-                  playsInline
-                  src={selectedVideo.src}
+                  src={selectedItem.videoSrc}
                   className="w-full h-full object-cover"
-                />
+                  controls
+                  playsInline
+                  preload="metadata"
+                  autoPlay
+                >
+                  Your browser does not support the video tag.
+                </video>
               ) : (
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-500">Loading videos...</span>
-                </div>
+                <>
+                  <Image
+                    src={selectedItem.thumbnail}
+                    alt={selectedItem.title}
+                    className="w-full h-full object-cover"
+                    width={1280}
+                    height={720}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="p-4 rounded-full bg-white bg-opacity-80">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-8 h-8 text-gray-800"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </>
               )}
             </div>
 
-            {/* Video Thumbnails Gallery */}
+            {/* Image Thumbnails Gallery */}
             <div className="flex gap-4 overflow-x-auto mt-6 pb-4">
-              {videoList.map((vid, idx) => (
+              {galleryItems.map((item, idx) => (
                 <div
                   key={idx}
-                  className={`relative w-[140px] h-[80px] sm:w-[180px] sm:h-[100px] md:w-[220px] md:h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${selectedVideo.src === vid.src
+                  className={`relative w-[140px] h-[80px] sm:w-[180px] sm:h-[100px] md:w-[220px] md:h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${selectedItem.thumbnail === item.thumbnail
                     ? "border-blue-500 border-2"
                     : "border-transparent"
                     }`}
-                  onClick={() => setSelectedVideo(vid)}
+                  onClick={() => {
+                    setSelectedItem(item);
+                    setIsVideoPlaying(false);
+                  }}
                 >
                   <div className="relative w-full h-full bg-gray-800">
-                    {/* Video preview - only loads when section is visible */}
-                    {sectionVisible ? (
-                      <video
-                        src={vid.src}
-                        className="w-full h-full object-cover"
-                        muted
-                        playsInline
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-700 flex items-center justify-center">
-                        <span className="text-xs text-gray-400">Loading...</span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                      <div className={`p-2 rounded-full ${selectedVideo.src === vid.src ? 'bg-blue-500' : 'bg-white'}`}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className={`w-4 h-4 ${selectedVideo.src === vid.src ? 'text-white' : 'text-gray-800'}`}
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
+                    <Image
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                      width={220}
+                      height={130}
+                    />
                     <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
                       <p className="text-xs text-white font-medium truncate">
-                        {vid.title}
+                        {item.title}
                       </p>
                     </div>
                   </div>
