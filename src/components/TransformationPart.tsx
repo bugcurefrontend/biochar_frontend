@@ -5,7 +5,7 @@ import React from "react";
 import CountUp from "react-countup";
 import { useState, useRef, useEffect, useMemo } from "react";
 
-const TransfomationPart = () => {
+const TransformationPart = () => {
   const galleryItems = useMemo(() => [
     {
       videoSrc: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580049/4_1_womc8l.mp4",
@@ -171,11 +171,10 @@ const TransfomationPart = () => {
         </div>
         {/* ─────────────── Responsive Testimonial Card – All Screens ─────────────── */}
         <div className="mt-8 mx-4 sm:mx-6 lg:mt-16 bg-gray-900 text-white rounded-xl overflow-hidden" ref={testimonialRef}>
-          {/* Mobile and Tablet Layout (< lg) */}
-          <div className="lg:hidden">
-            {/* Video/Image container */}
+          <div className="flex flex-col lg:flex-row lg:h-96">
+            {/* Video Section */}
             <div 
-              className="relative aspect-video bg-gray-800 flex items-center justify-center cursor-pointer" 
+              className="relative aspect-video lg:aspect-auto lg:w-1/2 bg-gray-800 cursor-pointer overflow-hidden" 
               onClick={() => setTestimonialPlaying(true)}
             >
               {testimonialPlaying ? (
@@ -199,63 +198,10 @@ const TransfomationPart = () => {
               )}
             </div>
 
-            {/* Content below video */}
-            <div className="p-4 sm:p-6 lg:p-8">
-              <p className="font-serif text-base sm:text-lg leading-relaxed mb-4">
-                &ldquo;Vision, ingenuity, and labor have transformed what was once harsh
-                and depleted land into a lush green campus, with rainforest full
-                of thriving, endemic, and endangered species, medicinal and edible
-                plants, and organic farms. Kanha Shanti Vanam has become a
-                testament to harmony with nature.&rdquo;
-              </p>
-
-              <div className="text-sm text-gray-300 mb-4">
-                <p>Patricia Scotland</p>
-                <p>Secretary General, Commonwealth</p>
-              </div>
-
-              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
-                Water table has increased from 1,200 feet below ground to 300
-                feet below ground. Over 150,000 trees have been grown on barren
-                land, in a period of 6 years. Multiple rainforests grown on poor
-                soil in a semi-arid land with low annual rainfall, considered
-                impossible by experts.
-              </p>
-            </div>
-          </div>
-
-          {/* Desktop Layout (≥ lg) */}
-          <div className="hidden lg:flex h-96">
-            {/* Left – Video */}
-            <div 
-              className="lg:w-1/2 relative overflow-hidden cursor-pointer" 
-              onClick={() => setTestimonialPlaying(true)}
-            >
-              {testimonialPlaying ? (
-                <video
-                  src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="auto"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <Image
-                  src="/patricia_thumbnail.png"
-                  alt="Patricia Scotland Testimonial"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  width={640}
-                  height={360}
-                />
-              )}
-            </div>
-
-            {/* Right – Content */}
-            <div className="lg:w-1/2 flex flex-col justify-center h-full">
-              <div className="p-6 xl:p-8 space-y-6">
-                <p className="font-serif text-lg xl:text-xl leading-relaxed">
+            {/* Content Section */}
+            <div className="p-4 sm:p-6 lg:w-1/2 lg:flex lg:flex-col lg:justify-center lg:p-8">
+              <div className="space-y-4 lg:space-y-6">
+                <p className="font-serif text-base sm:text-lg lg:text-xl leading-relaxed">
                   &ldquo;Vision, ingenuity, and labor have transformed what was once
                   harsh and depleted land into a lush green campus, with
                   rainforest full of thriving, endemic, and endangered species,
@@ -263,12 +209,12 @@ const TransfomationPart = () => {
                   Vanam has become a testament to harmony with nature.&rdquo;
                 </p>
 
-                <div className="text-sm font-normal text-gray-300">
+                <div className="text-sm text-gray-300">
                   <p>Patricia Scotland</p>
-                  <p className="text-gray-300">Secretary General, Commonwealth</p>
+                  <p>Secretary General, Commonwealth</p>
                 </div>
 
-                <p className="text-xs xl:text-sm text-gray-400 leading-relaxed">
+                <p className="text-xs sm:text-sm lg:text-sm text-gray-400 leading-relaxed">
                   Water table has increased from 1,200 feet below ground to 300
                   feet below ground. Over 150,000 trees have been grown on barren
                   land, in a period of 6 years. Multiple rainforests grown on poor
@@ -455,4 +401,4 @@ const TransfomationPart = () => {
   );
 };
 
-export default TransfomationPart;
+export default TransformationPart;
