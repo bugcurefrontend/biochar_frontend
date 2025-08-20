@@ -32,6 +32,16 @@ const faqs = [
     answer:
       "It improves fertility, water retention, crop yield, and income. We aim to provide biochar free to farmers via carbon credit purchases.",
   },
+  {
+    question: "Who produces the biochar in your project?",
+    answer:
+      "We work with rural entrepreneurs and farmers who use sustainable methods to produce biochar from farm residue.",
+  },
+  {
+    question: "How does biochar benefit farmers?",
+    answer:
+      "It improves fertility, water retention, crop yield, and income. We aim to provide biochar free to farmers via carbon credit purchases.",
+  },
 ];
 
 export default function FormAndFaq() {

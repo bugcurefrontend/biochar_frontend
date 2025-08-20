@@ -107,7 +107,8 @@ const TransfomationPart = () => {
         if (entry.isIntersecting) {
           setSectionVisible(true);
         } else {
-          handleVisibilityChange(false, setIsVideoPlaying);
+          // Stop video when section is not visible
+          setIsVideoPlaying(false);
         }
       },
       {
@@ -196,20 +197,6 @@ const TransfomationPart = () => {
                   height={360}
                 />
               )}
-              {!testimonialPlaying && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="p-4 rounded-full bg-white bg-opacity-80">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-8 h-8 text-gray-800"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Content below video */}
@@ -255,27 +242,13 @@ const TransfomationPart = () => {
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/patricia_thumbnail.png"
-                    alt="Patricia Scotland Testimonial"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    width={640}
-                    height={360}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="p-4 rounded-full bg-white bg-opacity-80">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="w-8 h-8 text-gray-800"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+                <Image
+                  src="/patricia_thumbnail.png"
+                  alt="Patricia Scotland Testimonial"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  width={640}
+                  height={360}
+                />
               )}
             </div>
 
@@ -369,43 +342,16 @@ const TransfomationPart = () => {
           {/* Video Section */}
           <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
             {/* Main Video Player */}
-            <div 
-              className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4 cursor-pointer" 
-              onClick={() => setIsVideoPlaying(true)}
-            >
-              {isVideoPlaying ? (
-                <video
-                  src={selectedItem.videoSrc}
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="auto"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <>
-                  <Image
-                    src={selectedItem.thumbnail}
-                    alt={selectedItem.title}
-                    className="w-full h-full object-cover"
-                    width={1280}
-                    height={720}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="p-4 rounded-full bg-white bg-opacity-80">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="w-8 h-8 text-gray-800"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                </>
-              )}
+            <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
+              <video
+                src={selectedItem.videoSrc}
+                className="w-full h-full object-cover"
+                controls
+                playsInline
+                preload="auto"
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Image Thumbnails Gallery */}
