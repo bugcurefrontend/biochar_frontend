@@ -33,7 +33,7 @@ export default function FormAndFaq() {
           setImagesVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.02 }
     );
     if (currentRef) {
       observer.observe(currentRef);
@@ -300,7 +300,14 @@ export default function FormAndFaq() {
         >
           {faqs.map((faq, i) => (
             <div key={i} className="flex flex-col gap-4">
-              <Image src={CONSTANTS.FAQ.ICON_SRC} alt={"icon"} width={40} height={40} className="object-contain w-auto h-auto max-w-[40px] max-h-[40px]" />
+              <Image 
+                src={CONSTANTS.FAQ.ICON_SRC} 
+                alt={"icon"} 
+                width={40} 
+                height={40} 
+                className="object-contain max-w-[40px] max-h-[40px]" 
+                style={{ width: "auto", height: "auto" }}
+              />
               <h4 className="font-serif text-lg">{faq.question}</h4>
               <p className="text-sm leading-relaxed text-gray-600">
                 {faq.answer}

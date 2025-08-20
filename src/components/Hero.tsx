@@ -64,21 +64,7 @@ const Hero = () => {
     }
   }, []);
 
-  // Preload video in background for even faster loading
-  useEffect(() => {
-    // Create invisible video element to start downloading immediately
-    const preloadVideo = document.createElement('video');
-    preloadVideo.src = CONSTANTS.VIDEOS.HERO;
-    preloadVideo.preload = 'auto';
-    preloadVideo.muted = true;
-    preloadVideo.style.display = 'none';
-    document.body.appendChild(preloadVideo);
-    preloadVideo.load();
-
-    return () => {
-      document.body.removeChild(preloadVideo);
-    };
-  }, []);
+  // Simplified loading - remove preload element for better performance
 
   return (
     // 1. Main container: Responsive height — shorter on mobile so it doesn't dominate the screen

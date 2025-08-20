@@ -30,7 +30,8 @@ const Header = () => {
               alt={"logo"}
               width={120}
               height={70}
-              className="object-contain w-auto h-auto max-w-[120px] max-h-[70px]"
+              className="object-contain max-w-[120px] max-h-[70px]"
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
         </div>

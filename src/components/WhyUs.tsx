@@ -76,8 +76,12 @@ const WhyUs = () => {
     if (!isVisible) return;
 
     const tabInterval = setInterval(() => {
-      setActiveIndex((prev) => {
-        const nextIndex = (prev + 1) % slides.length;
+      setActiveIndex((prevActiveIndex) => {
+        const currentImageIndex = imagePositionsRef.current[prevActiveIndex];
+        imagePositionsRef.current[prevActiveIndex] = currentImageIndex; // Save current position
+        const nextIndex = (prevActiveIndex + 1) % slides.length;
+        
+        // Switch to new tab's stored image immediately
         setImageIndex(imagePositionsRef.current[nextIndex]);
         return nextIndex;
       });
@@ -151,10 +155,12 @@ const WhyUs = () => {
 
           <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
             <OptimizedImage
+              key={`${activeIndex}-${imageIndex}`}
               src={currentImage}
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
               className="object-cover transition-opacity duration-300"
               priority={activeIndex === 0 && imageIndex === 0}
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
 

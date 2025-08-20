@@ -9,13 +9,15 @@ interface OptimizedImageProps {
   alt: string;
   className?: string;
   priority?: boolean;
+  sizes?: string;
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
   alt,
   className = "",
-  priority = false
+  priority = false,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 }) => {
   // Use our centralized image cache
   const allImages = useMemo(() => getAllUniqueImages(), []);
@@ -28,6 +30,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         src={src}
         alt={alt}
         fill
+        sizes={sizes}
         className={className}
         style={{ 
           objectFit: 'cover',
