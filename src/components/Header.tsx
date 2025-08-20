@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import { CONSTANTS } from "../constants";
 
 const Header = () => {
   const pathname = usePathname();
@@ -25,12 +26,11 @@ const Header = () => {
         <div className="py-1">
           <Link href="/">
             <Image
-              src={"/Logos/logo.png"}
+              src={CONSTANTS.LOGOS.MAIN}
               alt={"logo"}
               width={120}
               height={70}
-              style={{ width: 'auto', height: 'auto', maxWidth: '120px', maxHeight: '70px' }}
-              className="object-contain"
+              className="object-contain w-auto h-auto max-w-[120px] max-h-[70px]"
             />
           </Link>
         </div>

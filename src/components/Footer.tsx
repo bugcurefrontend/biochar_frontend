@@ -12,7 +12,7 @@ const Footer = () => {
 
         {/* Right - Links */}
         <div className="flex flex-col gap-2 md:flex-row md:gap-6 text-white underline underline-offset-2">
-          <Link href="/termAndCondition" className="hover:text-gray-300">
+          <Link href="/terms" className="hover:text-gray-300">
             Terms of use
           </Link>
           {/* <a href="#" className="hover:text-gray-300">

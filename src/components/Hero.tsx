@@ -2,11 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
+import { CONSTANTS } from "../constants";
 
 const Hero = () => {
-  const [videoVisible, setVideoVisible] = useState(false);
   const [initialBuffered, setInitialBuffered] = useState(false);
-  const [fullyLoaded, setFullyLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,7 +37,7 @@ const Hero = () => {
 
       const handleCanPlayThrough = () => {
         // Can play through without stopping
-        setFullyLoaded(true);
+        // Video fully loaded
       };
 
       const handleError = () => {
@@ -69,7 +68,7 @@ const Hero = () => {
   useEffect(() => {
     // Create invisible video element to start downloading immediately
     const preloadVideo = document.createElement('video');
-    preloadVideo.src = '/HeroSection.mp4';
+    preloadVideo.src = CONSTANTS.VIDEOS.HERO;
     preloadVideo.preload = 'auto';
     preloadVideo.muted = true;
     preloadVideo.style.display = 'none';
@@ -92,7 +91,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 h-full w-full z-0">
         <video
           ref={videoRef}
-          src="/HeroSection.mp4"
+          src={CONSTANTS.VIDEOS.HERO}
           autoPlay
           loop
           muted
@@ -136,11 +135,11 @@ const Hero = () => {
             <button className="flex items-center rounded-full bg-white px-3 py-1 text-black text-sm md:px-7 md:py-3 md:text-[1.2rem] gap-2 md:gap-3">
               <Link href="#formForId">Buy Carbon Credits </Link>
               <Image
-                src={"/icon.svg"}
+                src={CONSTANTS.ICONS.ARROW}
                 alt={"icon"}
-                width={20} // Standardized width for better scaling
-                height={20} // Standardized height
-                className="ml-2 h-auto w-auto scale-90 md:ml-3 md:scale-100"
+                width={20}
+                height={20}
+                className="ml-2 w-5 h-5 scale-90 md:ml-3 md:scale-100"
               />
             </button>
           </div>

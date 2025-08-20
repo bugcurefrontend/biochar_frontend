@@ -3,11 +3,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import { OptimizedImage } from "./OptimizedImage";
 import { SLIDE_DATA } from "../data/slideImages";
 
-interface Slide {
-  title: string;
-  bullets: string[];
-  images: string[];
-}
+
 
 const WhyUs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -158,7 +154,7 @@ const WhyUs = () => {
               src={currentImage}
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
               className="object-cover transition-opacity duration-300"
-              priority={imageIndex === 0}
+              priority={activeIndex === 0 && imageIndex === 0}
             />
           </div>
 

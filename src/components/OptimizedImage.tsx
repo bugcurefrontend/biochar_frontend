@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useImagePreloader } from "../hooks/useImagePreloader";
 import { getAllUniqueImages } from "../data/slideImages";
 import { useMemo } from "react";
@@ -18,23 +19,21 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 }) => {
   // Use our centralized image cache
   const allImages = useMemo(() => getAllUniqueImages(), []);
-  const { isImageLoaded, getCachedImage } = useImagePreloader(allImages);
+  const { isImageLoaded } = useImagePreloader(allImages);
 
   // If image is loaded in our cache, use it directly
   if (isImageLoaded(src)) {
-    const cachedImage = getCachedImage(src);
     return (
-      <img
+      <Image
         src={src}
         alt={alt}
+        fill
         className={className}
         style={{ 
-          width: '100%', 
-          height: '100%', 
           objectFit: 'cover',
           transition: 'opacity 0.3s ease'
         }}
-        loading={priority ? "eager" : "lazy"}
+        priority={priority}
       />
     );
   }

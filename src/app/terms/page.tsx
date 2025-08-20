@@ -10,7 +10,7 @@ const TermsPage = () => {
         <div className="max-w-4xl mx-auto px-4 pt-16">
           {/* Title */}
           <h1 className="text-4xl font-serif font-semibold mb-8 text-center">
-            Terms & Conditions of Use
+            Terms &amp; Conditions of Use
           </h1>
 
           {/* Content */}
@@ -19,7 +19,7 @@ const TermsPage = () => {
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">Terms of Use</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                This website has been created by Heartyculture Natural Products LLP ("Heartyculture") for providing its offerings or service to its customers, potential customers, employees, and public users. This page states the terms and conditions under which you may use this website. If you do not accept the terms and conditions stated here, do not use this website. By accessing or using the Heartyculture website, however accessed, you agree to be bound by these "Terms of Use".
+                This website has been created by Heartyculture Natural Products LLP (&ldquo;Heartyculture&rdquo;) for providing its offerings or service to its customers, potential customers, employees, and public users. This page states the terms and conditions under which you may use this website. If you do not accept the terms and conditions stated here, do not use this website. By accessing or using the Heartyculture website, however accessed, you agree to be bound by these &ldquo;Terms of Use&rdquo;.
               </p>
             </div>
 
@@ -76,7 +76,7 @@ const TermsPage = () => {
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">Registration</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                To sign up for certain offerings/services, you may be required to register for an account on the Services (an "Account"). You must provide accurate and complete information and keep your Account information updated. You shall not:
+                To sign up for certain offerings/services, you may be required to register for an account on the Services (an &ldquo;Account&rdquo;). You must provide accurate and complete information and keep your Account information updated. You shall not:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 <li>Select or use as a username a name of another person with the intent to impersonate that person</li>
@@ -84,7 +84,7 @@ const TermsPage = () => {
                 <li>Use, as a username, a name that is otherwise offensive, vulgar or obscene</li>
               </ul>
               <p className="text-gray-700 leading-relaxed mt-4">
-                You are solely responsible for the activity that occurs on your Account, and for keeping your Account password secure. You may never use another person's user account or registration information for the Services without permission.
+                You are solely responsible for the activity that occurs on your Account, and for keeping your Account password secure. You may never use another person&apos;s user account or registration information for the Services without permission.
               </p>
             </div>
 
@@ -98,56 +98,56 @@ const TermsPage = () => {
               </p>
               <p className="text-gray-700 leading-relaxed mb-4">Website users shall not:</p>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                <li>Reverse engineer, copy, or recreate Hearty Culture's proprietary systems</li>
+                <li>Reverse engineer, copy, or recreate Hearty Culture&apos;s proprietary systems</li>
                 <li>Share materials or certification content with unauthorized parties</li>
-                <li>Use Hearty Culture's methodologies outside the platform without written consent</li>
+                <li>Use Hearty Culture&apos;s methodologies outside the platform without written consent</li>
                 <li>Create derivative works based on proprietary Hearty Culture content</li>
-                <li>Register competing trademarks or service marks confusingly similar to Hearty Culture's Marks</li>
+                <li>Register competing trademarks or service marks confusingly similar to Hearty Culture&apos;s Marks</li>
               </ul>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">No Warranties and Limitation of Liability</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                HEARTYCULTURE MAKES NO REPRESENTATIONS ABOUT THE SUITABILITY OF THE INFORMATION, CONTENT, AND RELATED GRAPHICS PUBLISHED ON THIS WEBSITE (COLLECTIVELY, THE "CONTENT") FOR ANY PURPOSE. ALL CONTENT IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+                HEARTYCULTURE MAKES NO REPRESENTATIONS ABOUT THE SUITABILITY OF THE INFORMATION, CONTENT, AND RELATED GRAPHICS PUBLISHED ON THIS WEBSITE (COLLECTIVELY, THE &ldquo;CONTENT&rdquo;) FOR ANY PURPOSE. ALL CONTENT IS PROVIDED &ldquo;AS IS&rdquo; WITHOUT WARRANTY OF ANY KIND.
               </p>
               <p className="text-gray-700 leading-relaxed mb-4">
-                "HEARTYCULTURE" HEREBY DISCLAIMS ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS CONTENT, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL "HEARTYCULTURE" BE LIABLE FOR ANY SPECIAL, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA, OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE, OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE CONTENT AVAILABLE FROM THIS WEBSITE.
+                &ldquo;HEARTYCULTURE&rdquo; HEREBY DISCLAIMS ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS CONTENT, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL &ldquo;HEARTYCULTURE&rdquo; BE LIABLE FOR ANY SPECIAL, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA, OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE, OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE CONTENT AVAILABLE FROM THIS WEBSITE.
               </p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold font-serif mb-4">Arbitration & Governing Law</h2>
+              <h2 className="text-2xl font-semibold font-serif mb-4">Arbitration &amp; Governing Law</h2>
               <p className="text-gray-700 leading-relaxed">
                 Any claims arising out of the use of this Site shall be resolved by binding arbitration in Hyderabad, Telangana, India in accordance with the then-current rules of Arbitration framed under Indian laws. The jurisdiction shall be in the appropriate court in Hyderabad, India.
               </p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold font-serif mb-4">Material Submitted to "Heartyculture"</h2>
+              <h2 className="text-2xl font-semibold font-serif mb-4">Material Submitted to &ldquo;Heartyculture&rdquo;</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Materials submitted to the "Heartyculture" website will be used in accordance with Heartyculture's Privacy Policy which is incorporated herein by reference. If you are using the services provided on this site ("the Services") in connection with or on behalf of an entity's use of the Services ("Entity"), then by using the Services in any manner, both you and the Entity you represent, agree to be bound by the terms and conditions of these Terms of Use.
+                Materials submitted to the &ldquo;Heartyculture&rdquo; website will be used in accordance with Heartyculture&apos;s Privacy Policy which is incorporated herein by reference. If you are using the services provided on this site (&ldquo;the Services&rdquo;) in connection with or on behalf of an entity&apos;s use of the Services (&ldquo;Entity&rdquo;), then by using the Services in any manner, both you and the Entity you represent, agree to be bound by the terms and conditions of these Terms of Use.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">Ordering Services</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                If you opt in to use the Services to place orders on behalf of yourself or an entity (the "Ordering Services"), you understand and agree that Heartyculture has the option to reject any order they deem to be invalid. We make no guarantees regarding the availability, pricing, accuracy or timely delivery of products that are ordered through the Ordering Services.
+                If you opt in to use the Services to place orders on behalf of yourself or an entity (the &ldquo;Ordering Services&rdquo;), you understand and agree that Heartyculture has the option to reject any order they deem to be invalid. We make no guarantees regarding the availability, pricing, accuracy or timely delivery of products that are ordered through the Ordering Services.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">Order Entry Tool</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                If you use the Order Entry Tool on the Service, then you hereby agree to the terms in this section. Your User Content shall include without limitation all order history and other data uploaded to the Heartyculture's platform available through the Services (the Heartyculture Platform") in connection with the Order Entry Tool.
+                If you use the Order Entry Tool on the Service, then you hereby agree to the terms in this section. Your User Content shall include without limitation all order history and other data uploaded to the Heartyculture&apos;s platform available through the Services (the Heartyculture Platform&rdquo;) in connection with the Order Entry Tool.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">User Content</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                All Content added, created, uploaded, submitted, distributed, or posted to the Services by users (collectively "User Content"), whether publicly posted or privately transmitted, is the sole responsibility of the person who originated such User Content. You represent that all User Content provided by you is accurate, complete, up-to-date, and in compliance with all applicable laws, rules and regulations.
+                All Content added, created, uploaded, submitted, distributed, or posted to the Services by users (collectively &ldquo;User Content&rdquo;), whether publicly posted or privately transmitted, is the sole responsibility of the person who originated such User Content. You represent that all User Content provided by you is accurate, complete, up-to-date, and in compliance with all applicable laws, rules and regulations.
               </p>
             </div>
 
@@ -164,14 +164,14 @@ const TermsPage = () => {
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">Feedback</h2>
               <p className="text-gray-700 leading-relaxed">
-                Any feedback, reviews, comments, and suggestions or recommendations for modifications, improvements or changes to the Services or the Sites that you may choose in your sole discretion to provide us from time to time ("Feedback") shall be solely owned by us (including all intellectual property rights therein and thereto). You hereby assign and agree to assign all right, title and interest in and to the Feedback to us.
+                Any feedback, reviews, comments, and suggestions or recommendations for modifications, improvements or changes to the Services or the Sites that you may choose in your sole discretion to provide us from time to time (&ldquo;Feedback&rdquo;) shall be solely owned by us (including all intellectual property rights therein and thereto). You hereby assign and agree to assign all right, title and interest in and to the Feedback to us.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">Paid Services</h2>
               <p className="text-gray-700 leading-relaxed">
-                Certain of our Services may be subject to payments now or in the future (the "Paid Services"). Please note that any payment terms presented to you in the process of using or signing up for or purchasing a Paid Service are deemed part of this Agreement.
+                Certain of our Services may be subject to payments now or in the future (the &ldquo;Paid Services&rdquo;). Please note that any payment terms presented to you in the process of using or signing up for or purchasing a Paid Service are deemed part of this Agreement.
               </p>
             </div>
 
@@ -185,7 +185,7 @@ const TermsPage = () => {
             <div>
               <h2 className="text-2xl font-semibold font-serif mb-4">Indemnification</h2>
               <p className="text-gray-700 leading-relaxed">
-                You shall defend, indemnify, and hold harmless us, our affiliates and each of our and their respective employees, contractors, directors, suppliers and representatives from all liabilities, claims, and expenses, including reasonable attorneys' fees, that arise from or relate to your use or misuse of, or access to, the Services, Content, or otherwise from your User Content, violation of these Terms of Use, or infringement by you, or any third party using your Account or identity in the Services, of any intellectual property or other right of any person or entity.
+                You shall defend, indemnify, and hold harmless us, our affiliates and each of our and their respective employees, contractors, directors, suppliers and representatives from all liabilities, claims, and expenses, including reasonable attorneys&apos; fees, that arise from or relate to your use or misuse of, or access to, the Services, Content, or otherwise from your User Content, violation of these Terms of Use, or infringement by you, or any third party using your Account or identity in the Services, of any intellectual property or other right of any person or entity.
               </p>
             </div>
 

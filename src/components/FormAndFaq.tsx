@@ -2,47 +2,10 @@
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { CONSTANTS } from "../constants";
 
-const interestOptions = [
-  "Offset Emissions",
-  "Explore Partnership",
-  "Support Farmers",
-  "Join as a Volunteer",
-  "Other",
-];
-
-const faqs = [
-  {
-    question: "How does biochar help fight climate change?",
-    answer:
-      "Biochar is a stable form of carbon produced by heating biomass in low-oxygen conditions. When applied to soil, it improves health and locks carbon for thousands of years, preventing its return to the atmosphere.",
-  },
-  {
-    question: "What are biochar carbon credits?",
-    answer:
-      "Each carbon credit represents the removal of one ton of CO₂. Heartyculture credits are certified and traceable through digital MRV.",
-  },
-  {
-    question: "Who produces the biochar in your project?",
-    answer:
-      "We work with rural entrepreneurs and farmers who use sustainable methods to produce biochar from farm residue.",
-  },
-  {
-    question: "How does biochar benefit farmers?",
-    answer:
-      "It improves fertility, water retention, crop yield, and income. We aim to provide biochar free to farmers via carbon credit purchases.",
-  },
-  {
-    question: "Who produces the biochar in your project?",
-    answer:
-      "We work with rural entrepreneurs and farmers who use sustainable methods to produce biochar from farm residue.",
-  },
-  {
-    question: "How does biochar benefit farmers?",
-    answer:
-      "It improves fertility, water retention, crop yield, and income. We aim to provide biochar free to farmers via carbon credit purchases.",
-  },
-];
+const interestOptions = CONSTANTS.INTEREST_OPTIONS;
+const faqs = CONSTANTS.FAQS;
 
 export default function FormAndFaq() {
   const [selected, setSelected] = useState<string[]>([]);
@@ -113,7 +76,7 @@ export default function FormAndFaq() {
     };
 
     try {
-      const res = await fetch("https://biochar-api.onrender.com/api/submit-contact/", {
+      const res = await fetch(CONSTANTS.API.CONTACT_SUBMIT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +107,7 @@ export default function FormAndFaq() {
         <div className="relative md:col-span-6 px-6">
           {imagesVisible ? (
             <Image
-              src="/testimonile/video.jpg"
+              src={CONSTANTS.FAQ.IMAGE_SRC}
               alt="Green landscape with biochar restoration project"
               width={800}
               height={600}
@@ -153,7 +116,7 @@ export default function FormAndFaq() {
               loading="lazy"
               quality={85}
               placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXwGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             />
           ) : (
             <div className="w-full h-72 sm:h-96 md:h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center animate-pulse">
@@ -183,8 +146,8 @@ export default function FormAndFaq() {
                   to a greener future.
                 </h2>
                 <p className="text-sm text-gray-600">
-                  Feel free to WhatsApp or<br />
-                  call us at +91 99788 22525
+                                  Feel free to WhatsApp or<br />
+                call us at {CONSTANTS.CONTACT.PHONE}
                 </p>
               </div>
             </div>
@@ -337,7 +300,7 @@ export default function FormAndFaq() {
         >
           {faqs.map((faq, i) => (
             <div key={i} className="flex flex-col gap-4">
-              <Image src={"/sticker.svg"} alt={"icon"} width={40} height={40} style={{ width: 'auto', height: 'auto', maxWidth: '40px', maxHeight: '40px' }} className="object-contain" />
+              <Image src={CONSTANTS.FAQ.ICON_SRC} alt={"icon"} width={40} height={40} className="object-contain w-auto h-auto max-w-[40px] max-h-[40px]" />
               <h4 className="font-serif text-lg">{faq.question}</h4>
               <p className="text-sm leading-relaxed text-gray-600">
                 {faq.answer}

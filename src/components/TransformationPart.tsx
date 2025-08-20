@@ -4,25 +4,23 @@ import Link from "next/link";
 import React from "react";
 import CountUp from "react-countup";
 import { useState, useRef, useEffect, useMemo } from "react";
+import { CONSTANTS } from "../constants";
 
 const TransformationPart = () => {
   const galleryItems = useMemo(() => [
     {
-      videoSrc: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580049/4_1_womc8l.mp4",
-      thumbnail: "/kanha_thumbnail.png",
+      videoSrc: CONSTANTS.VIDEOS.KANHA,
+      thumbnail: CONSTANTS.THUMBNAILS.KANHA,
       title: "Kanha Biochar Project"
     },
     {
-      videoSrc: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755579266/3_1_frh94m.mp4",
-      thumbnail: "/shivgarh_thumbnail.png",
+      videoSrc: CONSTANTS.VIDEOS.SHIVGARH,
+      thumbnail: CONSTANTS.THUMBNAILS.SHIVGARH,
       title: "Shivgarh Impact Story"
     },
   ], []);
 
   const [selectedItem, setSelectedItem] = useState(galleryItems[0]);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [sectionVisible, setSectionVisible] = useState(false);
-  const [testimonialVisible, setTestimonialVisible] = useState(true);
   const [testimonialPlaying, setTestimonialPlaying] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -79,7 +77,7 @@ const TransformationPart = () => {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTestimonialVisible(true);
+          // Testimonial visible
         } else {
           handleVisibilityChange(false, setTestimonialPlaying);
         }
@@ -105,11 +103,11 @@ const TransformationPart = () => {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setSectionVisible(true);
-        } else {
-          // Stop video when section is not visible
-          setIsVideoPlaying(false);
-        }
+          // Section visible
+                 } else {
+           // Stop video when section is not visible
+           // Video stopped
+         }
       },
       {
         threshold: 0.3, // Trigger when 30% of the element is visible/invisible
@@ -179,7 +177,7 @@ const TransformationPart = () => {
             >
               {testimonialPlaying ? (
                 <video
-                  src="https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4"
+                  src={CONSTANTS.VIDEOS.PATRICIA}
                   className="w-full h-full object-cover"
                   controls
                   playsInline
@@ -189,7 +187,7 @@ const TransformationPart = () => {
                 </video>
               ) : (
                 <Image
-                  src="/patricia_thumbnail.png"
+                  src={CONSTANTS.THUMBNAILS.PATRICIA}
                   alt="Patricia Scotland Testimonial"
                   className="w-full h-full object-cover"
                   width={640}
@@ -289,15 +287,15 @@ const TransformationPart = () => {
           <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
             {/* Main Video Player */}
             <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
-              <video
-                src={selectedItem.videoSrc}
-                className="w-full h-full object-cover"
-                controls
-                playsInline
-                preload="auto"
-              >
-                Your browser does not support the video tag.
-              </video>
+                          <video
+              src={selectedItem.videoSrc}
+              className="w-full h-full object-cover"
+              controls
+              playsInline
+              preload="metadata"
+            >
+              Your browser does not support the video tag.
+            </video>
             </div>
 
             {/* Image Thumbnails Gallery */}
@@ -309,10 +307,9 @@ const TransformationPart = () => {
                     ? "border-blue-500 border-2"
                     : "border-transparent"
                     }`}
-                  onClick={() => {
-                    setSelectedItem(item);
-                    setIsVideoPlaying(false);
-                  }}
+                                     onClick={() => {
+                     setSelectedItem(item);
+                   }}
                 >
                   <div className="relative w-full h-full bg-gray-800">
                     <Image
@@ -390,9 +387,9 @@ const TransformationPart = () => {
           {/* Download Annual Report Button */}
           <div className="text-center mt-12 mb-8">
             <button className="inline-block px-6 py-3 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
-              <a href="/HFI Biochar Annual Report 2025.pdf" target="_blank" rel="noopener noreferrer">
-                Download 2025 Annual Report
-              </a>
+                          <a href={CONSTANTS.DOCUMENTS.ANNUAL_REPORT} target="_blank" rel="noopener noreferrer">
+              Download 2025 Annual Report
+            </a>
             </button>
           </div>
         </section>
