@@ -95,9 +95,3 @@ export const useImagePreloader = (imageSources: string[]) => {
     getCachedImage: (src: string) => globalImageCache.get(src),
   };
 };
-
-// Utility to get all unique images from slide data
-export const extractUniqueImages = (slides: Array<{ images: string[] }>): string[] => {
-  const allImages = slides.flatMap(slide => slide.images);
-  return [...new Set(allImages)]; // Remove duplicates
-};
