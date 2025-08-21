@@ -8,8 +8,8 @@ const logos = CONSTANTS.LOGOS.BRANDS.map((src, index) => ({
   url: CONSTANTS.BRAND_URLS[index]
 }));
 
-// Duplicate for infinite scroll
-const loopLogos = [...logos, ...logos];
+// Create enough duplicates for seamless infinite scroll
+const loopLogos = [...logos, ...logos, ...logos];
 
 export default function Brands() {
 
@@ -20,17 +20,14 @@ export default function Brands() {
           Loved and supported by
         </p>
 
-        <div
-          className="flex items-center animate-scroll"
-          style={{ gap: '2rem' }}
-        >
+        <div className="animate-scroll-infinite flex items-center whitespace-nowrap" style={{ gap: '3rem' }}>
           {loopLogos.map((logo, i) => (
             <Link
               key={i}
               href={logo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-shrink-0 group"
+              className="inline-block flex-shrink-0 group"
             >
               <div className="relative">
                 <Image

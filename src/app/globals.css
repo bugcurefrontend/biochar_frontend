@@ -15,5 +15,18 @@ html {
 }
 
 .animate-scroll {
-  animation: scroll 40s linear infinite;
+  animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll-infinite {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll-infinite {
+  animation: scroll-infinite 10s linear infinite;
 }
