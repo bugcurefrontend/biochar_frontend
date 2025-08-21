@@ -22,6 +22,7 @@ const TransformationPart = () => {
 
   const [selectedItem, setSelectedItem] = useState(galleryItems[0]);
   const [testimonialPlaying, setTestimonialPlaying] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // Handle video visibility changes
@@ -106,7 +107,7 @@ const TransformationPart = () => {
           // Section visible
                  } else {
            // Stop video when section is not visible
-           // Video stopped
+           setVideoPlaying(false);
          }
       },
       {
@@ -286,16 +287,29 @@ const TransformationPart = () => {
           {/* Video Section */}
           <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
             {/* Main Video Player */}
-            <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4">
-                          <video
-              src={selectedItem.videoSrc}
-              className="w-full h-full object-cover"
-              controls
-              playsInline
-              preload="metadata"
+            <div 
+              className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4 cursor-pointer"
+              onClick={() => setVideoPlaying(true)}
             >
-              Your browser does not support the video tag.
-            </video>
+              {videoPlaying ? (
+                <video
+                  src={selectedItem.videoSrc}
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="auto"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <Image
+                  src={selectedItem.thumbnail}
+                  alt={selectedItem.title}
+                  className="w-full h-full object-cover"
+                  width={640}
+                  height={360}
+                />
+              )}
             </div>
 
             {/* Image Thumbnails Gallery */}
@@ -309,6 +323,7 @@ const TransformationPart = () => {
                     }`}
                                      onClick={() => {
                      setSelectedItem(item);
+                     setVideoPlaying(false);
                    }}
                 >
                   <div className="relative w-full h-full bg-gray-800">
