@@ -7,23 +7,23 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   display: "swap",
   preload: true,
 });
 
 const goudy = Goudy_Bookletter_1911({
-  subsets: ["latin"], // or [] for full
-  weight: "400", // only 400 is offered
-  display: "swap", // Prevents invisible text during font load
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
   variable: "--font-goudy",
-  preload: true, // Preload font for faster loading
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   display: "swap",
   preload: true,
 });
