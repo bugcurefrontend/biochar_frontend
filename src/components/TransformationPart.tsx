@@ -307,9 +307,8 @@ const TransformationPart = () => {
                   src={selectedItem.thumbnail}
                   alt={selectedItem.title}
                   className="w-full h-full object-cover"
-                  width={640}
-                  height={360}
-                  style={{ width: "auto", height: "auto" }}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                 />
               )}
             </div>
