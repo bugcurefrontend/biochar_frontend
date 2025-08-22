@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useState, useRef } from "react";
-import { OptimizedImage } from "./OptimizedImage";
+import Image from "next/image";
 import { SLIDE_DATA } from "../data/slideImages";
 
 
@@ -154,13 +154,18 @@ const WhyUs = () => {
           </button>
 
           <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
-            <OptimizedImage
+            <Image
               key={`${activeIndex}-${imageIndex}`}
               src={currentImage}
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+              fill
               className="object-cover transition-opacity duration-300"
               priority={activeIndex === 0 && imageIndex === 0}
               sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ 
+                objectFit: 'cover',
+                transition: 'opacity 0.3s ease'
+              }}
             />
           </div>
 
