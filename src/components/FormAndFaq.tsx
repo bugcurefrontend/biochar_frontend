@@ -107,7 +107,7 @@ export default function FormAndFaq() {
         <div className="relative md:col-span-6 px-6">
           {imagesVisible ? (
             <Image
-              src={CONSTANTS.FAQ.IMAGE_SRC}
+              src="/contact_us.webp"
               alt="Green landscape with biochar restoration project"
               width={800}
               height={600}

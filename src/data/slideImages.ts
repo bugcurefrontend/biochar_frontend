@@ -2,29 +2,29 @@
 export const SLIDE_IMAGES = {
   // Permanent Carbon Removal
   CARBON_REMOVAL: [
-    "/CardsImg/card1.jpg",
-    "/CardsImg/card12.jpg", 
-    "/CardsImg/card7.jpg",
-    "/CardsImg/card8.jpg",
-    "/CardsImg/card9.jpg"
+    "/CardsImg/card1.webp",
+    "/CardsImg/card12.webp", 
+    "/CardsImg/card7.webp",
+    "/CardsImg/card8.webp",
+    "/CardsImg/card9.webp"
   ] as string[],
   
   // Empowering Communities  
   COMMUNITIES: [
-    "/CardsImg/card3.jpg",
-    "/CardsImg/card4.jpg"
+    "/CardsImg/card3.webp",
+    "/CardsImg/card4.webp"
   ] as string[],
   
   // Research & Adoption
   RESEARCH: [
-    "/CardsImg/card5.jpg",
-    "/CardsImg/card6.jpg"
+    "/CardsImg/card5.webp",
+    "/CardsImg/card6.webp"
   ] as string[],
   
   // Scale
   SCALE: [
-    "/CardsImg/card10.jpg",
-    "/CardsImg/card11.jpg"
+    "/CardsImg/card10.webp",
+    "/CardsImg/card11.webp"
   ] as string[]
 };
 

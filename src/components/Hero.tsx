@@ -126,6 +126,7 @@ const Hero = () => {
                 width={20}
                 height={20}
                 className="ml-2 w-5 h-5 scale-90 md:ml-3 md:scale-100"
+                style={{ width: "auto", height: "auto" }}
               />
             </button>
           </div>

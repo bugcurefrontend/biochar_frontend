@@ -3,7 +3,7 @@ export const CONSTANTS = {
   // FAQ Section
   FAQ: {
     ICON_SRC: "/sticker.svg",
-    IMAGE_SRC: "/testimonile/video.jpg",
+    IMAGE_SRC: "/contact_us.webp",
   },
   
   // Icons
@@ -21,25 +21,25 @@ export const CONSTANTS = {
   
   // Thumbnail Images
   THUMBNAILS: {
-    KANHA: "/kanha_thumbnail.png",
-    SHIVGARH: "/shivgarh_thumbnail.png",
-    PATRICIA: "/patricia_thumbnail.png",
+    KANHA: "/thumbnails/kanha_thumbnail.webp",
+    SHIVGARH: "/thumbnails/shivgarh_thumbnail.webp",
+    PATRICIA: "/thumbnails/patricia_thumbnail.webp",
   },
   
   // Logo and Brand Images
   LOGOS: {
-    MAIN: "/Logos/logo.png",
+    MAIN: "/Logos/logo.webp",
     BRANDS: [
-      "/Logos/brand1.png",
-      "/Logos/brand2.png",
-      "/Logos/brand3.png",
-      "/Logos/brand4.png",
-      "/Logos/brand5.png",
-      "/Logos/brand6.png",
-      "/Logos/brand7.png",
-      "/Logos/brand8.png",
-      "/Logos/brand9.png",
-      "/Logos/brand10.png",
+      "/Logos/brand1.webp",
+      "/Logos/brand2.webp",
+      "/Logos/brand3.webp",
+      "/Logos/brand4.webp",
+      "/Logos/brand5.webp",
+      "/Logos/brand6.webp",
+      "/Logos/brand7.webp",
+      "/Logos/brand8.webp",
+      "/Logos/brand9.webp",
+      "/Logos/brand10.webp",
     ],
   },
   

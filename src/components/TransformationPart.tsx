@@ -193,6 +193,7 @@ const TransformationPart = () => {
                   className="w-full h-full object-cover"
                   width={640}
                   height={360}
+                  style={{ width: "auto", height: "auto" }}
                 />
               )}
             </div>
@@ -308,6 +309,7 @@ const TransformationPart = () => {
                   className="w-full h-full object-cover"
                   width={640}
                   height={360}
+                  style={{ width: "auto", height: "auto" }}
                 />
               )}
             </div>
@@ -333,6 +335,7 @@ const TransformationPart = () => {
                       className="w-full h-full object-cover"
                       width={220}
                       height={130}
+                      style={{ width: "auto", height: "auto" }}
                     />
                     <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
                       <p className="text-xs text-white font-medium truncate">

@@ -38,6 +38,7 @@ export default function Brands() {
                   className="w-[80px] h-auto sm:w-[120px] md:w-[150px] 
                     object-contain transition-all duration-300 
                     group-hover:opacity-80 group-hover:scale-105"
+                  style={{ width: "auto", height: "auto" }}
                   priority={i < 5} // Load first 5 images immediately
                 />
               </div>

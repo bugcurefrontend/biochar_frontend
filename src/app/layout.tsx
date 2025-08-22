@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     siteName: "Heartyculture Biochar",
     images: [
       {
-        url: "/Logos/logo.png",
+        url: "/Logos/logo.webp",
         width: 300,
         height: 100,
         alt: "Heartyculture Biochar - Carbon Credits for Climate Action",
@@ -112,7 +112,7 @@ export default function RootLayout({
         "url": "https://yourdomain.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://yourdomain.com/Logos/logo.png",
+          "url": "https://yourdomain.com/Logos/logo.webp",
           "width": 300,
           "height": 100
         },
