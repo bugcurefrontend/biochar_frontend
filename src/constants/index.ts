@@ -99,5 +99,13 @@ export const CONSTANTS = {
       question: "How does biochar benefit farmers?",
       answer: "It improves fertility, water retention, crop yield, and income. We aim to provide biochar free to farmers via carbon credit purchases.",
     },
+    {
+      question: "What makes biochar different from compost or fertilizer?",
+      answer: "Unlike compost or fertilizer, biochar is not a nutrient source but a nutrient holder—an enhancer, not a substitute. It acts as a slow-release bank, improving the efficiency of added inputs.",
+    },
+    {
+      question: "How do carbon credit purchases support communities?",
+      answer: "Revenue from carbon credits goes back to rural producers, creating jobs and strengthening local economies. This ensures both climate impact and social impact happen together.",
+    },
   ],
 };

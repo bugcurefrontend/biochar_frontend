@@ -9,6 +9,8 @@ const WhyUs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set());
   const imagePositionsRef = useRef<number[]>([0, 0, 0, 0]);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -40,6 +42,55 @@ const WhyUs = () => {
       }
     };
   }, []);
+
+  // Preload images effect
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      return new Promise<void>((resolve, reject) => {
+        if (preloadedImages.has(src)) {
+          resolve();
+          return;
+        }
+        
+        const img = new window.Image();
+        img.onload = () => {
+          setPreloadedImages(prev => new Set([...prev, src]));
+          resolve();
+        };
+        img.onerror = reject;
+        img.src = src;
+      });
+    };
+
+    // Preload current slide's images
+    const currentSlideImages = slides[activeIndex].images;
+    
+    // Preload current image first
+    preloadImage(currentSlideImages[imageIndex]).catch(console.error);
+    
+    // Then preload next few images in current slide
+    const preloadPromises = [];
+    for (let i = 1; i <= 3; i++) {
+      const nextIndex = (imageIndex + i) % currentSlideImages.length;
+      preloadPromises.push(preloadImage(currentSlideImages[nextIndex]));
+    }
+    
+    // Preload first image of next slide
+    const nextSlideIndex = (activeIndex + 1) % slides.length;
+    const nextSlideFirstImage = slides[nextSlideIndex].images[0];
+    preloadPromises.push(preloadImage(nextSlideFirstImage));
+    
+    Promise.allSettled(preloadPromises);
+  }, [activeIndex, imageIndex, slides, preloadedImages]);
+
+  // Handle image loading state
+  useEffect(() => {
+    if (preloadedImages.has(currentImage)) {
+      setImageLoading(false);
+    } else {
+      setImageLoading(true);
+    }
+  }, [currentImage, preloadedImages]);
 
   const handleNext = useCallback(() => {
     const numImages = slides[activeIndex].images.length;
@@ -154,17 +205,30 @@ const WhyUs = () => {
           </button>
 
           <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
+            {/* Loading skeleton */}
+            {imageLoading && (
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse flex items-center justify-center z-10">
+                <div className="text-center">
+                  <div className="w-12 h-12 border-4 border-gray-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+                  <p className="text-gray-500 text-sm">Loading image...</p>
+                </div>
+              </div>
+            )}
+            
             <Image
-              key={`${activeIndex}-${imageIndex}`}
               src={currentImage}
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
               fill
-              className="object-cover transition-opacity duration-300"
+              className={`object-cover transition-all duration-500 ${
+                imageLoading ? 'opacity-0' : 'opacity-100'
+              }`}
               priority={activeIndex === 0 && imageIndex === 0}
               sizes="(max-width: 768px) 100vw, 50vw"
+              onLoad={() => setImageLoading(false)}
+              onLoadStart={() => setImageLoading(true)}
               style={{ 
                 objectFit: 'cover',
-                transition: 'opacity 0.3s ease'
+                transition: 'opacity 0.5s ease'
               }}
             />
           </div>
