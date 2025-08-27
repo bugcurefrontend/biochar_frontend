@@ -152,12 +152,6 @@ const WhyUs = () => {
           <br className="hidden lg:block" />
           real community impact
         </h2>
-
-        {!isVisible && (
-          <div className="mt-4 text-xs text-gray-400 opacity-50">
-            ⏸️ Auto-slide paused (not in view)
-          </div>
-        )}
       </div>
 
       <nav className="w-full overflow-x-auto py-5 mb-10 lg:overflow-x-hidden">
