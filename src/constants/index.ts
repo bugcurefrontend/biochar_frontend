@@ -59,7 +59,8 @@ export const CONSTANTS = {
   
   // API Endpoints
   API: {
-    CONTACT_SUBMIT: "https://biochar-api.onrender.com/api/submit-contact/",
+    CONTACT_SUBMIT: process.env.NEXT_PUBLIC_CONTACT_SUBMIT_URL || "https://biochar-api.onrender.com/api/submit-contact/",
+    // BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || "https://biochar-api.onrender.com",
   },
   
   // Contact Information
