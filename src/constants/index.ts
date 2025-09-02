@@ -59,8 +59,12 @@ export const CONSTANTS = {
   
   // API Endpoints
   API: {
-    CONTACT_SUBMIT: process.env.NEXT_PUBLIC_CONTACT_SUBMIT_URL || "https://biochar-api.onrender.com/api/submit-contact/",
-    // BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || "https://biochar-api.onrender.com",
+    // Sheet2API endpoint - replace YOUR_API_URL with your actual Sheet2API URL
+    SHEET2API_URL: process.env.NEXT_PUBLIC_SHEET2API_URL || "YOUR_SHEET2API_URL_HERE",
+    // Alternative: FormSubmit (replace with your email)
+    FORMSUBMIT_URL: "https://formsubmit.co/your-email@domain.com",
+    // Old backend API (keep for reference)
+    // CONTACT_SUBMIT: process.env.NEXT_PUBLIC_CONTACT_SUBMIT_URL || "https://biochar-api.onrender.com/api/submit-contact/",
   },
   
   // Contact Information

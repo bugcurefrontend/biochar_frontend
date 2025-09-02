@@ -68,15 +68,17 @@ export default function FormAndFaq() {
     e.preventDefault();
     if (!validate()) return;
 
+    // Sheet2API payload format
     const payload = {
-      full_name: form.name,
-      email: form.email,
-      interests: selected,
-      inquiry_message: form.message,
+      "Full Name": form.name,
+      "Email": form.email,
+      "Interests": selected.join(", "), // Convert array to comma-separated string
+      "Message": form.message,
+      "Timestamp": new Date().toISOString(),
     };
 
     try {
-      const res = await fetch(CONSTANTS.API.CONTACT_SUBMIT, {
+      const res = await fetch(CONSTANTS.API.SHEET2API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,12 +86,12 @@ export default function FormAndFaq() {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        throw new Error(data.message || "Submission failed");
+      // Sheet2API typically returns different response format
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
 
+      // For Sheet2API, successful submission usually returns 200 status
       setSubmitted(true);
       setForm({ name: "", email: "", message: "" });
       setSelected([]);
