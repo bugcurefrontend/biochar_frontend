@@ -59,8 +59,8 @@ export const CONSTANTS = {
   
   // API Endpoints
   API: {
-    // Sheet2API endpoint - replace YOUR_API_URL with your actual Sheet2API URL
-    SHEET2API_URL: process.env.NEXT_PUBLIC_SHEET2API_URL || "YOUR_SHEET2API_URL_HERE",
+    // Sheet2API endpoint
+    SHEET2API_URL: process.env.NEXT_PUBLIC_CONTACT_SUBMIT_URL || "https://sheet2api.com/v1/z36mRRXvT9CO/heartyculture-leads",
     // Alternative: FormSubmit (replace with your email)
     FORMSUBMIT_URL: "https://formsubmit.co/your-email@domain.com",
     // Old backend API (keep for reference)
