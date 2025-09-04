@@ -68,16 +68,28 @@ export default function FormAndFaq() {
     e.preventDefault();
     if (!validate()) return;
 
-    // Sheet2API payload format
+    // Sheet2API payload format - match exact column headers in your Google Sheet
     const payload = {
-      "Full Name": form.name,
+      "Name": form.name,
       "Email": form.email,
-      "Interests": selected.join(", "), // Convert array to comma-separated string
+      "Interests": selected.join(", "),
       "Message": form.message,
       "Timestamp": new Date().toISOString(),
     };
 
     try {
+      console.log("Sending payload:", payload);
+      console.log("API URL:", CONSTANTS.API.SHEET2API_URL);
+      
+      // First, let's try to GET the current sheet structure to understand the format
+      try {
+        const getRes = await fetch(CONSTANTS.API.SHEET2API_URL, { method: "GET" });
+        const getResText = await getRes.text();
+        console.log("GET response:", getResText);
+      } catch (getError) {
+        console.log("GET request failed:", getError);
+      }
+      
       const res = await fetch(CONSTANTS.API.SHEET2API_URL, {
         method: "POST",
         headers: {
@@ -86,9 +98,15 @@ export default function FormAndFaq() {
         body: JSON.stringify(payload),
       });
 
-      // Sheet2API typically returns different response format
+      console.log("Response status:", res.status);
+      console.log("Response headers:", res.headers);
+      
+      // Try to get the error response body
+      const responseText = await res.text();
+      console.log("Response body:", responseText);
+
       if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
+        throw new Error(`HTTP error! status: ${res.status}, body: ${responseText}`);
       }
 
       // For Sheet2API, successful submission usually returns 200 status
@@ -98,7 +116,7 @@ export default function FormAndFaq() {
       setErrors({});
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Something went wrong while submitting. Please try again.");
+      alert(`Error: ${error.message}`);
     }
   }
 
