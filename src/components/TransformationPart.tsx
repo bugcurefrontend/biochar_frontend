@@ -287,63 +287,69 @@ const TransformationPart = () => {
 
           {/* Video Section */}
           <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
-            {/* Main Video Player */}
-            <div 
-              className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-4 cursor-pointer"
-              onClick={() => setVideoPlaying(true)}
-            >
-              {videoPlaying ? (
-                <video
-                  src={selectedItem.videoSrc}
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="auto"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <Image
-                  src={selectedItem.thumbnail}
-                  alt={selectedItem.title}
-                  className="w-full h-full object-cover"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                />
-              )}
-            </div>
-
-            {/* Image Thumbnails Gallery */}
-            <div className="flex gap-4 overflow-x-auto mt-6 pb-4">
-              {galleryItems.map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`relative w-[140px] h-[80px] sm:w-[180px] sm:h-[100px] md:w-[220px] md:h-[130px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${selectedItem.thumbnail === item.thumbnail
-                    ? "border-blue-500 border-2"
-                    : "border-transparent"
-                    }`}
-                                     onClick={() => {
-                     setSelectedItem(item);
-                     setVideoPlaying(false);
-                   }}
-                >
-                  <div className="relative w-full h-full bg-gray-800">
-                    <Image
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                      width={220}
-                      height={130}
-                      style={{ width: "auto", height: "auto" }}
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
-                      <p className="text-xs text-white font-medium truncate">
-                        {item.title}
-                      </p>
+            <div className="flex flex-col lg:flex-row gap-6">
+              {/* Image Thumbnails Gallery - Left Side */}
+              <div className="lg:w-[15%] lg:order-1">
+                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0">
+                  {galleryItems.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className={`relative w-[140px] h-[80px] sm:w-[180px] sm:h-[100px] md:w-[220px] md:h-[130px] lg:w-full lg:h-[120px] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border ${selectedItem.thumbnail === item.thumbnail
+                        ? "border-blue-500 border-2"
+                        : "border-transparent"
+                        }`}
+                                         onClick={() => {
+                         setSelectedItem(item);
+                         setVideoPlaying(false);
+                       }}
+                    >
+                      <div className="relative w-full h-full bg-gray-800">
+                        <Image
+                          src={item.thumbnail}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                          width={220}
+                          height={130}
+                          style={{ width: "auto", height: "auto" }}
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
+                          <p className="text-xs text-white font-medium truncate">
+                            {item.title}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Main Video Player - Right Side */}
+              <div className="lg:w-[85%] lg:order-2">
+                <div 
+                  className="relative overflow-hidden rounded-2xl shadow-lg aspect-video cursor-pointer"
+                  onClick={() => setVideoPlaying(true)}
+                >
+                  {videoPlaying ? (
+                    <video
+                      src={selectedItem.videoSrc}
+                      className="w-full h-full object-cover"
+                      controls
+                      playsInline
+                      preload="auto"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <Image
+                      src={selectedItem.thumbnail}
+                      alt={selectedItem.title}
+                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 900px"
+                    />
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
