@@ -142,19 +142,19 @@ const WhyUs = () => {
   }, [slides.length, isVisible]);
 
   return (
-    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-24 py-12" ref={sectionRef}>
-      <div className="text-center mb-10 lg:mb-16">
-        <p className="text-sm lg:text-base font-light tracking-wide text-gray-500 mb-4">
+    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-12 py-12" ref={sectionRef}>
+      <div className="text-center mb-6 lg:mb-8">
+        <p className="font-serif text-sm lg:text-base font-light tracking-wide text-gray-500 mb-3">
           What sets HeartyCulture Biochar apart?
         </p>
-        <h2 className="font-semibold text-2xl md:text-3xl md:font-normal px-[10%] lg:text-5xl leading-tight">
+        <h2 className="font-serif font-semibold text-2xl md:text-3xl md:font-normal px-[10%] lg:text-3xl leading-tight">
           Permanent carbon removal that drives
           <br className="hidden lg:block" />
           real community impact
         </h2>
       </div>
 
-      <nav className="w-full overflow-x-auto py-5 mb-10 lg:overflow-x-hidden">
+      <nav className="w-full overflow-x-auto py-3 mb-6 lg:overflow-x-hidden">
         <div className="flex mx-auto w-max gap-6 px-4">
           {slides.map((slide, index) => {
             const isActive = activeIndex === index;
@@ -168,7 +168,7 @@ const WhyUs = () => {
                     : "text-gray-400 hover:text-black"
                 }`}
               >
-                <span className="text-lg mt-1 text-center font-medium">
+                <span className="font-serif text-lg mt-1 text-center font-medium">
                   {slide.title}
                 </span>
               </button>
@@ -178,11 +178,11 @@ const WhyUs = () => {
       </nav>
 
       <div className="flex flex-col md:flex-row rounded-xl overflow-hidden">
-        <div className="bg-gray-900 text-white md:w-1/2 p-8 space-y-6 flex flex-col justify-center">
-          <h3 className="font-serif text-2xl lg:text-3xl mb-4">
+        <div className="bg-gray-900 text-white md:w-1/2 p-6 space-y-4 flex flex-col justify-center">
+          <h3 className="font-serif text-xl lg:text-2xl mb-3">
             {currentSlide.title}
           </h3>
-          <ul className="list-disc pl-5 space-y-3 text-sm md:text-base leading-relaxed">
+          <ul className="font-serif list-disc pl-5 space-y-2 text-sm md:text-sm leading-relaxed">
             {currentSlide.bullets.map((bullet, i) => (
               <li key={i}>{bullet}</li>
             ))}
@@ -198,7 +198,7 @@ const WhyUs = () => {
             ‹
           </button>
 
-          <div className="w-full h-[50vh] md:h-[80vh] relative overflow-hidden shadow">
+          <div className="w-full h-[50vh] md:h-[55vh] relative overflow-hidden shadow">
             {/* Loading skeleton */}
             {imageLoading && (
               <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse flex items-center justify-center z-10">
