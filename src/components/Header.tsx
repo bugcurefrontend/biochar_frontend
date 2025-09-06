@@ -39,22 +39,34 @@ const Header = () => {
         <div className="hidden lg:block">
           <ul className="flex font-bold">
             <li className="px-3">
-              <button onClick={() => handleScrollOrNavigate("whyUs")}>
+              <button 
+                onClick={() => handleScrollOrNavigate("whyUs")}
+                className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
+              >
                 WHY US
               </button>
             </li>
             <li className="px-3">
-              <button onClick={() => handleScrollOrNavigate("ourImpact")}>
+              <button 
+                onClick={() => handleScrollOrNavigate("ourImpact")}
+                className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
+              >
                 OUR IMPACT
               </button>
             </li>
             <li className="px-3">
-              <button onClick={() => handleScrollOrNavigate("formForId")}>
+              <button 
+                onClick={() => handleScrollOrNavigate("formForId")}
+                className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
+              >
                 CONTACT
               </button>
             </li>
             <li className="px-3">
-              <button onClick={() => handleScrollOrNavigate("FAQs")}>
+              <button 
+                onClick={() => handleScrollOrNavigate("FAQs")}
+                className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
+              >
                 FAQs
               </button>
             </li>
@@ -63,7 +75,7 @@ const Header = () => {
 
         <div>
           <button
-            className="bg-black text-white px-6 py-2 rounded-full text-sm"
+            className="bg-black text-white px-6 py-2 rounded-full text-sm hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
             onClick={() => handleScrollOrNavigate("formForId")}
           >
             Buy Carbon Credits
