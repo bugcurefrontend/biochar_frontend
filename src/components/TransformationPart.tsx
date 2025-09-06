@@ -127,17 +127,17 @@ const TransformationPart = () => {
 
   return (
     <>
-      <section id="ourImpact" className="bg-[#e9edf2] py-6 md:px-7" ref={sectionRef}>
-        <div className="max-w-7xl mx-auto px-5 py-10 lg:py-24">
+      <section id="ourImpact" className="bg-[#e9edf2] py-4 md:px-7" ref={sectionRef}>
+        <div className="max-w-7xl mx-auto px-5 py-6 lg:py-12">
           {/* <div className="grid md:grid-cols-12 md:gap-16"> */}
           <div className="md:flex md:justify-between w-full">
             {/* LEFT – headline */}
             <div className="md:w-1/2">
-              <p className="text-sm font-light tracking-wide text-gray-600 mb-6">
+              <p className="text-sm font-light tracking-wide text-gray-600 mb-4">
                 Impact
               </p>
 
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight mb-8">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl leading-tight mb-6">
                 Transformation at scale
                 <br className="hidden sm:block" />
                 with Biochar
@@ -162,15 +162,15 @@ const TransformationPart = () => {
                 <li>Delivers rising rural incomes</li>
               </ul>
 
-              <button className="inline-block mt-5 px-6 py-3 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
+              <button className="inline-block mt-4 px-5 py-2 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
                 <Link href="#formForId">Turn carbon into community</Link>
               </button>
             </div>
           </div>
         </div>
         {/* ─────────────── Responsive Testimonial Card – All Screens ─────────────── */}
-        <div className="mt-8 mx-4 sm:mx-6 lg:mt-16 bg-gray-900 text-white rounded-xl overflow-hidden" ref={testimonialRef}>
-          <div className="flex flex-col lg:flex-row lg:h-96">
+        <div className="mt-6 mx-4 sm:mx-6 lg:mt-10 bg-gray-900 text-white rounded-xl overflow-hidden" ref={testimonialRef}>
+          <div className="flex flex-col lg:flex-row lg:h-80">
             {/* Video Section */}
             <div 
               className="relative aspect-video lg:aspect-auto lg:w-1/2 bg-gray-800 cursor-pointer overflow-hidden" 
@@ -199,9 +199,9 @@ const TransformationPart = () => {
             </div>
 
             {/* Content Section */}
-            <div className="p-4 sm:p-6 lg:w-1/2 lg:flex lg:flex-col lg:justify-center lg:p-8">
-              <div className="space-y-4 lg:space-y-6">
-                <p className="font-serif text-base sm:text-lg lg:text-xl leading-relaxed">
+            <div className="p-4 sm:p-5 lg:w-1/2 lg:flex lg:flex-col lg:justify-center lg:p-6">
+              <div className="space-y-3 lg:space-y-4">
+                <p className="font-serif text-sm sm:text-base lg:text-lg leading-relaxed">
                   &ldquo;Vision, ingenuity, and labor have transformed what was once
                   harsh and depleted land into a lush green campus, with
                   rainforest full of thriving, endemic, and endangered species,
