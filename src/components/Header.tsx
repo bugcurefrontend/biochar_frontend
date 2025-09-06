@@ -2,12 +2,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CONSTANTS } from "../constants";
 
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY < 10) {
+          setIsVisible(true);
+        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          setIsVisible(false);
+        } else if (currentScrollY < lastScrollY) {
+          setIsVisible(true);
+        }
+        
+        setLastScrollY(currentScrollY);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+      return () => window.removeEventListener('scroll', controlNavbar);
+    }
+  }, [lastScrollY]);
 
   const handleScrollOrNavigate = (id: string) => {
     if (pathname === "/") {
@@ -21,8 +46,10 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full">
-      <div className="w-full flex justify-between items-center py-2 bg-white px-4 lg:rounded-full lg:px-5 lg:w-[95%] lg:mx-auto">
+    <div className={`fixed top-0 left-0 right-0 z-50 w-full transition-transform duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
+      <div className="w-full flex justify-between items-center py-2 bg-white px-4 lg:px-5 lg:w-[100%] lg:mx-auto">
         <div className="py-1">
           <Link href="/">
             <Image
