@@ -118,14 +118,14 @@ const Hero = () => {
             Two Crises. One Solution.
           </p>
           <div className="pt-5">
-            <button className="flex items-center rounded-full bg-white px-3 py-1 text-black text-sm md:px-7 md:py-3 md:text-[1.2rem] gap-2 md:gap-3">
+            <button className="group flex items-center rounded-full bg-white px-3 py-1 text-black text-sm md:px-7 md:py-3 md:text-[1.2rem] gap-2 md:gap-3 hover:bg-black hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl">
               <Link href="#formForId">Buy Carbon Credits </Link>
               <Image
                 src={CONSTANTS.ICONS.ARROW}
                 alt={"icon"}
                 width={20}
                 height={20}
-                className="ml-2 w-5 h-5 scale-90 md:ml-3 md:scale-100"
+                className="ml-2 w-5 h-5 scale-90 md:ml-3 md:scale-100 group-hover:translate-x-1 group-hover:brightness-0 group-hover:invert transition-all duration-300"
                 style={{ width: "auto", height: "auto" }}
               />
             </button>
