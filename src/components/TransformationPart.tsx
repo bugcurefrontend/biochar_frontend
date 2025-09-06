@@ -290,7 +290,7 @@ const TransformationPart = () => {
             <div className="flex flex-col lg:flex-row gap-6">
               {/* Image Thumbnails Gallery - Left Side */}
               <div className="lg:w-[15%] lg:order-1">
-                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0">
+                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-y-auto lg:max-h-[400px] pb-4 lg:pb-0">
                   {galleryItems.map((item, idx) => (
                     <div
                       key={idx}
