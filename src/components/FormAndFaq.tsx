@@ -173,7 +173,7 @@ export default function FormAndFaq() {
             </div>
           ) : (
             <>
-              <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl mb-2">
+              <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl mb-6">
                 Create impact today
               </h2>
               <form

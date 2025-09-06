@@ -278,6 +278,49 @@ const TransformationPart = () => {
             ))}
           </div>
 
+          {/* Loved and supported by section */}
+          <div className="bg-white text-black mt-12">
+            <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-12">
+              <p className="text-center text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-6 sm:mb-10">
+                Loved and supported by
+              </p>
+
+              <div className="slider">
+                <div className="slider-track">
+                  {[...CONSTANTS.LOGOS.BRANDS, ...CONSTANTS.LOGOS.BRANDS, ...CONSTANTS.LOGOS.BRANDS].map((logoSrc, i) => {
+                    const logos = CONSTANTS.LOGOS.BRANDS;
+                    const logoIndex = i % logos.length;
+                    const logoUrl = CONSTANTS.BRAND_URLS[logoIndex];
+                    
+                    return (
+                      <Link
+                        key={i}
+                        href={logoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center min-w-[200px]"
+                      >
+                        <div className="relative">
+                          <Image
+                            src={logoSrc}
+                            alt={`Partner logo ${logoIndex + 1}`}
+                            width={150}
+                            height={100}
+                            className="w-[80px] h-auto sm:w-[120px] md:w-[150px] 
+                              object-contain transition-all duration-300 
+                              group-hover:opacity-80 group-hover:scale-105"
+                            style={{ width: "auto", height: "auto" }}
+                            priority={i < 5}
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Section Title for Video */}
           <div className="text-center mb-10 mt-16">
             <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
