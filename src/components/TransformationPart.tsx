@@ -279,7 +279,7 @@ const TransformationPart = () => {
           </div>
 
           {/* Loved and supported by section */}
-          <div className="bg-white text-black mt-12">
+          <div className="bg-white text-black mt-12 rounded-xl mx-4 sm:mx-6">
             <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-12">
               <p className="text-center text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-6 sm:mb-10">
                 Loved and supported by

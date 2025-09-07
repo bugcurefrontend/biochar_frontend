@@ -23,6 +23,7 @@ export default function FormAndFaq() {
     interests?: string;
   }>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Intersection Observer for lazy loading
   useEffect(() => {
@@ -67,6 +68,8 @@ export default function FormAndFaq() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
+
+    setIsSubmitting(true);
 
     // Sheet2API payload format - match exact column headers in your Google Sheet
     const payload = {
@@ -117,6 +120,8 @@ export default function FormAndFaq() {
     } catch (error) {
       console.error("Submit error:", error);
       alert(`Error: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -124,7 +129,7 @@ export default function FormAndFaq() {
     <section className=" " id="formForId" ref={sectionRef}>
       <div className="max-w-7xl mt-8 mx-auto md:grid md:grid-cols-12 mb-12 lg:mb-24">
         {/* ─────── Image (above on mobile, left on desktop) ─────── */}
-        <div className="relative md:col-span-6 px-6">
+        <div className="relative md:col-span-6 px-6 py-16">
           {imagesVisible ? (
             <Image
               src="/contact_us.webp"
@@ -279,9 +284,17 @@ export default function FormAndFaq() {
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-2 rounded-full bg-[#123955] text-white text-sm hover:bg-gray-800"
+                    disabled={isSubmitting}
+                    className={`px-6 py-2 rounded-full text-white text-sm transition-all duration-200 flex items-center gap-2 ${
+                      isSubmitting 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-[#123955] hover:bg-gray-800'
+                    }`}
                   >
-                    Transform carbon
+                    {isSubmitting && (
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    )}
+                    {isSubmitting ? 'Submitting...' : 'Transform carbon'}
                   </button>
                 </div>
               </form>
