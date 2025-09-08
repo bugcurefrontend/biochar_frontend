@@ -103,7 +103,7 @@ const Header = () => {
 
         <div>
           <button
-            className="bg-black text-white px-6 py-2 rounded-full text-sm hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
+            className="bg-black text-white px-6 py-2 rounded-full text-sm hover:bg-gray-800 hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
             onClick={() => handleScrollOrNavigate("formForId")}
           >
             Buy Carbon Credits
