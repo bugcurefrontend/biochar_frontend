@@ -393,15 +393,25 @@ const TransformationPart = () => {
                   onClick={() => setVideoPlaying(true)}
                 >
                   {videoPlaying ? (
-                    <video
-                      src={selectedItem.videoSrc}
-                      className="w-full h-full object-cover"
-                      controls
-                      playsInline
-                      preload="auto"
-                    >
-                      Your browser does not support the video tag.
-                    </video>
+                    selectedItem.videoSrc.includes('youtube.com/embed') ? (
+                      <iframe
+                        src={selectedItem.videoSrc}
+                        className="w-full h-full"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <video
+                        src={selectedItem.videoSrc}
+                        className="w-full h-full object-cover"
+                        controls
+                        playsInline
+                        preload="auto"
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    )
                   ) : (
                     <Image
                       src={selectedItem.thumbnail}

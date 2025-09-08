@@ -17,10 +17,10 @@ export const CONSTANTS = {
     KANHA: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580049/4_1_womc8l.mp4",
     SHIVGARH: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755579266/3_1_frh94m.mp4",
     PATRICIA: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4",
-    WHAT_IS_BIOCHAR: "https://youtu.be/liWgD98LLMg",
-    HOW_TO_USE_BIOCHAR: "https://youtu.be/rfYrviUn-E8",
-    BIOCHAR_GOLD_FOR_FARMERS: "https://youtu.be/hzvnX9BKLNE",
-    BIOCHAR_HEARTFULNESS_MOVEMENT: "https://youtu.be/7k_DErgR-Hk",
+    WHAT_IS_BIOCHAR: "https://www.youtube.com/embed/liWgD98LLMg",
+    HOW_TO_USE_BIOCHAR: "https://www.youtube.com/embed/rfYrviUn-E8",
+    BIOCHAR_GOLD_FOR_FARMERS: "https://www.youtube.com/embed/hzvnX9BKLNE",
+    BIOCHAR_HEARTFULNESS_MOVEMENT: "https://www.youtube.com/embed/7k_DErgR-Hk",
   },
   
   // Thumbnail Images
