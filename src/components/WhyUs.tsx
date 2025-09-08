@@ -66,7 +66,7 @@ const WhyUs = () => {
     const currentSlideImages = slides[activeIndex].images;
     
     // Preload current image first
-    preloadImage(currentSlideImages[imageIndex]).catch(console.error);
+    preloadImage(currentSlideImages[imageIndex]).catch(() => {});
     
     // Then preload next few images in current slide
     const preloadPromises = [];

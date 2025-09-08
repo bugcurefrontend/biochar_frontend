@@ -74,7 +74,6 @@ export const useImagePreloader = (imageSources: string[]) => {
           setIsLoading(false);
         }
       } catch (error) {
-        console.error('Error preloading images:', error);
         if (mountedRef.current) {
           setIsLoading(false);
         }

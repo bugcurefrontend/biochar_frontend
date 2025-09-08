@@ -81,18 +81,6 @@ export default function FormAndFaq() {
     };
 
     try {
-      console.log("Sending payload:", payload);
-      console.log("API URL:", CONSTANTS.API.SHEET2API_URL);
-      
-      // First, let's try to GET the current sheet structure to understand the format
-      try {
-        const getRes = await fetch(CONSTANTS.API.SHEET2API_URL, { method: "GET" });
-        const getResText = await getRes.text();
-        console.log("GET response:", getResText);
-      } catch (getError) {
-        console.log("GET request failed:", getError);
-      }
-      
       const res = await fetch(CONSTANTS.API.SHEET2API_URL, {
         method: "POST",
         headers: {
@@ -101,12 +89,7 @@ export default function FormAndFaq() {
         body: JSON.stringify(payload),
       });
 
-      console.log("Response status:", res.status);
-      console.log("Response headers:", res.headers);
-      
-      // Try to get the error response body
       const responseText = await res.text();
-      console.log("Response body:", responseText);
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}, body: ${responseText}`);
@@ -118,7 +101,6 @@ export default function FormAndFaq() {
       setSelected([]);
       setErrors({});
     } catch (error) {
-      console.error("Submit error:", error);
       alert(`Error: ${error.message}`);
     } finally {
       setIsSubmitting(false);
@@ -338,8 +320,7 @@ export default function FormAndFaq() {
                 alt={"icon"} 
                 width={40} 
                 height={40} 
-                className="object-contain max-w-[40px] max-h-[40px]" 
-                style={{ width: "auto", height: "auto" }}
+                className="object-contain w-auto h-auto max-w-[40px] max-h-[40px]" 
               />
               <h4 className="font-serif text-lg">{faq.question}</h4>
               <p className="text-sm leading-relaxed text-gray-600">
