@@ -18,6 +18,26 @@ const TransformationPart = () => {
       thumbnail: CONSTANTS.THUMBNAILS.SHIVGARH,
       title: "Shivgarh Impact Story"
     },
+    {
+      videoSrc: CONSTANTS.VIDEOS.WHAT_IS_BIOCHAR,
+      thumbnail: CONSTANTS.THUMBNAILS.WHAT_IS_BIOCHAR,
+      title: "What is Biochar"
+    },
+    {
+      videoSrc: CONSTANTS.VIDEOS.HOW_TO_USE_BIOCHAR,
+      thumbnail: CONSTANTS.THUMBNAILS.HOW_TO_USE_BIOCHAR,
+      title: "How to Use Biochar"
+    },
+    {
+      videoSrc: CONSTANTS.VIDEOS.BIOCHAR_GOLD_FOR_FARMERS,
+      thumbnail: CONSTANTS.THUMBNAILS.BIOCHAR_GOLD_FOR_FARMERS,
+      title: "Biochar Gold for Farmers"
+    },
+    {
+      videoSrc: CONSTANTS.VIDEOS.BIOCHAR_HEARTFULNESS_MOVEMENT,
+      thumbnail: CONSTANTS.THUMBNAILS.BIOCHAR_HEARTFULNESS_MOVEMENT,
+      title: "Biochar the Heartfulness Movement"
+    },
   ], []);
 
   const [selectedItem, setSelectedItem] = useState(galleryItems[0]);

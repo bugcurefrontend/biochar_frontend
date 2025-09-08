@@ -15,8 +15,8 @@ const Hero = () => {
     const video = videoRef.current;
     
     if (video) {
-      // Aggressive preloading
-      video.preload = 'auto';
+      // Load only metadata
+      video.preload = 'metadata';
       
       // Event listeners for fastest possible loading
       const handleLoadStart = () => {
@@ -82,7 +82,7 @@ const Hero = () => {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           className={`h-full w-full object-cover transition-opacity duration-150 ${
             initialBuffered ? 'opacity-100' : 'opacity-0'
           }`}

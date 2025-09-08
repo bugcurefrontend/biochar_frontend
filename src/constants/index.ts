@@ -17,6 +17,10 @@ export const CONSTANTS = {
     KANHA: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580049/4_1_womc8l.mp4",
     SHIVGARH: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755579266/3_1_frh94m.mp4",
     PATRICIA: "https://res.cloudinary.com/dr004mbx7/video/upload/v1755580142/01_jmgzjk.mp4",
+    WHAT_IS_BIOCHAR: "https://youtu.be/liWgD98LLMg",
+    HOW_TO_USE_BIOCHAR: "https://youtu.be/rfYrviUn-E8",
+    BIOCHAR_GOLD_FOR_FARMERS: "https://youtu.be/hzvnX9BKLNE",
+    BIOCHAR_HEARTFULNESS_MOVEMENT: "https://youtu.be/7k_DErgR-Hk",
   },
   
   // Thumbnail Images
@@ -24,6 +28,10 @@ export const CONSTANTS = {
     KANHA: "/thumbnails/kanha_thumbnail.webp",
     SHIVGARH: "/thumbnails/shivgarh_thumbnail.webp",
     PATRICIA: "/thumbnails/patricia_thumbnail.webp",
+    WHAT_IS_BIOCHAR: "/thumbnails/what_is_biochar.webp",
+    HOW_TO_USE_BIOCHAR: "/thumbnails/how_to_use_biochar.webp",
+    BIOCHAR_GOLD_FOR_FARMERS: "/thumbnails/biochar_gold_for_farmers.webp",
+    BIOCHAR_HEARTFULNESS_MOVEMENT: "/thumbnails/biochar_the_heartfulness_movement.webp",
   },
   
   // Logo and Brand Images

@@ -194,6 +194,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preload" as="video" href="/HeroSection.mp4" type="video/mp4" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
