@@ -7,6 +7,51 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { CONSTANTS } from "../constants";
 
 const TransformationPart = () => {
+  const [canScrollUp, setCanScrollUp] = useState(false);
+  const [canScrollDown, setCanScrollDown] = useState(true);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+
+  const checkScrollButtons = () => {
+    const element = galleryScrollRef.current;
+    if (element) {
+      const isDesktop = window.innerWidth >= 1024;
+      
+      if (isDesktop) {
+        // Desktop: check vertical scroll
+        setCanScrollUp(element.scrollTop > 0);
+        setCanScrollDown(element.scrollTop < element.scrollHeight - element.clientHeight);
+      } else {
+        // Mobile: check horizontal scroll
+        setCanScrollLeft(element.scrollLeft > 0);
+        setCanScrollRight(element.scrollLeft < element.scrollWidth - element.clientWidth);
+      }
+    }
+  };
+
+  const scrollGallery = (direction: 'up' | 'down' | 'left' | 'right') => {
+    const element = galleryScrollRef.current;
+    if (element) {
+      const isDesktop = window.innerWidth >= 1024;
+      const scrollAmount = isDesktop ? 140 : 180; // Adjust for mobile vs desktop
+      
+      if (isDesktop) {
+        // Desktop: vertical scrolling
+        element.scrollBy({
+          top: direction === 'down' ? scrollAmount : direction === 'up' ? -scrollAmount : 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Mobile: horizontal scrolling
+        element.scrollBy({
+          left: direction === 'right' ? scrollAmount : direction === 'left' ? -scrollAmount : 0,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
   const galleryItems = useMemo(() => [
     {
       videoSrc: CONSTANTS.VIDEOS.KANHA,
@@ -143,6 +188,34 @@ const TransformationPart = () => {
         observer.unobserve(videoSection);
       }
     };
+  }, []);
+
+  // Check scroll buttons on mount and scroll
+  useEffect(() => {
+    const element = galleryScrollRef.current;
+    if (element) {
+      checkScrollButtons();
+      element.addEventListener('scroll', checkScrollButtons);
+      
+      // Also check on window resize
+      const handleResize = () => {
+        setTimeout(() => checkScrollButtons(), 100); // Small delay to ensure resize is complete
+      };
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+        element.removeEventListener('scroll', checkScrollButtons);
+        window.removeEventListener('resize', handleResize);
+      };
+    }
+  }, []);
+
+  // Initialize scroll state on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkScrollButtons();
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -352,8 +425,38 @@ const TransformationPart = () => {
           <div className="max-w-6xl mx-auto my-10" ref={videoSectionRef}>
             <div className="flex flex-col lg:flex-row gap-6">
               {/* Image Thumbnails Gallery - Left Side */}
-              <div className="lg:w-[15%] lg:order-1">
-                <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-y-auto lg:max-h-[400px] pb-4 lg:pb-0">
+              <div className="lg:w-[15%] lg:order-1 lg:aspect-video relative">
+                {/* Mobile: Left Arrow */}
+                {canScrollLeft && (
+                  <button
+                    onClick={() => scrollGallery('left')}
+                    className="lg:hidden absolute -left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all"
+                    aria-label="Scroll left"
+                  >
+                    <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                )}
+
+                {/* Desktop: Up Arrow */}
+                {canScrollUp && (
+                  <button
+                    onClick={() => scrollGallery('up')}
+                    className="hidden lg:block absolute -top-2 left-1/2 transform -translate-x-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all"
+                    aria-label="Scroll up"
+                  >
+                    <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                    </svg>
+                  </button>
+                )}
+                
+                <div 
+                  ref={galleryScrollRef}
+                  className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-y-auto lg:h-full pb-4 lg:pb-0 scrollbar-hide"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
                   {galleryItems.map((item, idx) => (
                     <div
                       key={idx}
@@ -384,6 +487,32 @@ const TransformationPart = () => {
                     </div>
                   ))}
                 </div>
+
+                {/* Mobile: Right Arrow */}
+                {canScrollRight && (
+                  <button
+                    onClick={() => scrollGallery('right')}
+                    className="lg:hidden absolute -right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all"
+                    aria-label="Scroll right"
+                  >
+                    <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                )}
+
+                {/* Desktop: Down Arrow */}
+                {canScrollDown && (
+                  <button
+                    onClick={() => scrollGallery('down')}
+                    className="hidden lg:block absolute -bottom-2 left-1/2 transform -translate-x-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all"
+                    aria-label="Scroll down"
+                  >
+                    <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                )}
               </div>
 
               {/* Main Video Player - Right Side */}
