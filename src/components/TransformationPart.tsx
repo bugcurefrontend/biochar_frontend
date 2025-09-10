@@ -246,7 +246,7 @@ const TransformationPart = () => {
               </p>
 
               <p>
-                Carbon finance enables us to set&nbsp;up biochar sites, which:
+                Carbon finance enables us to set up more biochar sites, driving operational viability and creating self-sustaining business models
               </p>
 
               <ul className="list-disc pl-5 space-y-1">

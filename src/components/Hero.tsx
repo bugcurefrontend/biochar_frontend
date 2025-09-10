@@ -115,7 +115,7 @@ const Hero = () => {
             rural livelihoods vanish
           </p>
           <p className="py-1 text-[0.8rem] text-white md:w-[50%] md:text-base xl:text-[1.8rem]">
-            Two Crises. One Solution.
+            Two crises. One solution.
           </p>
           <div className="pt-5">
             <button className="group flex items-center rounded-full bg-white px-3 py-1 text-black text-sm md:px-7 md:py-3 md:text-[1.2rem] gap-2 md:gap-3 hover:bg-black hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl">
