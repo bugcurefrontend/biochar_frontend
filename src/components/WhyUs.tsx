@@ -177,8 +177,8 @@ const WhyUs = () => {
         </div>
       </nav>
 
-      <div className="flex flex-col md:flex-row rounded-xl overflow-hidden">
-        <div className="bg-gray-900 text-white md:w-1/2 p-6 space-y-4 flex flex-col justify-center">
+      <div className="flex flex-col md:flex-row rounded-xl overflow-hidden md:items-center">
+        <div className="bg-gray-900 text-white md:w-1/2 p-6 space-y-4 flex flex-col justify-center md:h-[48vh]">
           <h3 className="font-serif text-xl lg:text-2xl mb-3">
             {currentSlide.title}
           </h3>
@@ -189,7 +189,7 @@ const WhyUs = () => {
           </ul>
         </div>
 
-        <div className="md:w-1/2 flex items-center justify-center relative overflow-hidden">
+        <div className="md:w-1/2 flex items-center justify-center relative md:h-[50vh]">
           <button
             onClick={handlePrev}
             aria-label="Previous image"
@@ -198,7 +198,7 @@ const WhyUs = () => {
             ‹
           </button>
 
-          <div className="w-full h-[50vh] md:h-[55vh] relative overflow-hidden shadow">
+          <div className="w-full h-[50vh] md:h-[50vh] relative flex items-center justify-center">
             {/* Loading skeleton */}
             {imageLoading && (
               <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse flex items-center justify-center z-10">
@@ -212,8 +212,9 @@ const WhyUs = () => {
             <Image
               src={currentImage}
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-              fill
-              className={`object-cover transition-all duration-500 ${
+              width={600}
+              height={400}
+              className={`w-full h-full object-contain transition-all duration-500 ${
                 imageLoading ? 'opacity-0' : 'opacity-100'
               }`}
               priority={activeIndex === 0 && imageIndex === 0}
@@ -221,7 +222,7 @@ const WhyUs = () => {
               onLoad={() => setImageLoading(false)}
               onLoadStart={() => setImageLoading(true)}
               style={{ 
-                objectFit: 'cover',
+                objectFit: 'contain',
                 transition: 'opacity 0.5s ease'
               }}
             />
