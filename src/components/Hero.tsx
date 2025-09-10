@@ -111,8 +111,9 @@ const Hero = () => {
       {/* 4. Content Layer: Sits on top of the video and overlay. */}
       <div className="relative z-20 flex h-full items-center px-4 md:px-8 lg:px-16">
         <div>
-          <h1 className="w-[80%] text-[1.5rem] text-white md:w-[70%] md:text-[2.5rem] xl:text-[3.5rem]">
-            Carbon to Community with Biochar
+          <h1 className="w-[95%] text-white md:w-[70%]">
+            <span className="md:hidden text-[0.95rem] leading-tight">Carbon to Community<br />with Biochar</span>
+            <span className="hidden md:inline md:text-[2.5rem] xl:text-[3.5rem]">Carbon to Community with Biochar</span>
           </h1>
           <p className="py-1 text-[0.8rem] text-white md:w-[50%] md:text-base xl:text-[1.8rem]">
             As carbon emissions rise
@@ -124,14 +125,14 @@ const Hero = () => {
             Two crises. One solution.
           </p>
           <div className="pt-5">
-            <button className="group flex items-center rounded-full bg-white px-3 py-1 text-black text-sm md:px-7 md:py-3 md:text-[1.2rem] gap-2 md:gap-3 hover:bg-black hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl">
+            <button className="group flex items-center rounded-full bg-white px-2 py-1 text-black text-xs sm:px-3 sm:text-sm md:px-7 md:py-3 md:text-[1.2rem] gap-1 sm:gap-2 md:gap-3 hover:bg-black hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl">
               <Link href="#formForId">Buy Carbon Credits </Link>
               <Image
                 src={CONSTANTS.ICONS.ARROW}
                 alt={"icon"}
                 width={20}
                 height={20}
-                className="ml-2 w-5 h-5 scale-90 md:ml-3 md:scale-100 group-hover:translate-x-1 group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                className="ml-1 w-4 h-4 scale-75 sm:ml-2 sm:w-5 sm:h-5 sm:scale-90 md:ml-3 md:scale-100 group-hover:translate-x-1 group-hover:brightness-0 group-hover:invert transition-all duration-300"
                 style={{ width: "auto", height: "auto" }}
               />
             </button>
