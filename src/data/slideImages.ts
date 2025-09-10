@@ -56,9 +56,9 @@ export const SLIDE_DATA: SlideConfig[] = [
   {
     title: "Empowering Communities",
     bullets: [
-      "Livelihoods: Rural youth and women build profitable village-scale biochar businesses, creating dignified local jobs and establishing a vibrant rural economy.",
-      "Soil Health: Biochar improves soil moisture and structure and permanently increases fertility by bringing back microbial life in soil for generations.",
-      "Farmer Prosperity: Our field trials across diverse zones demonstrate better crop yields & farmer income year after year, with a single application of biochar. Carbon finance makes biochar affordable and accessible to farmers."
+      "Livelihoods: Improves livelihoods of rural youth and women, creating dignified local jobs in villages.",
+      "Soil Health: Biochar improves soil moisture, structure and fertility by bringing back microbial life.",
+      "Farmer Prosperity: Our field trials demonstrate better crop yields & farmer income with biochar. Finance makes biochar affordable and accessible to farmers."
     ],
     images: SLIDE_IMAGES.COMMUNITIES
   },
@@ -74,10 +74,9 @@ export const SLIDE_DATA: SlideConfig[] = [
   {
     title: "Scale",
     bullets: [
-      "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India through Samunnati and Heartfulness Institute, we're built for scale.",
-      "Afforestation: In 10,200 acres of reforestation with Forests by Heartfulness, biochar has boosted sapling survival to 85–90%.",
-      "Collaborative Model: Partnering with ICAR-CICR, Samunnati, Arvind Mills, Pratibha Syntex, and dMRV partners for science, adoption, and transparency.",
-      "SDG-aligned: Driving climate action, rural livelihoods, healthy soils, biodiversity and food security."
+      "Farmer Network: With access to 18 million farmers across 100,000+ villages in 8 states of India, we're built for scale.",
+      "Afforestation: Applied in 10,200 acres of reforestation projects, biochar has boosted sapling survival to 85–90%.",
+      "Collaborative Model: Partnering with ICAR-CICR for science, adoption, and transparency."
     ],
     images: SLIDE_IMAGES.SCALE
   }
