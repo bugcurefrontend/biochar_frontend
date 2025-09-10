@@ -75,6 +75,17 @@ const Hero = () => {
       
       {/* 2. Video Layer: Progressive loading with 30% buffer strategy */}
       <div className="absolute top-0 left-0 h-full w-full z-0">
+        {/* Poster image - always present, hidden when video is ready */}
+        <Image
+          src="/hero_section_poster.webp"
+          alt="Hero section"
+          fill
+          className={`absolute inset-0 object-cover transition-opacity duration-150 ${
+            initialBuffered ? 'opacity-0' : 'opacity-100'
+          }`}
+          priority
+        />
+        
         <video
           ref={videoRef}
           src={CONSTANTS.VIDEOS.HERO}
@@ -87,11 +98,6 @@ const Hero = () => {
             initialBuffered ? 'opacity-100' : 'opacity-0'
           }`}
         />
-        
-        {/* Minimal loading state - only shows for very brief moment */}
-        {!initialBuffered && !videoError && (
-          <div className="absolute inset-0 bg-gray-900" />
-        )}
 
         {/* Fallback if video fails */}
         {videoError && (

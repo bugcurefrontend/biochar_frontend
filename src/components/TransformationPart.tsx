@@ -246,14 +246,14 @@ const TransformationPart = () => {
               </p>
 
               <p>
-                Carbon finance enables us to set up more biochar sites, driving operational viability and creating self-sustaining business models
+                Carbon finance enables us to set up more biochar sites, driving operational viability and creating self-sustaining business models.
               </p>
 
-              <ul className="list-disc pl-5 space-y-1">
+              {/* <ul className="list-disc pl-5 space-y-1">
                 <li>Creates local entrepreneurs and jobs</li>
                 <li>Drives measurable soil improvement and higher yields</li>
                 <li>Delivers rising rural incomes</li>
-              </ul>
+              </ul> */}
 
               <button className="inline-block mt-4 px-5 py-2 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
                 <Link href="#formForId">Turn carbon into community</Link>
