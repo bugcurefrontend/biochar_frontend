@@ -108,7 +108,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 h-full w-full bg-black/40 z-10"></div>
 
       {/* 4. Content Layer: Sits on top of the video and overlay. */}
-      <div className="relative z-20 flex h-full items-end pb-16 md:items-center md:pb-0 px-4 md:px-8 lg:px-16">
+      <div className="relative z-20 flex h-full items-center px-4 md:px-8 lg:px-16">
         <div>
           <h1 className="w-full text-white">
             <span className="md:hidden text-[1.3rem] leading-tight">
