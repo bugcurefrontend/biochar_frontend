@@ -14,9 +14,9 @@ const Header = () => {
 
   useEffect(() => {
     const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         const currentScrollY = window.scrollY;
-        
+
         if (currentScrollY < 10) {
           setIsVisible(true);
         } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
@@ -24,14 +24,14 @@ const Header = () => {
         } else if (currentScrollY < lastScrollY) {
           setIsVisible(true);
         }
-        
+
         setLastScrollY(currentScrollY);
       }
     };
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
-      return () => window.removeEventListener('scroll', controlNavbar);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar);
+      return () => window.removeEventListener("scroll", controlNavbar);
     }
   }, [lastScrollY]);
 
@@ -48,9 +48,11 @@ const Header = () => {
   };
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 w-full transition-transform duration-300 ${
-      isVisible ? 'translate-y-0' : '-translate-y-full'
-    }`}>
+    <div
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="w-full flex justify-between items-center py-2 bg-white px-4 lg:px-5 lg:w-[100%] lg:mx-auto">
         <div className="py-1">
           <Link href="/">
@@ -68,7 +70,7 @@ const Header = () => {
         <div className="hidden lg:block">
           <ul className="flex font-bold">
             <li className="px-3">
-              <button 
+              <button
                 onClick={() => handleScrollOrNavigate("whyUs")}
                 className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
               >
@@ -76,7 +78,7 @@ const Header = () => {
               </button>
             </li>
             <li className="px-3">
-              <button 
+              <button
                 onClick={() => handleScrollOrNavigate("ourImpact")}
                 className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
               >
@@ -84,7 +86,7 @@ const Header = () => {
               </button>
             </li>
             <li className="px-3">
-              <button 
+              <button
                 onClick={() => handleScrollOrNavigate("formForId")}
                 className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
               >
@@ -92,7 +94,7 @@ const Header = () => {
               </button>
             </li>
             <li className="px-3">
-              <button 
+              <button
                 onClick={() => handleScrollOrNavigate("FAQs")}
                 className="hover:text-gray-600 transition-colors duration-200 cursor-pointer"
               >
@@ -109,15 +111,25 @@ const Header = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-              isMobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
-            }`}></span>
-            <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
-              isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-            }`}></span>
-            <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-              isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'
-            }`}></span>
+            <span
+              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                isMobileMenuOpen
+                  ? "rotate-45 translate-y-1"
+                  : "-translate-y-0.5"
+              }`}
+            ></span>
+            <span
+              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+                isMobileMenuOpen ? "opacity-0" : "opacity-100"
+              }`}
+            ></span>
+            <span
+              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                isMobileMenuOpen
+                  ? "-rotate-45 -translate-y-1"
+                  : "translate-y-0.5"
+              }`}
+            ></span>
           </button>
 
           {/* Desktop Buy Button */}
@@ -131,12 +143,14 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      <div className={`lg:hidden bg-white shadow-lg border-t transition-all duration-300 overflow-hidden ${
-        isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-      }`}>
-        <ul className="py-4 px-4 space-y-2">
+      <div
+        className={`lg:hidden bg-white shadow-lg border-t transition-all duration-300 overflow-hidden mx-auto flex ${
+          isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <ul className="py-4 px-4 space-y-2 mx-auto flex flex-col items-center">
           <li>
-            <button 
+            <button
               onClick={() => handleScrollOrNavigate("whyUs")}
               className="w-full text-left py-3 px-2 font-bold hover:bg-gray-100 rounded transition-colors duration-200"
             >
@@ -144,7 +158,7 @@ const Header = () => {
             </button>
           </li>
           <li>
-            <button 
+            <button
               onClick={() => handleScrollOrNavigate("ourImpact")}
               className="w-full text-left py-3 px-2 font-bold hover:bg-gray-100 rounded transition-colors duration-200"
             >
@@ -152,7 +166,7 @@ const Header = () => {
             </button>
           </li>
           <li>
-            <button 
+            <button
               onClick={() => handleScrollOrNavigate("formForId")}
               className="w-full text-left py-3 px-2 font-bold hover:bg-gray-100 rounded transition-colors duration-200"
             >
@@ -160,16 +174,16 @@ const Header = () => {
             </button>
           </li>
           <li>
-            <button 
+            <button
               onClick={() => handleScrollOrNavigate("FAQs")}
               className="w-full text-left py-3 px-2 font-bold hover:bg-gray-100 rounded transition-colors duration-200"
             >
               FAQs
             </button>
           </li>
-          <li className="pt-2">
+          <li className="pt-2 mb-3">
             <button
-              className="w-full bg-black text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-gray-800 transition-all duration-300 cursor-pointer shadow-lg"
+              className="bg-black text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gray-800 transition-all duration-300 cursor-pointer shadow-lg"
               onClick={() => handleScrollOrNavigate("formForId")}
             >
               Buy Carbon Credits

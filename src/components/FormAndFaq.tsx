@@ -73,11 +73,11 @@ export default function FormAndFaq() {
 
     // Sheet2API payload format - match exact column headers in your Google Sheet
     const payload = {
-      "Name": form.name,
-      "Email": form.email,
-      "Interests": selected.join(", "),
-      "Message": form.message,
-      "Timestamp": new Date().toISOString(),
+      Name: form.name,
+      Email: form.email,
+      Interests: selected.join(", "),
+      Message: form.message,
+      Timestamp: new Date().toISOString(),
     };
 
     try {
@@ -92,7 +92,9 @@ export default function FormAndFaq() {
       const responseText = await res.text();
 
       if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}, body: ${responseText}`);
+        throw new Error(
+          `HTTP error! status: ${res.status}, body: ${responseText}`
+        );
       }
 
       // For Sheet2API, successful submission usually returns 200 status
@@ -146,15 +148,20 @@ export default function FormAndFaq() {
             <div className="text-left space-y-6 max-w-md mr-auto">
               <div className="text-gray-800 space-y-4">
                 <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl leading-tight">
-                  Every acre you help restore.<br />
-                  Every credit you purchase.<br />
-                  Every village you touch,<br />
-                  brings us one step closer<br />
+                  Every acre you help restore.
+                  <br />
+                  Every credit you purchase.
+                  <br />
+                  Every village you touch,
+                  <br />
+                  brings us one step closer
+                  <br />
                   to a greener future.
                 </h2>
                 <p className="text-sm text-gray-600">
-                                  Feel free to WhatsApp or<br />
-                call us at {CONSTANTS.CONTACT.PHONE}
+                  Feel free to WhatsApp or
+                  <br />
+                  call us at {CONSTANTS.CONTACT.PHONE}
                 </p>
               </div>
             </div>
@@ -224,10 +231,11 @@ export default function FormAndFaq() {
                           type="button"
                           onClick={() => toggle(label)}
                           className={`px-4 py-2 rounded text-xs border transition
-                  ${active
-                              ? "bg-black text-white border-black"
-                              : "bg-white text-gray-800 border-gray-300"
-                            }`}
+                  ${
+                    active
+                      ? "bg-black text-white border-black"
+                      : "bg-white text-gray-800 border-gray-300"
+                  }`}
                         >
                           {label}
                         </button>
@@ -235,7 +243,9 @@ export default function FormAndFaq() {
                     })}
                   </div>
                   {errors.interests && (
-                    <p className="text-xs text-red-600 mt-1">{errors.interests}</p>
+                    <p className="text-xs text-red-600 mt-1">
+                      {errors.interests}
+                    </p>
                   )}
                 </div>
 
@@ -268,15 +278,15 @@ export default function FormAndFaq() {
                     type="submit"
                     disabled={isSubmitting}
                     className={`px-6 py-2 rounded-full text-white text-sm transition-all duration-200 flex items-center gap-2 ${
-                      isSubmitting 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-[#123955] hover:bg-gray-800'
+                      isSubmitting
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-[#123955] hover:bg-gray-800"
                     }`}
                   >
                     {isSubmitting && (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                     )}
-                    {isSubmitting ? 'Submitting...' : 'Transform carbon'}
+                    {isSubmitting ? "Submitting..." : "Transform carbon"}
                   </button>
                 </div>
               </form>
@@ -284,50 +294,52 @@ export default function FormAndFaq() {
           )}
         </div>
       </div>
-      <section className="py-16 px-4 bg-gray-100">
-        <h2 className="text-3xl md:text-4xl font-serif text-center mb-10">
-          FAQs
-        </h2>
+      <section className="bg-gray-100">
+        <div className="max-w-7xl mx-auto py-16 px-4 ">
+          <h2 className="text-3xl md:text-4xl font-serif text-center mb-10">
+            FAQs
+          </h2>
 
-        {/* Mobile Accordion View */}
-        <div className="md:hidden bg-white rounded-xl border-2 border-gray-300 divide-y divide-gray-200">
-          {faqs.map((faq, i) => (
-            <div key={i}>
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full text-left px-5 py-4 font-serif text-base text-gray-900"
-              >
-                {faq.question}
-              </button>
-              {openIndex === i && (
-                <div className="px-5 pb-4 text-sm text-gray-600 leading-relaxed">
+          {/* Mobile Accordion View */}
+          <div className="md:hidden bg-white rounded-xl border-2 border-gray-300 divide-y divide-gray-200">
+            {faqs.map((faq, i) => (
+              <div key={i}>
+                <button
+                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                  className="w-full text-left px-5 py-4 font-serif text-base text-gray-900"
+                >
+                  {faq.question}
+                </button>
+                {openIndex === i && (
+                  <div className="px-5 pb-4 text-sm text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Grid View */}
+          <div
+            id="FAQs"
+            className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mt-12 text-gray-800 px-7"
+          >
+            {faqs.map((faq, i) => (
+              <div key={i} className="flex flex-col gap-4">
+                <Image
+                  src={CONSTANTS.FAQ.ICON_SRC}
+                  alt={"icon"}
+                  width={40}
+                  height={40}
+                  className="object-contain w-auto h-auto max-w-[40px] max-h-[40px]"
+                />
+                <h4 className="font-serif text-lg">{faq.question}</h4>
+                <p className="text-sm leading-relaxed text-gray-600">
                   {faq.answer}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Desktop Grid View */}
-        <div
-          id="FAQs"
-          className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mt-12 text-gray-800 px-7"
-        >
-          {faqs.map((faq, i) => (
-            <div key={i} className="flex flex-col gap-4">
-              <Image 
-                src={CONSTANTS.FAQ.ICON_SRC} 
-                alt={"icon"} 
-                width={40} 
-                height={40} 
-                className="object-contain w-auto h-auto max-w-[40px] max-h-[40px]" 
-              />
-              <h4 className="font-serif text-lg">{faq.question}</h4>
-              <p className="text-sm leading-relaxed text-gray-600">
-                {faq.answer}
-              </p>
-            </div>
-          ))}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </section>

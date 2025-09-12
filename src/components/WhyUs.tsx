@@ -3,14 +3,14 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { SLIDE_DATA } from "../data/slideImages";
 
-
-
 const WhyUs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
-  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set());
+  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(
+    new Set()
+  );
   const imagePositionsRef = useRef<number[]>([0, 0, 0, 0]);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +28,7 @@ const WhyUs = () => {
       },
       {
         threshold: 0.3,
-        rootMargin: '0px'
+        rootMargin: "0px",
       }
     );
 
@@ -51,10 +51,10 @@ const WhyUs = () => {
           resolve();
           return;
         }
-        
+
         const img = new window.Image();
         img.onload = () => {
-          setPreloadedImages(prev => new Set([...prev, src]));
+          setPreloadedImages((prev) => new Set([...prev, src]));
           resolve();
         };
         img.onerror = reject;
@@ -64,22 +64,22 @@ const WhyUs = () => {
 
     // Preload current slide's images
     const currentSlideImages = slides[activeIndex].images;
-    
+
     // Preload current image first
     preloadImage(currentSlideImages[imageIndex]).catch(() => {});
-    
+
     // Then preload next few images in current slide
     const preloadPromises = [];
     for (let i = 1; i <= 3; i++) {
       const nextIndex = (imageIndex + i) % currentSlideImages.length;
       preloadPromises.push(preloadImage(currentSlideImages[nextIndex]));
     }
-    
+
     // Preload first image of next slide
     const nextSlideIndex = (activeIndex + 1) % slides.length;
     const nextSlideFirstImage = slides[nextSlideIndex].images[0];
     preloadPromises.push(preloadImage(nextSlideFirstImage));
-    
+
     Promise.allSettled(preloadPromises);
   }, [activeIndex, imageIndex, slides, preloadedImages]);
 
@@ -102,11 +102,14 @@ const WhyUs = () => {
     setImageIndex((prev) => (prev - 1 + numImages) % numImages);
   }, [activeIndex, slides]);
 
-  const onSlideChange = useCallback((index: number) => {
-    imagePositionsRef.current[activeIndex] = imageIndex;
-    setActiveIndex(index);
-    setImageIndex(imagePositionsRef.current[index]);
-  }, [activeIndex, imageIndex]);
+  const onSlideChange = useCallback(
+    (index: number) => {
+      imagePositionsRef.current[activeIndex] = imageIndex;
+      setActiveIndex(index);
+      setImageIndex(imagePositionsRef.current[index]);
+    },
+    [activeIndex, imageIndex]
+  );
 
   // Image auto-advance - only when visible
   useEffect(() => {
@@ -114,7 +117,8 @@ const WhyUs = () => {
 
     const imageInterval = setInterval(() => {
       const numImages = slides[activeIndex]?.images.length || 1;
-      const newImageIndex = (imagePositionsRef.current[activeIndex] + 1) % numImages;
+      const newImageIndex =
+        (imagePositionsRef.current[activeIndex] + 1) % numImages;
       imagePositionsRef.current[activeIndex] = newImageIndex;
       setImageIndex(newImageIndex);
     }, 2000);
@@ -131,7 +135,7 @@ const WhyUs = () => {
         const currentImageIndex = imagePositionsRef.current[prevActiveIndex];
         imagePositionsRef.current[prevActiveIndex] = currentImageIndex; // Save current position
         const nextIndex = (prevActiveIndex + 1) % slides.length;
-        
+
         // Switch to new tab's stored image immediately
         setImageIndex(imagePositionsRef.current[nextIndex]);
         return nextIndex;
@@ -142,9 +146,13 @@ const WhyUs = () => {
   }, [slides.length, isVisible]);
 
   return (
-    <section id="whyUs" className="max-w-7xl mx-auto px-4 lg:py-12 py-12" ref={sectionRef}>
+    <section
+      id="whyUs"
+      className="max-w-7xl mx-auto px-4 lg:py-12 py-12"
+      ref={sectionRef}
+    >
       <div className="text-center mb-6 lg:mb-8">
-        <p className="font-serif text-sm lg:text-base font-light tracking-wide text-gray-500 mb-3">
+        <p className="text-sm tracking-wide text-gray-600 mb-3">
           What sets HeartyCulture Biochar apart?
         </p>
         <h2 className="font-serif font-semibold text-2xl md:text-3xl md:font-normal px-[10%] lg:text-3xl leading-tight">
@@ -168,7 +176,7 @@ const WhyUs = () => {
                     : "text-gray-400 hover:text-black"
                 }`}
               >
-                <span className="font-serif text-lg mt-1 text-center font-medium">
+                <span className="text-lg mt-1 text-center font-medium">
                   {slide.title}
                 </span>
               </button>
@@ -177,8 +185,8 @@ const WhyUs = () => {
         </div>
       </nav>
 
-      <div className="flex flex-col md:flex-row rounded-xl overflow-hidden md:items-center">
-        <div className="bg-gray-900 text-white md:w-1/2 p-6 space-y-4 flex flex-col justify-center md:h-[48vh]">
+      <div className="flex flex-col md:flex-row rounded-xl overflow-hidden md:items-center bg-gray-900">
+        <div className=" text-white md:w-1/2 p-6 space-y-4 flex flex-col justify-center md:h-full">
           <h3 className="font-serif text-xl lg:text-2xl mb-3">
             {currentSlide.title}
           </h3>
@@ -189,7 +197,7 @@ const WhyUs = () => {
           </ul>
         </div>
 
-        <div className="md:w-1/2 flex items-center justify-center relative md:h-[50vh]">
+        <div className="md:w-1/2 flex items-center justify-center relative h-full">
           <button
             onClick={handlePrev}
             aria-label="Previous image"
@@ -198,7 +206,7 @@ const WhyUs = () => {
             ‹
           </button>
 
-          <div className="w-full h-[50vh] md:h-[50vh] relative flex items-center justify-center">
+          <div className="w-full relative flex items-center justify-center">
             {/* Loading skeleton */}
             {imageLoading && (
               <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse flex items-center justify-center z-10">
@@ -208,22 +216,22 @@ const WhyUs = () => {
                 </div>
               </div>
             )}
-            
+
             <Image
               src={currentImage}
               alt={`${currentSlide.title} - image ${imageIndex + 1}`}
               width={600}
               height={400}
               className={`w-full h-full object-contain transition-all duration-500 ${
-                imageLoading ? 'opacity-0' : 'opacity-100'
+                imageLoading ? "opacity-0" : "opacity-100"
               }`}
               priority={activeIndex === 0 && imageIndex === 0}
               sizes="(max-width: 768px) 100vw, 50vw"
               onLoad={() => setImageLoading(false)}
               onLoadStart={() => setImageLoading(true)}
-              style={{ 
-                objectFit: 'contain',
-                transition: 'opacity 0.5s ease'
+              style={{
+                objectFit: "contain",
+                transition: "opacity 0.5s ease",
               }}
             />
           </div>
