@@ -29,14 +29,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yourdomain.com'),
-  title: "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
-  description: "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil. 75% persistent carbon removal with measurable community impact across India.",
+  metadataBase: new URL("http://biochar.heartyculture.com"),
+  title:
+    "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
+  description:
+    "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil. 75% persistent carbon removal with measurable community impact across India.",
   keywords: [
     "carbon credits",
     "biochar",
     "carbon removal",
-    "climate action", 
+    "climate action",
     "soil health",
     "carbon sequestration",
     "sustainable agriculture",
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     "permanent carbon removal",
     "farmer prosperity",
     "regenerative agriculture",
-    "carbon marketplace"
+    "carbon marketplace",
   ],
   authors: [{ name: "Heartyculture" }],
   creator: "Heartyculture",
@@ -58,17 +60,19 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yourdomain.com",
-    title: "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
-    description: "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil. 75% persistent carbon removal with measurable community impact across India.",
+    url: "http://biochar.heartyculture.com",
+    title:
+      "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
+    description:
+      "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil. 75% persistent carbon removal with measurable community impact across India.",
     siteName: "Heartyculture Biochar",
     images: [
       {
@@ -81,13 +85,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
-    description: "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil.",
+    title:
+      "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
+    description:
+      "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil.",
   },
   category: "Environment",
   classification: "Carbon Credits, Climate Action, Sustainable Agriculture",
   alternates: {
-    canonical: "https://yourdomain.com",
+    canonical: "http://biochar.heartyculture.com",
   },
 };
 
@@ -108,87 +114,91 @@ export default function RootLayout({
       {
         "@type": "Organization",
         "@id": "https://yourdomain.com/#organization",
-        "name": "Heartyculture",
-        "url": "https://yourdomain.com",
-        "logo": {
+        name: "Heartyculture",
+        url: "http://biochar.heartyculture.com",
+        logo: {
           "@type": "ImageObject",
-          "url": "https://yourdomain.com/Logos/logo.webp",
-          "width": 300,
-          "height": 100
+          url: "https://yourdomain.com/Logos/logo.webp",
+          width: 300,
+          height: 100,
         },
-        "description": "Leading biochar carbon credit provider focusing on permanent carbon removal and rural community empowerment",
-        "address": {
+        description:
+          "Leading biochar carbon credit provider focusing on permanent carbon removal and rural community empowerment",
+        address: {
           "@type": "PostalAddress",
-          "addressCountry": "IN",
-          "addressRegion": "India"
+          addressCountry: "IN",
+          addressRegion: "India",
         },
-        "contactPoint": {
+        contactPoint: {
           "@type": "ContactPoint",
-          "telephone": "+91-99788-22525",
-          "contactType": "customer service",
-          "availableLanguage": ["English", "Hindi"]
+          telephone: "+91-99788-22525",
+          contactType: "customer service",
+          availableLanguage: ["English", "Hindi"],
         },
-        "sameAs": []
+        sameAs: [],
       },
       {
         "@type": "WebSite",
         "@id": "https://yourdomain.com/#website",
-        "url": "https://yourdomain.com",
-        "name": "Heartyculture Biochar",
-        "description": "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil",
-        "publisher": {
-          "@id": "https://yourdomain.com/#organization"
+        url: "http://biochar.heartyculture.com",
+        name: "Heartyculture Biochar",
+        description:
+          "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil",
+        publisher: {
+          "@id": "https://yourdomain.com/#organization",
         },
-        "potentialAction": {
+        potentialAction: {
           "@type": "SearchAction",
-          "target": {
+          target: {
             "@type": "EntryPoint",
-            "urlTemplate": "https://yourdomain.com/?search={search_term_string}"
+            urlTemplate: "https://yourdomain.com/?search={search_term_string}",
           },
-          "query-input": "required name=search_term_string"
-        }
+          "query-input": "required name=search_term_string",
+        },
       },
       {
         "@type": "Service",
         "@id": "https://yourdomain.com/#service",
-        "name": "Carbon Credit Sales",
-        "description": "Verified biochar carbon credits with permanent CO2 removal and community impact",
-        "provider": {
-          "@id": "https://yourdomain.com/#organization"
+        name: "Carbon Credit Sales",
+        description:
+          "Verified biochar carbon credits with permanent CO2 removal and community impact",
+        provider: {
+          "@id": "https://yourdomain.com/#organization",
         },
-        "serviceType": "Carbon Offset",
-        "areaServed": {
+        serviceType: "Carbon Offset",
+        areaServed: {
           "@type": "Country",
-          "name": "India"
+          name: "India",
         },
-        "hasOfferCatalog": {
+        hasOfferCatalog: {
           "@type": "OfferCatalog",
-          "name": "Biochar Carbon Credits",
-          "itemListElement": [
+          name: "Biochar Carbon Credits",
+          itemListElement: [
             {
               "@type": "Offer",
-              "itemOffered": {
+              itemOffered: {
                 "@type": "Service",
-                "name": "Verified Carbon Credits",
-                "description": "75% persistent carbon removal through biochar production"
-              }
-            }
-          ]
-        }
+                name: "Verified Carbon Credits",
+                description:
+                  "75% persistent carbon removal through biochar production",
+              },
+            },
+          ],
+        },
       },
       {
         "@type": "BreadcrumbList",
         "@id": "https://yourdomain.com/#breadcrumb",
-        "itemListElement": [
+        itemListElement: [
           {
             "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://yourdomain.com"
-          }
-        ]
-      }
-    ]
+            position: 1,
+            name: "Home",
+            item: "http://biochar.heartyculture.com",
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -204,7 +214,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${goudy.variable} antialiased`}
       >
-        
         {children}
       </body>
     </html>

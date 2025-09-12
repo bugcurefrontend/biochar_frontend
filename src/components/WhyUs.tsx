@@ -155,7 +155,7 @@ const WhyUs = () => {
         <p className="text-sm tracking-wide text-gray-600 mb-3">
           What sets HeartyCulture Biochar apart?
         </p>
-        <h2 className="font-serif font-semibold text-2xl md:text-3xl md:font-normal px-[10%] lg:text-3xl leading-tight">
+        <h2 className="font-serif text-2xl md:text-3xl px-[10%] lg:text-3xl leading-tight">
           Permanent carbon removal that drives
           <br className="hidden lg:block" />
           real community impact

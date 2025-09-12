@@ -25,14 +25,26 @@ html {
   overflow: hidden;
   position: relative;
   mask: linear-gradient(90deg, transparent, #fff 5%, #fff 95%, transparent);
-  -webkit-mask: linear-gradient(90deg, transparent, #fff 5%, #fff 95%, transparent);
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    #fff 5%,
+    #fff 95%,
+    transparent
+  );
 }
 
 .slider-track {
   display: flex;
   width: max-content;
   gap: 3rem;
-  animation: scroll 50s linear infinite;
+  animation: scroll 40s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .slider-track {
+    animation: scroll 20s linear infinite;
+  }
 }
 
 @keyframes scroll {
