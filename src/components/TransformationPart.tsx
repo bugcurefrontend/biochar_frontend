@@ -436,7 +436,7 @@ const TransformationPart = () => {
                           href={logoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center justify-center min-w-[200px]"
+                          className="group flex items-center justify-center md:min-w-[200px]"
                         >
                           <div className="relative">
                             <Image

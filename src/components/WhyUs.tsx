@@ -191,9 +191,20 @@ const WhyUs = () => {
             {currentSlide.title}
           </h3>
           <ul className="font-serif list-disc pl-5 space-y-2 text-sm md:text-sm leading-relaxed">
-            {currentSlide.bullets.map((bullet, i) => (
-              <li key={i}>{bullet}</li>
-            ))}
+            {currentSlide.bullets.map((bullet, i) => {
+              const [title, ...rest] = bullet.split(":");
+              const description = rest.join(":").trim();
+
+              return (
+                <li key={i}>
+                  <span className="font-semibold">
+                    {title}
+                    <span>:</span>
+                  </span>{" "}
+                  <span>{description}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
