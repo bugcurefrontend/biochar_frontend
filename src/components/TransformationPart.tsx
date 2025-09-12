@@ -383,14 +383,14 @@ const TransformationPart = () => {
                   <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
                     {item.label.includes("Million") ? (
                       <>
-                        <CountUp end={item.count} duration={2} separator="," />+
+                        <CountUp end={item.count} duration={2.5} separator="," />+
                         Million
                         <br />
                         {item.label.replace("Million+", "").trim()}
                       </>
                     ) : (
                       <>
-                        <CountUp end={item.count} duration={2} separator="," />
+                        <CountUp end={item.count} duration={2.5} separator="," />
                         {item.count >= 1000 ? "+" : ""} <br />
                         {item.label.split("\n").map((line, index) => (
                           <span key={index}>
@@ -668,7 +668,7 @@ const TransformationPart = () => {
                   <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
                     {item.showCountSeparately ? (
                       <>
-                        <CountUp end={item.count} duration={2} separator="," />
+                        <CountUp end={item.count} duration={2.5} separator="," />
                         {item.count >= 1000 ? "+" : ""} <br />
                         {item.label.split("\n").map((line, index) => (
                           <span key={index}>
