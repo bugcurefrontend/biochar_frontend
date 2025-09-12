@@ -121,7 +121,7 @@ const WhyUs = () => {
         (imagePositionsRef.current[activeIndex] + 1) % numImages;
       imagePositionsRef.current[activeIndex] = newImageIndex;
       setImageIndex(newImageIndex);
-    }, 2000);
+    }, 2500);
 
     return () => clearInterval(imageInterval);
   }, [activeIndex, slides, isVisible]);
