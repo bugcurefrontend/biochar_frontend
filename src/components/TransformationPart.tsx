@@ -296,19 +296,29 @@ const TransformationPart = () => {
             <div className="flex flex-col lg:items-center lg:flex-row h-full">
               {/* Video Section */}
               <div
-                className="relative aspect-video lg:aspect-auto lg:w-1/2 bg-gray-800 cursor-pointer overflow-hidden max-xl:rounded-r-xl max-lg:rounded-r-none"
+                className="relative aspect-video lg:w-1/2 bg-gray-800 cursor-pointer overflow-hidden max-xl:rounded-r-xl max-lg:rounded-r-none"
                 onClick={() => setTestimonialPlaying(true)}
               >
                 {testimonialPlaying ? (
-                  <video
-                    src={CONSTANTS.VIDEOS.PATRICIA}
-                    className="w-full h-full object-cover"
-                    controls
-                    playsInline
-                    preload="auto"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                  CONSTANTS.VIDEOS.PATRICIA.includes("youtube.com/embed") ? (
+                    <iframe
+                      src={CONSTANTS.VIDEOS.PATRICIA}
+                      className="w-full h-full"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video
+                      src={CONSTANTS.VIDEOS.PATRICIA}
+                      className="w-full h-full object-cover"
+                      controls
+                      playsInline
+                      preload="auto"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  )
                 ) : (
                   <Image
                     src={CONSTANTS.THUMBNAILS.PATRICIA}
@@ -325,12 +335,7 @@ const TransformationPart = () => {
               <div className="px-4 py-6 sm:py-5 sm:px-5 lg:w-1/2 lg:flex lg:flex-col lg:justify-center">
                 <div className="space-y-3 lg:space-y-4">
                   <p className="font-serif text-sm sm:text-base lg:text-lg leading-relaxed">
-                    &ldquo;Vision, ingenuity, and labor have transformed what
-                    was once harsh and depleted land into a lush green campus,
-                    with rainforest full of thriving, endemic, and endangered
-                    species, medicinal and edible plants, and organic farms.
-                    Kanha Shanti Vanam has become a testament to harmony with
-                    nature.&rdquo;
+                    &ldquo;Vision, ingenuity, and labor have transformed what was once harsh and depleted land into a lush green campus, with rainforest, thriving, endemic, and endangered species and organic farms. Kanha Shanti Vanam has become a testament to harmony with nature.&rdquo;
                   </p>
 
                   <div className="text-sm text-gray-300">
