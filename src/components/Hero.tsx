@@ -114,11 +114,11 @@ const Hero = () => {
             <span className="md:hidden text-[1.3rem] leading-tight">
               Carbon to Community <br /> with Biochar
             </span>
-            <span className="hidden md:inline md:text-[2.5rem] xl:text-[3.5rem]">
+            <span className="hidden md:inline md:text-[2.5rem] xl:text-[3.5rem] leading-18">
               Carbon to Community <br /> with Biochar
             </span>
           </h1>
-          <p className="py-1 text-[0.8rem] text-white md:text-base xl:text-[1.8rem]">
+          <p className="mt-2 py-1 text-[0.8rem] text-white md:text-base xl:text-[1.8rem]">
             As carbon emissions rise.
           </p>
           <p className="text-[0.8rem] text-white md:text-base xl:text-[1.8rem]">

@@ -335,12 +335,16 @@ const TransformationPart = () => {
               <div className="px-4 py-6 sm:py-5 sm:px-5 lg:w-1/2 lg:flex lg:flex-col lg:justify-center">
                 <div className="space-y-3 lg:space-y-4">
                   <p className="font-serif text-sm sm:text-base lg:text-lg leading-relaxed">
-                    &ldquo;Vision, ingenuity, and labor have transformed what was once harsh and depleted land into a lush green campus, with rainforest, thriving, endemic, and endangered species and organic farms. Kanha Shanti Vanam has become a testament to harmony with nature.&rdquo;
+                    &ldquo;Vision, ingenuity, and labor have transformed what
+                    was once harsh and depleted land into a lush green campus,
+                    with rainforest, thriving, endemic, and endangered species
+                    and organic farms. Kanha Shanti Vanam has become a testament
+                    to harmony with nature.&rdquo;
                   </p>
 
                   <div className="text-sm text-gray-300">
                     <p>Patricia Scotland</p>
-                    <p>Secretary General, Commonwealth</p>
+                    <p>Former Secretary General, Commonwealth</p>
                   </div>
 
                   <p className="text-xs sm:text-sm lg:text-sm text-gray-400 leading-relaxed">
@@ -383,14 +387,22 @@ const TransformationPart = () => {
                   <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
                     {item.label.includes("Million") ? (
                       <>
-                        <CountUp end={item.count} duration={2.5} separator="," />+
-                        Million
+                        <CountUp
+                          end={item.count}
+                          duration={2.5}
+                          separator=","
+                        />
+                        + Million
                         <br />
                         {item.label.replace("Million+", "").trim()}
                       </>
                     ) : (
                       <>
-                        <CountUp end={item.count} duration={2.5} separator="," />
+                        <CountUp
+                          end={item.count}
+                          duration={2.5}
+                          separator=","
+                        />
                         {item.count >= 1000 ? "+" : ""} <br />
                         {item.label.split("\n").map((line, index) => (
                           <span key={index}>
@@ -668,7 +680,11 @@ const TransformationPart = () => {
                   <h3 className="text-3xl sm:text-4xl font-roboto font-semibold leading-tight mb-4">
                     {item.showCountSeparately ? (
                       <>
-                        <CountUp end={item.count} duration={2.5} separator="," />
+                        <CountUp
+                          end={item.count}
+                          duration={2.5}
+                          separator=","
+                        />
                         {item.count >= 1000 ? "+" : ""} <br />
                         {item.label.split("\n").map((line, index) => (
                           <span key={index}>
