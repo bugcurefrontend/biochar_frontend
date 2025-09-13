@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback, useEffect, useState, useRef } from "react";
-import Image from "next/image";
 import { SLIDE_DATA } from "../data/slideImages";
+import { AnimatePresence, easeOut, motion } from "framer-motion";
 
 const WhyUs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -121,7 +121,7 @@ const WhyUs = () => {
         (imagePositionsRef.current[activeIndex] + 1) % numImages;
       imagePositionsRef.current[activeIndex] = newImageIndex;
       setImageIndex(newImageIndex);
-    }, 2500);
+    }, 3000);
 
     return () => clearInterval(imageInterval);
   }, [activeIndex, slides, isVisible]);
@@ -140,10 +140,64 @@ const WhyUs = () => {
         setImageIndex(imagePositionsRef.current[nextIndex]);
         return nextIndex;
       });
-    }, 5000);
+    }, 7000);
 
     return () => clearInterval(tabInterval);
   }, [slides.length, isVisible]);
+
+  // Animation variants
+  const contentVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: easeOut, // Corrected here
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+      transition: { duration: 0.3 },
+    },
+  };
+
+  const imageVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.95,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: easeOut, // Corrected here
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 1.05,
+      transition: { duration: 0.2 },
+    },
+  };
+
+  const listItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.4,
+        ease: easeOut, // Corrected here
+      },
+    }),
+  };
 
   return (
     <section
@@ -186,71 +240,111 @@ const WhyUs = () => {
       </nav>
 
       <div className="flex flex-col md:flex-row rounded-xl overflow-hidden md:items-center bg-gray-900">
-        <div className=" text-white md:w-1/2 p-6 space-y-4 flex flex-col justify-center md:h-full">
-          <h3 className="font-serif text-xl lg:text-2xl mb-3">
-            {currentSlide.title}
-          </h3>
-          <ul className="font-serif list-disc pl-5 space-y-2 text-sm md:text-sm leading-relaxed">
-            {currentSlide.bullets.map((bullet, i) => {
-              const [title, ...rest] = bullet.split(":");
-              const description = rest.join(":").trim();
+        <div className="text-white md:w-1/2 p-6 space-y-4 flex flex-col justify-center md:h-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`content-${activeIndex}`}
+              variants={contentVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="space-y-4"
+            >
+              <motion.h3
+                className="font-serif text-xl lg:text-2xl mb-3"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.4 }}
+              >
+                {currentSlide.title}
+              </motion.h3>
 
-              return (
-                <li key={i}>
-                  <span className="font-semibold">
-                    {title}
-                    <span>:</span>
-                  </span>{" "}
-                  <span>{description}</span>
-                </li>
-              );
-            })}
-          </ul>
+              <motion.ul
+                className="font-serif list-disc pl-5 space-y-2 text-sm md:text-sm leading-relaxed"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.1,
+                      delayChildren: 0.2,
+                    },
+                  },
+                }}
+              >
+                {currentSlide.bullets.map((bullet, i) => {
+                  const [title, ...rest] = bullet.split(":");
+                  const description = rest.join(":").trim();
+
+                  return (
+                    <motion.li key={i} custom={i} variants={listItemVariants}>
+                      <span className="font-semibold">
+                        {title}
+                        <span>:</span>
+                      </span>{" "}
+                      <span>{description}</span>
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <div className="md:w-1/2 flex items-center justify-center relative h-full">
           <button
             onClick={handlePrev}
             aria-label="Previous image"
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 text-white text-[4rem] px-2 py-1 hover:bg-black/20 rounded transition-colors"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 text-white text-[4rem] px-2 py-1 hover:bg-black/20 rounded transition-all duration-200 hover:scale-110"
           >
             ‹
           </button>
 
           <div className="w-full relative flex items-center justify-center">
-            {/* Loading skeleton */}
-            {imageLoading && (
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse flex items-center justify-center z-10">
-                <div className="text-center">
-                  <div className="w-12 h-12 border-4 border-gray-400 border-t-transparent rounded-full animate-spin mb-4"></div>
-                  <p className="text-gray-500 text-sm">Loading image...</p>
-                </div>
-              </div>
-            )}
+            {/* Loading skeleton with animation */}
+            <AnimatePresence>
+              {imageLoading && (
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center z-10"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="text-center">
+                    <div className="w-12 h-12 border-4 border-gray-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-gray-500 text-sm">Loading image...</p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-            <Image
-              src={currentImage}
-              alt={`${currentSlide.title} - image ${imageIndex + 1}`}
-              width={600}
-              height={400}
-              className={`w-full h-full object-contain transition-all duration-500 ${
-                imageLoading ? "opacity-0" : "opacity-100"
-              }`}
-              priority={activeIndex === 0 && imageIndex === 0}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              onLoad={() => setImageLoading(false)}
-              onLoadStart={() => setImageLoading(true)}
-              style={{
-                objectFit: "contain",
-                transition: "opacity 0.5s ease",
-              }}
-            />
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={`${activeIndex}-${imageIndex}`}
+                src={currentImage}
+                alt={`${currentSlide.title} - image ${imageIndex + 1}`}
+                width={600}
+                height={400}
+                variants={imageVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="w-full h-full object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                onLoad={() => setImageLoading(false)}
+                onLoadStart={() => setImageLoading(true)}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </AnimatePresence>
           </div>
 
           <button
             onClick={handleNext}
             aria-label="Next image"
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-white text-[4rem] px-2 py-1 hover:bg-black/20 rounded transition-colors"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-white text-[4rem] px-2 py-1 hover:bg-black/20 rounded transition-all duration-200 hover:scale-110"
           >
             ›
           </button>
