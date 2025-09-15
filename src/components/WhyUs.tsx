@@ -126,7 +126,7 @@ const WhyUs = () => {
       imagePositionsRef.current[activeIndex] = newImageIndex;
       setDirection(1); // Auto-advance always goes forward
       setImageIndex(newImageIndex);
-    }, 3000);
+    }, 2500);
 
     return () => clearInterval(imageInterval);
   }, [activeIndex, slides, isVisible]);
@@ -146,7 +146,7 @@ const WhyUs = () => {
         setImageIndex(imagePositionsRef.current[nextIndex]);
         return nextIndex;
       });
-    }, 7000);
+    }, 5000);
 
     return () => clearInterval(tabInterval);
   }, [slides.length, isVisible]);
