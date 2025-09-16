@@ -47,6 +47,18 @@ html {
   }
 }
 
+a,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="image"],
+[role="button"],
+[tabindex]:not([tabindex="-1"]),
+.clickable {
+  cursor: pointer;
+}
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
