@@ -22,13 +22,6 @@ export default function Custom404() {
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
-            onClick={() => router.back()}
-            className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
-          >
-            <MdArrowLeft className="w-5 h-5 mr-2" />
-            Go Back
-          </button>
-          <button
             onClick={() => router.push("/")}
             className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
           >
