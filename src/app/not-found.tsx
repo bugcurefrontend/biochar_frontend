@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
-import { MdArrowLeft, MdHome } from "react-icons/md";
+import { MdHome } from "react-icons/md";
 
 export default function Custom404() {
   const router = useRouter();
