@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const buildTime = new Date().toUTCString(); // capture build timestamp
+const buildTime = new Date().toUTCString();
 
 const nextConfig: NextConfig = {
   async headers() {
@@ -12,10 +12,7 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
-          {
-            key: "Last-Modified",
-            value: buildTime,
-          },
+          { key: "Last-Modified", value: buildTime },
         ],
       },
       {
@@ -26,10 +23,7 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
-          {
-            key: "Last-Modified",
-            value: buildTime,
-          },
+          { key: "Last-Modified", value: buildTime },
         ],
       },
       {
@@ -40,10 +34,8 @@ const nextConfig: NextConfig = {
             value:
               "public, max-age=43200, s-maxage=600, stale-while-revalidate=120",
           },
-          {
-            key: "Last-Modified",
-            value: buildTime,
-          },
+          { key: "Last-Modified", value: buildTime },
+          { key: "Vary", value: "Accept-Encoding" },
         ],
       },
     ];
