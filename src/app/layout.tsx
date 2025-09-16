@@ -76,9 +76,9 @@ export const metadata: Metadata = {
     siteName: "Heartyculture Biochar",
     images: [
       {
-        url: "/Logos/logo.webp",
-        width: 300,
-        height: 100,
+        url: "http://biochar.heartyculture.com/og-image.webp",
+        width: 1200,
+        height: 630,
         alt: "Heartyculture Biochar - Carbon Credits for Climate Action",
       },
     ],
@@ -89,6 +89,7 @@ export const metadata: Metadata = {
       "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
     description:
       "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil.",
+    images: ["http://biochar.heartyculture.com/og-image.webp"],
   },
   category: "Environment",
   classification: "Carbon Credits, Climate Action, Sustainable Agriculture",
@@ -113,14 +114,14 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://yourdomain.com/#organization",
+        "@id": "http://biochar.heartyculture.com/#organization",
         name: "Heartyculture",
         url: "http://biochar.heartyculture.com",
         logo: {
           "@type": "ImageObject",
-          url: "https://yourdomain.com/Logos/logo.webp",
-          width: 300,
-          height: 100,
+          url: "http://biochar.heartyculture.com/og-image.webp",
+          width: 1200,
+          height: 630,
         },
         description:
           "Leading biochar carbon credit provider focusing on permanent carbon removal and rural community empowerment",
@@ -139,31 +140,32 @@ export default function RootLayout({
       },
       {
         "@type": "WebSite",
-        "@id": "https://yourdomain.com/#website",
+        "@id": "http://biochar.heartyculture.com/#website",
         url: "http://biochar.heartyculture.com",
         name: "Heartyculture Biochar",
         description:
           "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil",
         publisher: {
-          "@id": "https://yourdomain.com/#organization",
+          "@id": "http://biochar.heartyculture.com/#organization",
         },
         potentialAction: {
           "@type": "SearchAction",
           target: {
             "@type": "EntryPoint",
-            urlTemplate: "https://yourdomain.com/?search={search_term_string}",
+            urlTemplate:
+              "http://biochar.heartyculture.com/?search={search_term_string}",
           },
           "query-input": "required name=search_term_string",
         },
       },
       {
         "@type": "Service",
-        "@id": "https://yourdomain.com/#service",
+        "@id": "http://biochar.heartyculture.com/#service",
         name: "Carbon Credit Sales",
         description:
           "Verified biochar carbon credits with permanent CO2 removal and community impact",
         provider: {
-          "@id": "https://yourdomain.com/#organization",
+          "@id": "http://biochar.heartyculture.com/#organization",
         },
         serviceType: "Carbon Offset",
         areaServed: {
@@ -188,7 +190,7 @@ export default function RootLayout({
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://yourdomain.com/#breadcrumb",
+        "@id": "http://biochar.heartyculture.com/#breadcrumb",
         itemListElement: [
           {
             "@type": "ListItem",
