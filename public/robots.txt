@@ -9,9 +9,6 @@ Allow: /terms
 # Disallow: /admin
 # Disallow: /private
 
-# Sitemap location
-Sitemap: https://yourdomain.com/sitemap.xml
-
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
