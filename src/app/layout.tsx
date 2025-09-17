@@ -30,10 +30,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("http://biochar.heartyculture.com"),
-  title:
-    "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
+  title: "Heartyculture Biochar – Carbon Credits for Climate Change.",
   description:
-    "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil. 75% persistent carbon removal with measurable community impact across India.",
+    "Buy verified biochar carbon credits that remove CO₂, restore soil, and empower farmers.",
   keywords: [
     "carbon credits",
     "biochar",
@@ -69,10 +68,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "http://biochar.heartyculture.com",
-    title:
-      "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
+    title: "Heartyculture Biochar – Carbon Credits for Climate Change.",
     description:
-      "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil. 75% persistent carbon removal with measurable community impact across India.",
+      "Buy verified biochar carbon credits that remove CO₂, restore soil, and empower farmers.",
     siteName: "Heartyculture Biochar",
     images: [
       {
@@ -85,10 +83,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Heartyculture Biochar - Carbon Credits for Climate Action & Rural Prosperity",
+    title: "Heartyculture Biochar – Carbon Credits for Climate Change.",
     description:
-      "Buy verified carbon credits from biochar projects that permanently remove CO2 while empowering farmers and restoring soil.",
+      "Buy verified biochar carbon credits that remove CO₂, restore soil, and empower farmers.",
     images: ["http://biochar.heartyculture.com/og-image.webp"],
   },
   category: "Environment",
