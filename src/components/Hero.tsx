@@ -135,6 +135,7 @@ const Hero = () => {
                 alt={"icon"}
                 width={20}
                 height={20}
+                priority
                 className="ml-1 w-4 h-4 scale-75 sm:ml-2 sm:w-5 sm:h-5 sm:scale-90 md:ml-3 md:scale-100 group-hover:translate-x-1 group-hover:brightness-0 group-hover:invert transition-all duration-300"
                 style={{ width: "auto", height: "auto" }}
               />

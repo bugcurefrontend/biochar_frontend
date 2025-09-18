@@ -61,7 +61,7 @@ const Header = () => {
               alt={"logo"}
               width={120}
               height={70}
-              priority={true}
+              priority
               className="object-contain w-auto h-auto max-w-[120px] max-h-[70px]"
             />
           </Link>
