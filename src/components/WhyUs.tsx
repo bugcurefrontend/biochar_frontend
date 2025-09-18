@@ -196,7 +196,7 @@ const WhyUs = () => {
           What sets HeartyCulture Biochar apart?
         </p>
         <h2 className="font-serif text-2xl md:text-3xl px-[10%] lg:text-3xl leading-tight">
-          Permanent carbon removal that drives
+          Permanent carbon removal that drives{" "}
           <br className="hidden lg:block" />
           real community impact
         </h2>
