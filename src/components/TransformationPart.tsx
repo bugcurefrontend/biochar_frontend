@@ -255,7 +255,7 @@ const TransformationPart = () => {
               </p>
 
               <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl leading-tight mb-6">
-                Transformation at scale
+                Transformation at scale {""}
                 <br className="hidden sm:block" />
                 with Biochar
               </h2>
