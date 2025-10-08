@@ -85,7 +85,7 @@ export const CONSTANTS = {
 
   // Documents
   DOCUMENTS: {
-    ANNUAL_REPORT: "/HFI Biochar Annual Report 2025.pdf",
+    ANNUAL_REPORT: "/Heartyculture Biochar At a Glance.pdf",
   },
 
   // Interest Options

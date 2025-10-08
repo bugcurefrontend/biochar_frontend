@@ -730,7 +730,7 @@ const TransformationPart = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Download 2025 Annual Report
+                  Heartyculture Biochar: At a Glance
                 </a>
               </button>
             </div>
