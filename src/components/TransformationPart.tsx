@@ -282,7 +282,7 @@ const TransformationPart = () => {
               </ul> */}
 
               <button className="inline-block mt-4 px-5 py-2 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
-                <Link href="#Touching Lives Section">Review Case Studies</Link>
+                <Link href="#case-study">Review Case Studies</Link>
               </button>
             </div>
           </div>
@@ -477,7 +477,7 @@ const TransformationPart = () => {
             </div>
 
             {/* Section Title for Video */}
-            <div className="text-center mb-10 mt-16">
+            <div id="case-study" className="text-center mb-10 pt-16">
               <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
                 Touching Lives
               </h2>
