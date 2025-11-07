@@ -265,8 +265,8 @@ const TransformationPart = () => {
             <div className="md:w-1/2">
               <p>
                 Biochar&apos;s potential to regenerate soil at scale is
-                evidenced by these three large case studies in restoring barren
-                land, afforestation and agriculture.
+                evidenced by these large case studies in restoring barren land,
+                afforestation and agriculture.
               </p>
 
               <p>
@@ -282,7 +282,7 @@ const TransformationPart = () => {
               </ul> */}
 
               <button className="inline-block mt-4 px-5 py-2 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
-                <Link href="#formForId">Turn carbon into community</Link>
+                <Link href="#Touching Lives Section">Review Case Studies</Link>
               </button>
             </div>
           </div>
@@ -720,19 +720,6 @@ const TransformationPart = () => {
                   </p>
                 </div>
               ))}
-            </div>
-
-            {/* Download Annual Report Button */}
-            <div className="text-center mt-12 mb-8">
-              <button className="inline-block px-6 py-3 rounded-full border border-gray-400 text-gray-800 hover:bg-gray-900 hover:text-white transition">
-                <a
-                  href={CONSTANTS.DOCUMENTS.ANNUAL_REPORT}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Heartyculture Biochar: At a Glance
-                </a>
-              </button>
             </div>
           </div>
         </section>

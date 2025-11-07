@@ -83,11 +83,6 @@ export const CONSTANTS = {
     PHONE: "+91 99788 22525",
   },
 
-  // Documents
-  DOCUMENTS: {
-    ANNUAL_REPORT: "/Heartyculture Biochar At a Glance.pdf",
-  },
-
   // Interest Options
   INTEREST_OPTIONS: [
     "Offset Emissions",
