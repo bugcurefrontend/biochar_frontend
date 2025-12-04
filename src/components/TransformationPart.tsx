@@ -476,7 +476,6 @@ const TransformationPart = () => {
               </div>
             </div>
 
-            {/* Section Title for Video */}
             <div id="case-study" className="text-center mb-10 pt-16">
               <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
                 Touching Lives
